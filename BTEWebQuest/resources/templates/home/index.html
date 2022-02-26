@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<th:block layout:include="fragments/include" />
+</head>
+
+<body class="bg-dark">
+
+	<!--Header-->
+	<th:block layout:include="fragments/header" />
+
+	<!--Main page header image-->
+	<th:block layout:include="main-content/headerImage" />
+	
+	<!--Now Available section-->
+	<th:block layout:include="main-content/now-available" />
+	
+	<!--Coming Soon section-->
+	
+	<th:block layout:include="main-content/test" />
+	
+	<!--Footer-->
+	<th:block layout:include="fragments/footer" />
+
+</body>
+
+</html>
