@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head>
+<head th:insert="~{ fragments/include :: include}">
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<th:block layout:include="fragments/include" />
+	<title>Breaking The Earth</title>
 </head>
 
 <body class="bg-dark">
 
 	<!--Header-->
-	<th:block layout:include="fragments/header" />
+	<div th:insert="~{ fragments/header :: header}"></div>
 
 	<!--Main page header image-->
-	<th:block layout:include="main-content/headerImage" />
+	<div th:insert="~{ main-content/headerImage :: headerImage}"></div>
 	
 	<!--Now Available section-->
-	<th:block layout:include="main-content/now-available" />
-	
+	<div th:insert="~{ main-content/now-available :: now-availableFragment}"></div>
+
 	<!--Coming Soon section-->
-	
-	<th:block layout:include="main-content/test" />
+	<div th:insert="~{ main-content/test :: test}"></div>
 	
 	<!--Footer-->
-	<th:block layout:include="fragments/footer" />
+	<div th:insert="~{ fragments/footer :: footer}"></div>
 
 </body>
 
