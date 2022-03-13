@@ -1,0 +1,23 @@
+<div class="container position-absolute top-50 start-50 translate-middle" th:fragment="userFrag">
+
+    <h1 class="text-center">User Management</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-dark">
+            <th>Username</th>
+            <th>Edit</th>
+            <th>Change Password</th>
+            <th>Delete User</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.userName}">Username</td>
+            <td></td>
+            <td></td>
+            <td><button th:onclick="deleteItem([[${user.id}]]); return false" class="btn btn-sm btn-danger" style="width: 150px;" >Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

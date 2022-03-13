@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDataService implements DataAccessInterface<UserEntity>{
@@ -43,8 +44,14 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
 
     @Override
     public UserEntity findById(int id) {
-        return null;
+
+        // Optional Object to hold UserEntity returned from database by id
+        Optional<UserEntity> user = userRepository.findById((long) id);
+
+        // If Optional Object not null, return UserEntity, else throw NoSuchElement Exception
+        return user.get();
     }
+
 
     @Override
     public boolean create(UserEntity userEntity) {
@@ -58,7 +65,19 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
 
     @Override
     public boolean delete(UserEntity userEntity) {
-        return false;
+
+        try
+        {
+            // Attempt to delete CofFeeModel in database
+            userRepository.delete(userEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     public UserEntity findByUserName(String username) {

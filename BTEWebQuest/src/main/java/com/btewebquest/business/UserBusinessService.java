@@ -45,6 +45,19 @@ public class UserBusinessService implements UserDetailsService {
         return users;
     }
 
+    public UserModel getUserById(int id)
+    {
+        UserEntity user = service.findById(id);
+
+        return new UserModel(user.getId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword());
+    }
+
+    public boolean deleteUser(UserModel userModel)
+    {
+        UserEntity user = new UserEntity(userModel.getId(), userModel.getFirstName(), userModel.getLastName(), userModel.getUserName(), userModel.getPassword());
+
+        return service.delete(user);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
