@@ -44,10 +44,12 @@
     </table>
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-dark testClass" data-bs-toggle="modal" data-bs-target="#addModal">
-        Add User
-    </button>
-
+    <div sec:authorize="hasRole('ADMIN')">
+        <span style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+             <button type="button" class="btn btn-dark testClass" data-bs-toggle="modal" data-bs-target="#addModal" >
+            Add User</button>
+        </span>
+    </div>
     <!-- Add User Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -194,9 +196,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="updateUserId" name="id" >
-                    <input type="hidden" id="updateFirstName" name="firstName" value="test">
-                    <input type="hidden" id="updateLastName" name="lastName" value="test">
-                    <input type="hidden" id="updateUserName" name="userName" value="test">
+
                     <!-- Insert th:field for name -->
                     <div class="form-row my-2">
                         <div class="col">

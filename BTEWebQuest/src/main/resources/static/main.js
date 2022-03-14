@@ -38,6 +38,28 @@ $('document').ready(function() {
         $('#changeModal').modal('show');
     })
 
+    $("#updateButton").on('click', function(event){
+
+        event.preventDefault();
+
+        let id = $('#updateUserId').val();
+        let oldPassword = $("#oldPassword").val();
+        let newPassword = $("#newPassword").val();
+
+        let jsonData = {id: id, firstName: "test" , lastName: "test", userName: oldPassword, password: newPassword};
+
+        $.post({
+            url: "users/update",
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json'
+        }).done(function(fragment){
+            $("#userTable").replaceWith(fragment);
+            $('.modal-backdrop').remove();
+        })
+    })
+
+
+
     $("#passwordButton").on('click', function(event){
 
         event.preventDefault();

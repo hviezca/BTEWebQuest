@@ -129,15 +129,10 @@ public class UserController
     public String verifyDeleteUser(@RequestBody UserModel user, Model model)
     {
         UserModel admin = service.getUserById((Integer) session.getAttribute("userID"));
-        System.out.println(admin.getUserName());
         UserModel deleteUser = service.getUserById(user.getId());
-
-        System.out.println(admin.getUserName());
-        System.out.println(user.getId());
 
         if(BCrypt.checkpw(user.getPassword(), admin.getPassword()))
         {
-            System.out.println(user.getId());
             service.deleteUser(deleteUser);
         }
         else
@@ -154,4 +149,30 @@ public class UserController
         return "admin/userFragment :: #userTable";
     }
 
+    @RequestMapping("/users/update")
+    public String updateUserPassword(@RequestBody UserModel user, Model model)
+    {
+
+        UserModel oldUser = service.getUserById(user.getId());
+
+        if(BCrypt.checkpw(user.getUserName(), oldUser.getPassword()))
+        {
+           // Encode Password
+           String encoded = new BCryptPasswordEncoder().encode(user.getPassword());
+           oldUser.setPassword(encoded);
+           service.updateUser(oldUser);
+        }
+        else
+        {
+            System.out.println("No Match");
+        }
+
+        List<UserModel> users = service.getUsers();
+
+        model.addAttribute("title", "User Management");
+        model.addAttribute("userList", users);
+        model.addAttribute("userModel", new UserModel());
+
+        return "admin/userFragment :: #userTable";
+    }
 }
