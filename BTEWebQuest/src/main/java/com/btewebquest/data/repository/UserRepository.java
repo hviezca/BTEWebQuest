@@ -15,6 +15,4 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
     @Query("SELECT * FROM roles INNER JOIN users_roles ON roles.ROLE_ID = users_roles.ROLE_ID WHERE users_roles.USER_ID = :id")
     Set<RoleEntity> findRoles(@Param("id") Long id);
-
-
 }

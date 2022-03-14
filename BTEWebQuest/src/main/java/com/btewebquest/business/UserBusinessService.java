@@ -45,6 +45,13 @@ public class UserBusinessService implements UserDetailsService {
         return users;
     }
 
+    public boolean addUser(UserModel user)
+    {
+        UserEntity userEntity = new UserEntity(user.getId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword());
+
+        return service.create(userEntity);
+    }
+
     public UserModel getUserById(int id)
     {
         UserEntity user = service.findById(id);
@@ -57,6 +64,21 @@ public class UserBusinessService implements UserDetailsService {
         UserEntity user = new UserEntity(userModel.getId(), userModel.getFirstName(), userModel.getLastName(), userModel.getUserName(), userModel.getPassword());
 
         return service.delete(user);
+    }
+
+    public boolean updateUser(UserModel user)
+    {
+        UserEntity userEntity = new UserEntity(user.getId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword());
+
+        return service.create(userEntity);
+    }
+
+    public UserModel findUserByUsername(String username)
+    {
+        // Call service and return user by username
+        UserEntity user =  service.findByUserName(username);
+
+        return new UserModel(user.getId(), user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword());
     }
 
     @Override

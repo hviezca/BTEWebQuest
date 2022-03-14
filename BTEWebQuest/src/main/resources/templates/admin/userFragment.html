@@ -1,23 +1,223 @@
-<div class="container position-absolute top-50 start-50 translate-middle" th:fragment="userFrag">
+<div class="container " th:fragment="userFrag" id="userTable">
+    <script type="text/javascript" th:src="@{/main.js}"></script>
 
-    <h1 class="text-center">User Management</h1>
+    <h1 class="text-center my-5">User Management</h1>
     <table class="table table-striped">
         <thead>
         <tr class="table-dark">
             <th>Username</th>
             <th>Edit</th>
             <th>Change Password</th>
+            <!-- <th>Delete User</th> -->
             <th>Delete User</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${userList}">
             <td th:text="${user.userName}">Username</td>
-            <td></td>
-            <td></td>
-            <td><button th:onclick="deleteItem([[${user.id}]]); return false" class="btn btn-sm btn-danger" style="width: 150px;" >Delete</button></td>
+            <td>
+                <div th:if="${session.userID == user.id or #authorization.expression('hasRole(''ADMIN'')')}">
+                    <a th:href="@{/BTE/users/json/{id} (id=${user.id})}" id="modalButton" class="testclass btn btn-sm btn-primary my-1" >Edit User</a>
+                </div>
+            </td>
+
+            <td>
+                <div th:if="${session.userID == user.id or #authorization.expression('hasRole(''ADMIN'')')}">
+                    <a id="updateButtonID" th:attr="data-id=${user.id}" class="btn btn-sm btn-primary my-1 updateClass" >Update Password</a>
+                </div>
+            </td>
+            <!--
+            <td>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <button th:onclick="deleteItem([[${user.id}]]); return false" class="btn btn-sm btn-danger my-1"  >Delete</button>
+                </div>
+            </td>
+            -->
+            <td>
+                <div sec:authorize="hasRole('ADMIN')">
+                <button type="button" id="deleteButtonID" th:attr="data-id=${user.id}" class="btn btn-sm btn-dark my-1 deleteClass">
+                Delete</button>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-dark testClass" data-bs-toggle="modal" data-bs-target="#addModal">
+        Add User
+    </button>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Add New User</h3>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                    <!-- Insert th:field for name -->
+                    <div class="form-row my-2">
+                        <div class="col">
+                            <input th:class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name"
+                                   required>
+                        </div>
+                    </div>
+
+                    <!-- Insert th:field for companyName -->
+                    <div class="form-row my-3">
+                        <div class="col">
+                            <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Last Name"
+                                   required>
+                        </div>
+                    </div>
+
+                    <!-- Insert th:field for companyLocation -->
+                    <div class="form-row my-3">
+                        <div class="col">
+                            <input class="form-control" id="userName" name="userName" type="text"
+                                   placeholder="Username" required>
+                        </div>
+                    </div>
+
+                    <!-- Insert th:field for companyLocation -->
+                    <div class="form-row my-3">
+                        <div class="col">
+                            <input class="form-control" id="password" name="password" type="password"
+                                   placeholder="Password" required>
+                        </div>
+                    </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="addButton" class="btn btn-primary">Add User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Edit User</h3>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm">
+                        <!-- Insert th:field for name -->
+                        <div class="form-row my-2">
+                            <div class="col">
+                                <input th:class="form-control" id="editFirstName" name="firstName" type="text" placeholder="First Name"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Insert th:field for companyName -->
+                        <div class="form-row my-3">
+                            <div class="col">
+                                <input class="form-control" id="editLastName" name="lastName" type="text" placeholder="Last Name"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Insert th:field for companyLocation -->
+                        <div class="form-row my-3">
+                            <div class="col">
+                                <input class="form-control" id="editUserName" name="userName" type="text"
+                                       placeholder="Username" required>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="editId" name="id">
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="editButton" class="btn btn-primary">Update User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Delete User</h3>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <input type="hidden" id="deleteUserId" name="id" >
+                        <input type="hidden" id="deleteFirstName" name="firstName" value="test">
+                        <input type="hidden" id="deleteLastName" name="lastName" value="test">
+                        <input type="hidden" id="deleteUserName" name="userName" value="test">
+                        <!-- Insert th:field for name -->
+                        <div class="form-row my-2">
+                            <div class="col">
+                                <input th:class="form-control" type="password" id="deletePassword" placeholder="Password"
+                                       required>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="passwordButton" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Update Password</h3>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="updateUserId" name="id" >
+                    <input type="hidden" id="updateFirstName" name="firstName" value="test">
+                    <input type="hidden" id="updateLastName" name="lastName" value="test">
+                    <input type="hidden" id="updateUserName" name="userName" value="test">
+                    <!-- Insert th:field for name -->
+                    <div class="form-row my-2">
+                        <div class="col">
+                            <input th:class="form-control" type="password" id="oldPassword" placeholder="Old Password"
+                                   required>
+                        </div>
+                    </div>
+
+                    <!-- Insert th:field for name -->
+                    <div class="form-row my-2">
+                        <div class="col">
+                            <input th:class="form-control" type="password" id="newPassword" placeholder="New Password"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="updateButton" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

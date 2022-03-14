@@ -54,13 +54,37 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
 
 
     @Override
-    public boolean create(UserEntity userEntity) {
-        return false;
+    public boolean create(UserEntity userEntity)
+    {
+        try
+        {
+            // Attempt to save new UserEntity to database
+            userRepository.save(userEntity);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
-    public boolean update(UserEntity userEntity) {
-        return false;
+    public boolean update(UserEntity userEntity)
+    {
+        try
+        {
+            // Attempt to update UserModel in database
+            userRepository.save(userEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -68,7 +92,7 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
 
         try
         {
-            // Attempt to delete CofFeeModel in database
+            // Attempt to delete UserModel in database
             userRepository.delete(userEntity);
         }
         catch(Exception e)
