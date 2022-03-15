@@ -4,9 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Table("USERS")
 public class UserEntity {
 
@@ -25,8 +22,6 @@ public class UserEntity {
 
     @Column("PASSWORD")
     private String password;
-
-    //private Set<RoleEntity> roles = new HashSet<>();
 
     public UserEntity() {}
 
