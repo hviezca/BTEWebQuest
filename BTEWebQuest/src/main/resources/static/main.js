@@ -125,3 +125,16 @@ function deleteItem(id)
         success: function(fragment) {$("#userTable").replaceWith(fragment);}
     });
 }
+
+/* Script for Datepicker */
+$(document).ready(function(){
+    var date_input=$('input[name="eventDate"]'); //our date input has the name "date"
+    var container=$('.bootstrap.min.css form').length>0 ? $('.bootstrap.min.css form').parent() : "body";
+    var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    };
+    date_input.datepicker(options);
+})
