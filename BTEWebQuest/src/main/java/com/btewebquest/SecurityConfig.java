@@ -31,15 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.csrf().disable()
-		.httpBasic()
-			.and()
-			.authorizeRequests()
-			.antMatchers("/service/**").authenticated()
-			.and()
 		.authorizeRequests()
 			.antMatchers("/", "/images/**", "/CSS/**").permitAll()
-				.antMatchers("/BTE/users/users").hasAnyAuthority("ROLE_ADMIN")
-				.antMatchers("/BTE/users/delete").hasAnyAuthority("ROLE_EDITOR")
+				.antMatchers("/BTE/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EDITOR")
 			.and()
 		.formLogin()
 			.loginPage("/login")

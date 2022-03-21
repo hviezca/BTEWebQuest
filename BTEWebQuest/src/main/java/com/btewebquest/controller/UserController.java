@@ -29,18 +29,6 @@ public class UserController
     @Autowired
     HttpSession session;
 
-    @GetMapping("/users/users")
-    public String testUsers()
-    {
-        return "admin/test.html";
-    }
-
-    @GetMapping("/users/delete")
-    public String testDelete()
-    {
-        return "admin/delete.html";
-    }
-
     @GetMapping("/users")
     public String users(Model model)
     {
