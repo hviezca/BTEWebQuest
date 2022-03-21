@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="~{ fragments/include :: include}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin-Home</title>
+</head>
+<body>
+<div th:insert="~{admin/admin-fragments/admin-header :: admin-header}"></div>
+<div class="container-fluid">
+    <div class="container mx-auto m-5">
+        <div class="fs-1 text-center">Admin Home</div>
+        <div><h3 class="fs-3 m-2 text-center">Hello <span th:text="*{username}"></span></h3></div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <button type="submit" onclick="location.href = 'booking-management';"
+                    class="btn btn-primary w-50 fs-5 mx-auto">Booking Management
+            </button>
+        </div>
+        <div class="row mb-3">
+            <button type="submit" onclick="location.href = '#';"
+                    class="btn btn-primary w-50 fs-5 mx-auto">Button 2
+            </button>
+        </div>
+        <div class="row mb-3">
+            <button type="submit" onclick="location.href = '#';"
+                    class="btn btn-primary w-50 fs-5 mx-auto">Button 3
+            </button>
+        </div>
+        <div class="row mb-3">
+            <button type="submit" onclick="location.href = '#';"
+                    class="btn btn-primary w-50 fs-5 mx-auto">Button 4
+            </button>
+        </div>
+    </div>
+    <div>
+        <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
+    </div>
+</div>
+
+</body>
+</html>

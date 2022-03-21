@@ -1,0 +1,48 @@
+
+<!--Navbar Header for admin pages
+author @ Hiram Viezca-->
+<div th:fragment="admin-header">
+    <nav class="navbar navbar-expand-lg navbar-light transparent">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img style="width:75px; height:55px; "
+                                                  th:src="@{/images/LogoWhiteOnBlack.jpeg/}"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon">
+    				<i class="fas fa-bars" style="color:black; font-size:28px;"></i>
+				</span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Videos</a>
+                    </li>
+                </ul>
+                <!--Navbar Dropdown Hamburger Menu-->
+                <ul class="navbar-nav me-right mb-2 mb-lg-0">
+                    <li class="nav-item text-muted">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="admin/admin-home">Login</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

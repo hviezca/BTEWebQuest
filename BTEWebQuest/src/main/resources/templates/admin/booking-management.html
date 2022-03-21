@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="~{ fragments/include :: include}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Booking Management</title>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <!-- Insert Header -->
+        <div th:insert="~{admin/admin-fragments/admin-header :: admin-header}"></div>
+
+        <!-- Insert page title -->
+        <div class="container mx-auto m-5">
+            <div class="fs-1 text-center">Booking Management</div>
+        </div>
+
+        <!-- Begin content-->
+        <div class="container">
+            <table class="table">
+                <thead class="bg-black text-white">
+                    <tr>
+                        <th scope="col">Venue</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Reply</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Venue 1</td>
+                        <td>2-2-22</td>
+                        <td>123 Main St, ABQ, NM</td>
+                        <td>This is a booking request</td>
+                        <td>Joe Shmoe</td>
+                        <td>test@test.com</td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <button type="submit" onclick="location.href = '#';"
+                                        class="btn btn-primary mx-auto">Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Insert Footer-->
+        <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
+
+    </div>
+</body>
+</html>
