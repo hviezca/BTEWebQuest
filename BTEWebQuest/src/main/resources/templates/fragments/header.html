@@ -42,9 +42,17 @@ author @ Hiram Viezca-->
                         <!--<span class="navbar-toggler-icon"></span>-->
                         Admin
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#">Login</a>
+                    <ul sec:authorize="isAnonymous()" class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li >
+                            <a class="dropdown-item" href="/login">Login</a>
+                        </li>
+                    </ul>
+                    <ul sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li >
+                            <a class="dropdown-item" href="/BTE/users">Users</a>
+                        </li>
+                        <li >
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </li>
                     </ul>
                     <!--<a class="nav-link text-muted" aria-current="page" href="#">Admin</a>-->

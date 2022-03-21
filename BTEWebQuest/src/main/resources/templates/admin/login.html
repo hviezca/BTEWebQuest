@@ -1,0 +1,40 @@
+
+<body>
+	<div th:fragment="login">
+		<div class="container body-content">
+			<div class="container border border-dark rounded p-s5 my-5 position-absolute top-50 start-50 translate-middle" style="max-width: 400px;">
+
+				<h3 class="text-center my-5">Login</h3>
+				
+				<!-- Insert th:action th:object for routing -->
+				<form th:action="@{/login}" method="POST">
+				
+						<!-- Insert th:field for username -->
+					<div class="form-row my-3">
+						<div class="col">
+							<input th:class="form-control" name="username" id="username" type="text" placeholder="Username" required>							
+						</div>
+					</div>
+					
+					<!-- Insert th:field for password -->
+					<div class="form-row my-3">
+						<div class="col">
+							<input class="form-control" name="password" id="password" type="password" placeholder="Password" required>
+						</div>
+					</div>
+					
+					<!-- Insert th:if and th:error for password error catching if required -->
+					<div class="form-row my-3">
+						<div class="col">
+							<h6 style="color: red; text-align:left" th:if="${param.error}">Invalid Username/Password Combo</h6>							
+						</div>
+					</div>
+					<input type="submit" value="Login" class="btn btn-dark btn-block btn-lg my-4">
+
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
