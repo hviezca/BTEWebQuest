@@ -17,13 +17,17 @@ public class TrackProgressEntity {
     @Column("IS_RECORDED")
     private boolean isRecorded;
 
+    @Column("TRACK_ID")
+    private int trackId;
+
     public TrackProgressEntity() {
     }
 
-    public TrackProgressEntity(int id, String instrumentName, boolean isRecorded) {
+    public TrackProgressEntity(int id, String instrumentName, boolean isRecorded, int trackId) {
         this.id = id;
         this.instrumentName = instrumentName;
         this.isRecorded = isRecorded;
+        this.trackId = trackId;
     }
 
     public int getId() {
@@ -48,5 +52,13 @@ public class TrackProgressEntity {
 
     public void setRecorded(boolean recorded) {
         isRecorded = recorded;
+    }
+
+    public int getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(int trackId) {
+        this.trackId = trackId;
     }
 }

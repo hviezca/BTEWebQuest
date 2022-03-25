@@ -1,7 +1,6 @@
 package com.btewebquest.data.repository;
 
 import com.btewebquest.data.entity.AlbumEntity;
-import com.btewebquest.data.entity.RoleEntity;
 import com.btewebquest.data.entity.TrackEntity;
 import com.btewebquest.data.entity.TrackProgressEntity;
 import org.springframework.data.jdbc.repository.query.Query;

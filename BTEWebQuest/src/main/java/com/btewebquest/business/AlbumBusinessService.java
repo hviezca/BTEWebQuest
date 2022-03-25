@@ -50,7 +50,7 @@ public class AlbumBusinessService {
         // For each CoffeeEntity in coffeeEntity List, add CoffeeModel to coffeeDomain List
         for(TrackEntity entity : trackEntities)
         {
-            tracks.add(new TrackModel(entity.getId(), entity.getTrackName(), entity.getTrackNumber()));
+            tracks.add(new TrackModel(entity.getId(), entity.getTrackName(), entity.getTrackNumber(), entity.getAlbumId()));
         }
 
         // Return list of CoffeeModels
@@ -73,6 +73,13 @@ public class AlbumBusinessService {
 
         // Return list of CoffeeModels
         return trackProgress;
+    }
+
+    public AlbumModel getAlbumById(int id)
+    {
+        AlbumEntity entity = service.findById(id);
+
+        return new AlbumModel(entity.getId(), entity.getAlbumName(), entity.getAlbumYear(), entity.isMixed(), entity.isMastered());
     }
 
 }

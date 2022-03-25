@@ -4,6 +4,19 @@ $('document').ready(function() {
         cache: false,
     });
 
+    $('.trackclass').on('click',function(event){
+
+        event.preventDefault();
+
+        var href= $(this).attr('href');
+
+        $.get(href, function(track, status){
+            $('#trackTitle').text(track.trackName);
+        })
+
+        $('#editTrackModal').modal('show');
+    })
+
     $('.testclass').on('click',function(event){
 
         event.preventDefault();

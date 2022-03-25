@@ -17,13 +17,17 @@ public class TrackEntity {
     @Column("TRACK_NUMBER")
     private int trackNumber;
 
+    @Column("ALBUM_ID")
+    private int albumId;
+
     public TrackEntity() {
     }
 
-    public TrackEntity(int id, String trackName, int trackNumber) {
+    public TrackEntity(int id, String trackName, int trackNumber, int albumId) {
         this.id = id;
         this.trackName = trackName;
         this.trackNumber = trackNumber;
+        this.albumId = albumId;
     }
 
     public int getId() {
@@ -48,5 +52,13 @@ public class TrackEntity {
 
     public void setTrackNumber(int trackNumber) {
         this.trackNumber = trackNumber;
+    }
+
+    public int getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(int albumId) {
+        this.albumId = albumId;
     }
 }

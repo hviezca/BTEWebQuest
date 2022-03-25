@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlbumDataService implements DataAccessInterface<AlbumEntity> {
@@ -87,7 +88,12 @@ public class AlbumDataService implements DataAccessInterface<AlbumEntity> {
 
     @Override
     public AlbumEntity findById(int id) {
-        return null;
+
+        // Optional Object to hold UserEntity returned from database by id
+        Optional<AlbumEntity> album = albumRepository.findById((long) id);
+
+        // If Optional Object not null, return UserEntity, else throw NoSuchElement Exception
+        return album.get();
     }
 
     @Override

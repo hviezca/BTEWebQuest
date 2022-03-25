@@ -1,10 +1,12 @@
 <div class="container " th:fragment="comingSoonMenu" id="comingSoonMenu">
 
+    <script type="text/javascript" th:src="@{/main.js}"></script>
+
     <h1 class="text-center my-5">Progress Management</h1>
 
     <div class="row justify-content-center my-2">
         <div class="col">
-            <h2 class="text-center ">Album Name</h2>
+            <h2 class="text-center" th:text="${album.albumName}">Album Name</h2>
         </div>
     </div>
 
@@ -22,91 +24,47 @@
 
             <div class="card-deck">
 
-                <div class="card mb-4 border" style="width: 100%;">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">
-                            Song Title
-                        </h5>
-                        <div class="row mx-auto mt-3">
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Vocals</label>
+                <div th:each="track : ${album.trackList}" >
+
+                    <div class="card mb-4 border" style="width: 100%;">
+                        <div class="card-body text-dark">
+                            <h5 class="card-title" th:text="${track.trackName}">
+                                Song Title
+                            </h5>
+                            <div class="row mx-auto mt-3">
+
+                                <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" th:checked="${track.tracksHash.get('VOCALS')}" onclick="this.checked=!this.checked;">
+                                    <label class="form-check-label" for="inlineCheckbox1">Vocals</label>
+                                </div>
+                                <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" th:checked="${track.tracksHash.get('GUITAR')}" onclick="this.checked=!this.checked;">
+                                    <label class="form-check-label" for="inlineCheckbox2">Guitar</label>
+                                </div>
+                                <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" th:checked="${track.tracksHash.get('BASS')}" onclick="this.checked=!this.checked;">
+                                    <label class="form-check-label" for="inlineCheckbox3">Bass</label>
+                                </div>
+                                <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" th:checked="${track.tracksHash.get('DRUMS')}" onclick="this.checked=!this.checked;">
+                                    <label class="form-check-label" for="inlineCheckbox4">Drums</label>
+                                </div>
+
+                                <div class="col" >
+                                    <a th:href="@{/BTE/comingsoon/json/{id} (id=${track.id})}" id="trackModalButton" class="trackclass btn btn-sm btn-primary" style="width: 150px;">Update</a>
+
+                                </div>
                             </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Guitar</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox3">Bass</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                                <label class="form-check-label" for="inlineCheckbox4">Drums</label>
-                            </div>
+
                         </div>
-
                     </div>
-                </div>
 
-                <div class="card mb-4 border" style="width: 100%;">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">
-                            Song Title
-                        </h5>
-                        <div class="row mx-auto mt-3">
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Vocals</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Guitar</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox3">Bass</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                                <label class="form-check-label" for="inlineCheckbox4">Drums</label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="card mb-4 border" style="width: 100%;">
-                    <div class="card-body text-dark">
-                        <h5 class="card-title">
-                            Song Title
-                        </h5>
-                        <div class="row mx-auto mt-3">
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Vocals</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Guitar</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox3">Bass</label>
-                            </div>
-                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-                                <label class="form-check-label" for="inlineCheckbox4">Drums</label>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
             </div>
 
         </div>
-        <div class="col-xl-2 order-1 order-xl-5 my-2">
+        <div class="col-xl-3 order-1 order-xl-5 my-2">
             <div class="row justify-content-evenly">
                 <div class="col-3 col-xl-12">
                     <div class="form-check">
@@ -135,4 +93,45 @@
             <button type="button" class="btn btn-primary btn-lg">Add Track</button>
         </div>
     </div>
+
+    <div class="modal fade" id="editTrackModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <h5 class="card-title" id="trackTitle">
+
+                    </h5>
+                    <div class="row mx-auto mt-3">
+
+                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"  >
+                            <label class="form-check-label" for="inlineCheckbox1">Vocals</label>
+                        </div>
+                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" >
+                            <label class="form-check-label" for="inlineCheckbox2">Guitar</label>
+                        </div>
+                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3">Bass</label>
+                        </div>
+                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" >
+                            <label class="form-check-label" for="inlineCheckbox4">Drums</label>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="passwordButton" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
+
