@@ -2,8 +2,10 @@ package com.btewebquest.business;
 
 import com.btewebquest.data.entity.RoleEntity;
 import com.btewebquest.data.entity.UserEntity;
+import com.btewebquest.data.entity.UserRoleEntity;
 import com.btewebquest.data.repository.UserRepository;
 import com.btewebquest.data.service.UserDataService;
+import com.btewebquest.data.service.UserRoleDataService;
 import com.btewebquest.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +27,7 @@ public class UserBusinessService implements UserDetailsService {
     private UserDataService service;
 
     @Autowired
-    private UserRepository service2;
+    private UserRoleDataService roleService;
 
     public List<UserModel> getUsers()
     {
@@ -87,7 +89,7 @@ public class UserBusinessService implements UserDetailsService {
         // Call service and return user by username
         UserEntity user =  service.findByUserName(username);
 
-        Set<RoleEntity> roleEntitySet = service2.findRoles((long) user.getId());
+        Set<RoleEntity> roleEntitySet = service.findUserRoles(user.getId());
 
         if(user != null)
         {
@@ -104,5 +106,12 @@ public class UserBusinessService implements UserDetailsService {
         {
             throw new UsernameNotFoundException("Username not found");
         }
+    }
+
+    public boolean addUserRoles(int role_id, int user_id)
+    {
+        UserRoleEntity user_role = new UserRoleEntity(0, role_id, user_id);
+
+        return roleService.create(user_role);
     }
 }

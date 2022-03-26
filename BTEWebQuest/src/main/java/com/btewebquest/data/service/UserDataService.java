@@ -1,5 +1,6 @@
 package com.btewebquest.data.service;
 
+import com.btewebquest.data.entity.RoleEntity;
 import com.btewebquest.data.entity.UserEntity;
 import com.btewebquest.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserDataService implements DataAccessInterface<UserEntity>{
@@ -102,6 +104,11 @@ public class UserDataService implements DataAccessInterface<UserEntity>{
         }
 
         return true;
+    }
+
+    public Set<RoleEntity> findUserRoles(int user_id)
+    {
+        return userRepository.findRoles((long) user_id);
     }
 
     public UserEntity findByUserName(String username) {

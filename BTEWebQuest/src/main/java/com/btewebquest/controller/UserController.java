@@ -96,6 +96,10 @@ public class UserController
 
         service.addUser(user);
 
+        user = service.findUserByUsername(user.getUserName());
+
+        service.addUserRoles(4, user.getId());
+
         List<UserModel> users = service.getUsers();
 
         model.addAttribute("title", "User Management");
