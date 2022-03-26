@@ -20,14 +20,30 @@ public class TrackEntity {
     @Column("ALBUM_ID")
     private int albumId;
 
+    @Column("VOCALS")
+    private boolean vocals;
+
+    @Column("GUITAR")
+    private boolean guitar;
+
+    @Column("DRUMS")
+    private boolean drums;
+
+    @Column("BASS")
+    private boolean bass;
+
     public TrackEntity() {
     }
 
-    public TrackEntity(int id, String trackName, int trackNumber, int albumId) {
+    public TrackEntity(int id, String trackName, int trackNumber, int albumId, boolean vocals, boolean guitar, boolean drums, boolean bass) {
         this.id = id;
         this.trackName = trackName;
         this.trackNumber = trackNumber;
         this.albumId = albumId;
+        this.vocals = vocals;
+        this.guitar = guitar;
+        this.drums = drums;
+        this.bass = bass;
     }
 
     public int getId() {
@@ -60,5 +76,37 @@ public class TrackEntity {
 
     public void setAlbumId(int albumId) {
         this.albumId = albumId;
+    }
+
+    public boolean isVocals() {
+        return vocals;
+    }
+
+    public void setVocals(boolean vocals) {
+        this.vocals = vocals;
+    }
+
+    public boolean isGuitar() {
+        return guitar;
+    }
+
+    public void setGuitar(boolean guitar) {
+        this.guitar = guitar;
+    }
+
+    public boolean isDrums() {
+        return drums;
+    }
+
+    public void setDrums(boolean drums) {
+        this.drums = drums;
+    }
+
+    public boolean isBass() {
+        return bass;
+    }
+
+    public void setBass(boolean bass) {
+        this.bass = bass;
     }
 }

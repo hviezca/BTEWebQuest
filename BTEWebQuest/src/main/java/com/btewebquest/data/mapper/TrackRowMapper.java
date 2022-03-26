@@ -12,6 +12,10 @@ public class TrackRowMapper implements RowMapper<TrackEntity> {
         return new TrackEntity(rs.getInt("TRACK_ID"),
                 rs.getString("TRACK_NAME"),
                 rs.getInt("TRACK_NUMBER"),
-                rs.getInt("ALBUM_ID"));
+                rs.getInt("ALBUM_ID"),
+                rs.getBoolean("VOCALS"),
+                rs.getBoolean("GUITAR"),
+                rs.getBoolean("DRUMS"),
+                rs.getBoolean("BASS"));
     }
 }

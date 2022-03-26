@@ -11,10 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.sound.midi.Track;
 import java.util.List;
 
 @Controller
@@ -30,8 +29,6 @@ public class ComingSoonController {
     @GetMapping("/comingsoon")
     public String comingSoon(Model model)
     {
-        model.addAttribute("title", "User Management");
-
         List<AlbumModel> albums = albumService.getAlbums();
 
         AlbumModel album = albumService.getAlbumById(1);
@@ -40,11 +37,7 @@ public class ComingSoonController {
 
         for (TrackModel track : album.getTrackList())
         {
-            track.setTracksProgress(albumService.getTrackProgress(track.getId()));
-            for (TrackProgressModel trackProgress : track.getTracksProgress())
-            {
-                track.getTracksHash().put(trackProgress.getInstrumentName(), trackProgress.isRecorded());
-            }
+
         }
 
         model.addAttribute("title", "Progress Management");
@@ -64,7 +57,6 @@ public class ComingSoonController {
     @GetMapping("/comingsoon/json/{id}")
     public ResponseEntity<?> getTrackJson(@PathVariable("id") int id)
     {
-
         try
         {
             TrackModel track = trackService.getTrackById(id);
@@ -77,6 +69,30 @@ public class ComingSoonController {
         {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @RequestMapping("/comingsoon/trackupdate")
+    public String updateTrack(@RequestBody TrackModel track, Model model)
+    {
+        trackService.updateTrack(track);
+        System.out.println(track.getId() + " " + track.getTrackName() + " " + track.getTrackNumber() + " " + track.isBass());
+
+        model.addAttribute("title", "User Management");
+
+        List<AlbumModel> albums = albumService.getAlbums();
+
+        AlbumModel album = albumService.getAlbumById(1);
+
+        album.setTrackList(albumService.getTracks(album.getId()));
+
+        for (TrackModel trackTest : album.getTrackList())
+        {
+
+        }
+
+        model.addAttribute("title", "Progress Management");
+        model.addAttribute("album", album);
+        return "coming-soon/coming-soon-menu-frag :: #comingSoonMenu";
     }
 
 }

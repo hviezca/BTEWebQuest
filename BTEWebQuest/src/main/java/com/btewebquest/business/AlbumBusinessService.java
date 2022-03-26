@@ -50,7 +50,7 @@ public class AlbumBusinessService {
         // For each CoffeeEntity in coffeeEntity List, add CoffeeModel to coffeeDomain List
         for(TrackEntity entity : trackEntities)
         {
-            tracks.add(new TrackModel(entity.getId(), entity.getTrackName(), entity.getTrackNumber(), entity.getAlbumId()));
+            tracks.add(new TrackModel(entity.getId(), entity.getTrackName(), entity.getTrackNumber(), entity.getAlbumId(), entity.isVocals(), entity.isGuitar(), entity.isDrums(), entity.isBass()));
         }
 
         // Return list of CoffeeModels

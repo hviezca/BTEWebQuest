@@ -10,18 +10,22 @@ public class TrackModel {
     private String trackName;
     private int trackNumber;
     private int albumId;
-    private List<TrackProgressModel> tracksProgress;
-    private HashMap<String, Boolean> tracksHash;
+    private boolean vocals;
+    private boolean guitar;
+    private boolean drums;
+    private boolean bass;
 
     public TrackModel() {}
 
-    public TrackModel(int id, String trackName, int trackNumber, int albumId) {
+    public TrackModel(int id, String trackName, int trackNumber, int albumId, boolean vocals, boolean guitar, boolean drums, boolean bass) {
         this.id = id;
         this.trackName = trackName;
         this.trackNumber = trackNumber;
         this.albumId = albumId;
-        this.tracksProgress = new ArrayList<TrackProgressModel>();
-        this.tracksHash = new HashMap<String, Boolean>();
+        this.vocals = vocals;
+        this.guitar = guitar;
+        this.drums = drums;
+        this.bass = bass;
     }
 
     public int getId() {
@@ -48,27 +52,43 @@ public class TrackModel {
         this.trackNumber = trackNumber;
     }
 
-    public List<TrackProgressModel> getTracksProgress() {
-        return tracksProgress;
-    }
-
-    public void setTracksProgress(List<TrackProgressModel> tracksProgress) {
-        this.tracksProgress = tracksProgress;
-    }
-
-    public HashMap<String, Boolean> getTracksHash() {
-        return tracksHash;
-    }
-
-    public void setTracksHash(HashMap<String, Boolean> tracksHash) {
-        this.tracksHash = tracksHash;
-    }
-
     public int getAlbumId() {
         return albumId;
     }
 
     public void setAlbumId(int albumId) {
         this.albumId = albumId;
+    }
+
+    public boolean isVocals() {
+        return vocals;
+    }
+
+    public void setVocals(boolean vocals) {
+        this.vocals = vocals;
+    }
+
+    public boolean isGuitar() {
+        return guitar;
+    }
+
+    public void setGuitar(boolean guitar) {
+        this.guitar = guitar;
+    }
+
+    public boolean isDrums() {
+        return drums;
+    }
+
+    public void setDrums(boolean drums) {
+        this.drums = drums;
+    }
+
+    public boolean isBass() {
+        return bass;
+    }
+
+    public void setBass(boolean bass) {
+        this.bass = bass;
     }
 }

@@ -41,7 +41,19 @@ public class TrackDataService implements DataAccessInterface<TrackEntity>{
 
     @Override
     public boolean update(TrackEntity trackEntity) {
-        return false;
+        try
+        {
+            // Attempt to update UserModel in database
+            System.out.println("Trying to update");
+            trackRepository.save(trackEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     @Override

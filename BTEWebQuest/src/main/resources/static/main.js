@@ -11,7 +11,14 @@ $('document').ready(function() {
         var href= $(this).attr('href');
 
         $.get(href, function(track, status){
-            $('#trackTitle').text(track.trackName);
+            $('#songTitle').val(track.trackName);
+            $('#updateTrackId').val(track.id);
+            $('#updateTrackNumber').val(track.trackNumber);
+            $('#updateAlbumId').val(track.albumId);
+            document.getElementById('editVocalCheck').checked = track.vocals;
+            document.getElementById('editGuitarCheck').checked = track.guitar;
+            document.getElementById('editDrumsCheck').checked = track.drums;
+            document.getElementById('editBassCheck').checked = track.bass;
         })
 
         $('#editTrackModal').modal('show');
@@ -126,6 +133,65 @@ $('document').ready(function() {
             $('.modal-backdrop').remove();
         })
     })
+
+    $("#updateTrackButton").on('click', function(event){
+
+        event.preventDefault();
+        let id = $('#updateTrackId').val();
+        let trackName = $("#songTitle").val();
+        let trackNumber = $("#updateTrackNumber").val();
+        let albumId = $("#updateAlbumId").val();
+        let vocals;
+        let guitar;
+        let drums;
+        let bass;
+        if (document.getElementById('editVocalCheck').checked)
+        {
+            vocals = true;
+        }
+        else
+        {
+            vocals = false;
+        }
+        if (document.getElementById('editGuitarCheck').checked)
+        {
+            guitar = true;
+        }
+        else
+        {
+            guitar = false;
+        }
+        if (document.getElementById('editBassCheck').checked)
+        {
+            bass = true;
+        }
+        else
+        {
+            bass = false;
+        }
+        if (document.getElementById('editDrumsCheck').checked)
+        {
+            drums = true;
+        }
+        else
+        {
+            drums = false;
+        }
+
+        let jsonData = {id: id, trackName: trackName, trackNumber: trackNumber, albumId: albumId, vocals: vocals, guitar: guitar, bass: bass, drums: drums};
+
+        alert(JSON.stringify(jsonData));
+
+        $.post({
+            url: "comingsoon/trackupdate",
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json'
+        }).done(function(fragment){
+            $("#comingSoonMenu").replaceWith(fragment);
+            $('.modal-backdrop').remove();
+        })
+    })
+
 
 })
 
