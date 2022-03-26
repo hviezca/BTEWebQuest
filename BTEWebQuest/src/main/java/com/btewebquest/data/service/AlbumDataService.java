@@ -2,8 +2,6 @@ package com.btewebquest.data.service;
 
 import com.btewebquest.data.entity.AlbumEntity;
 import com.btewebquest.data.entity.TrackEntity;
-import com.btewebquest.data.entity.TrackProgressEntity;
-import com.btewebquest.data.entity.UserEntity;
 import com.btewebquest.data.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,27 +63,6 @@ public class AlbumDataService implements DataAccessInterface<AlbumEntity> {
         return tracks;
     }
 
-    public List<TrackProgressEntity> findAllTrackProgressByID(int id)
-    {
-        //
-        List<TrackProgressEntity> trackProgress = new ArrayList<TrackProgressEntity>();
-
-        try
-        {
-            //
-            Iterable<TrackProgressEntity> userIterable = albumRepository.findTrackProgress((long) id);
-
-            //
-            userIterable.forEach(trackProgress::add);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //
-        return trackProgress;
-    }
-
     @Override
     public AlbumEntity findById(int id) {
 
@@ -103,7 +80,18 @@ public class AlbumDataService implements DataAccessInterface<AlbumEntity> {
 
     @Override
     public boolean update(AlbumEntity albumEntity) {
-        return false;
+        try
+        {
+            // Attempt to update  in database
+            albumRepository.save(albumEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     @Override

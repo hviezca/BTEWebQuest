@@ -17,6 +17,17 @@ public class TrackModel {
 
     public TrackModel() {}
 
+    public TrackModel(int albumId) {
+        this.id= 0;
+        this.trackName= "Track Title";
+        this.trackNumber= 0;
+        this.vocals = false;
+        this.guitar = false;
+        this.drums = false;
+        this.bass = false;
+        this.albumId = albumId;
+    }
+
     public TrackModel(int id, String trackName, int trackNumber, int albumId, boolean vocals, boolean guitar, boolean drums, boolean bass) {
         this.id = id;
         this.trackName = trackName;

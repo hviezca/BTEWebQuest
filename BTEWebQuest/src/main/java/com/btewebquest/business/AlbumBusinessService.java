@@ -2,13 +2,9 @@ package com.btewebquest.business;
 
 import com.btewebquest.data.entity.AlbumEntity;
 import com.btewebquest.data.entity.TrackEntity;
-import com.btewebquest.data.entity.TrackProgressEntity;
-import com.btewebquest.data.entity.UserEntity;
 import com.btewebquest.data.service.AlbumDataService;
 import com.btewebquest.model.AlbumModel;
 import com.btewebquest.model.TrackModel;
-import com.btewebquest.model.TrackProgressModel;
-import com.btewebquest.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,29 +53,18 @@ public class AlbumBusinessService {
         return tracks;
     }
 
-    public List<TrackProgressModel> getTrackProgress(int id)
-    {
-        //
-        List<TrackProgressEntity> trackProgressEntities = service.findAllTrackProgressByID(id);
-
-        // Empty List of CoffeeModels to hold results
-        List<TrackProgressModel> trackProgress = new ArrayList<TrackProgressModel>();
-
-        // For each CoffeeEntity in coffeeEntity List, add CoffeeModel to coffeeDomain List
-        for(TrackProgressEntity entity : trackProgressEntities)
-        {
-            trackProgress.add(new TrackProgressModel(entity.getId(), entity.getInstrumentName(), entity.isRecorded()));
-        }
-
-        // Return list of CoffeeModels
-        return trackProgress;
-    }
-
     public AlbumModel getAlbumById(int id)
     {
         AlbumEntity entity = service.findById(id);
 
         return new AlbumModel(entity.getId(), entity.getAlbumName(), entity.getAlbumYear(), entity.isMixed(), entity.isMastered());
+    }
+
+    public boolean updateAlbum(AlbumModel album)
+    {
+        AlbumEntity albumEntity = new AlbumEntity(album.getId(), album.getAlbumName(), album.getAlbumYear(), album.isMixed(), album.isMastered());
+
+        return service.update(albumEntity);
     }
 
 }

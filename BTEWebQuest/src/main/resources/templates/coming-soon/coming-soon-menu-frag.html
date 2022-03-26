@@ -1,12 +1,12 @@
 <div class="container " th:fragment="comingSoonMenu" id="comingSoonMenu">
 
-    <script type="text/javascript" th:src="@{/main.js}"></script>
+    <script type="text/javascript" th:src="@{/comingsoon.js}"></script>
 
     <h1 class="text-center my-5">Progress Management</h1>
 
     <div class="row justify-content-center my-2">
         <div class="col">
-            <h2 class="text-center" th:text="${album.albumName}">Album Name</h2>
+            <h2 class="text-center" th:text="${album.albumName} + ' (' + ${album.albumYear} + ')'">Album Name</h2>
         </div>
     </div>
 
@@ -49,13 +49,11 @@
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" th:checked="${track.drums}" onclick="this.checked=!this.checked;">
                                     <label class="form-check-label" for="inlineCheckbox4">Drums</label>
                                 </div>
-
-                                <div class="col" >
-                                    <a th:href="@{/BTE/comingsoon/json/{id} (id=${track.id})}" id="trackModalButton" class="trackclass btn btn-sm btn-primary" style="width: 20px;">Up</a>
-
-                                </div>
                             </div>
 
+                            <div class="row mt-3 justify-content-end" style="margin: 0 auto;">
+                                <a th:href="@{/BTE/comingsoon/json/{id} (id=${track.id})}" id="trackModalButton" class="trackclass btn btn-sm btn-primary" style="width: 130px;">Update Track</a>
+                            </div>
                         </div>
                     </div>
 
@@ -68,18 +66,18 @@
             <div class="row justify-content-evenly">
                 <div class="col-3 col-xl-12">
                     <div class="form-check">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <label class="form-check-label" for="isMixed">
                             Mix
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" th:checked="${album.isMixed}" value="" id="isMixed" onclick="this.checked=!this.checked;">
                     </div>
                 </div>
                 <div class="col-3 col-xl-12">
                     <div class="form-check">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <label class="form-check-label" for="isMastered">
                             Master
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" th:checked="${album.isMastered}" value="" id="isMastered" onclick="this.checked=!this.checked;">
                     </div>
                 </div>
             </div>
@@ -89,8 +87,47 @@
     </div>
 
     <div class="row my-2">
-        <div class="col col-xl-6 offset-xl-3 text-end">
-            <button type="button" class="btn btn-primary btn-lg">Add Track</button>
+        <div class="col col-xl-6 offset-xl-3">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <button type="button" id="updateAlbumButton" class="btn btn-dark btn-lg albumclass">Update Album</button>
+                </div>
+                <div class="col  text-end">
+                    <button type="button" th:onclick="addTrack([[${album.id}]]); return false" class="btn btn-dark btn-lg">Add Track</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editAlbumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <label for="albumTitle">Album Title</label>
+                    <input type="text" name="updateAlbumName" id="albumTitle" th:value="${album.albumName}" style="width: 100%;">
+
+                    <label class="mt-2" for="albumYear">Album Year</label>
+                    <input type="text" name="updateAlbumTitle" id="albumYear" th:value="${album.albumYear}" style="width: 100%;">
+
+                    <div class="row mx-auto mt-3">
+                        <input type="hidden" id="updateAlbumAlbumId" name="id" th:value="${album.id}">
+
+                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                            <input class="form-check-input" th:checked="${album.isMixed}" name="mix" type="checkbox" id="editIsMixedCheck">
+                            <label class="form-check-label" for="editIsMixedCheck">Mix</label>
+                        </div>
+                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                            <input class="form-check-input" th:checked="${album.isMastered}" name="master" type="checkbox" id="editIsMasteredCheck">
+                            <label class="form-check-label" for="editIsMasteredCheck">Mastered</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="doUpdateAlbumButton" class="btn btn-primary">Update</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -99,35 +136,33 @@
             <div class="modal-content">
                 <div class="modal-body">
 
-                    <form id="updateTrackForm">
 
-                    <label for="songTitle">Song Title</label>
-                    <input type="text" name="updateTrackName" id="songTitle" style="width: 100%;">
+                        <label for="songTitle">Song Title</label>
+                        <input type="text" name="updateTrackName" id="songTitle" style="width: 100%;">
 
-                    <div class="row mx-auto mt-3">
-                        <input type="hidden" id="updateTrackId" name="id">
-                        <input type="hidden" id="updateTrackNumber" name="trackNumber">
-                        <input type="hidden" id="updateAlbumId" name="albumId">
+                        <div class="row mx-auto mt-3">
+                            <input type="hidden" id="updateTrackId" name="id">
+                            <input type="hidden" id="updateTrackNumber" name="trackNumber">
+                            <input type="hidden" id="updateAlbumId" name="albumId">
 
-                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                            <input class="form-check-input" name="vocals" type="checkbox" id="editVocalCheck" value="option1"  >
-                            <label class="form-check-label" for="editVocalCheck">Vocals</label>
-                        </div>
-                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                            <input class="form-check-input" name="guitar" type="checkbox" id="editGuitarCheck" value="option2" >
-                            <label class="form-check-label" for="editGuitarCheck">Guitar</label>
-                        </div>
-                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                            <input class="form-check-input" name="bass" type="checkbox" id="editBassCheck" value="option3">
-                            <label class="form-check-label" for="editBassCheck">Bass</label>
-                        </div>
-                        <div class="col form-check form-check-inline" style="margin: 0 auto;">
-                            <input class="form-check-input" name="drums" type="checkbox" id="editDrumsCheck" value="option4" >
-                            <label class="form-check-label" for="editDrumsCheck">Drums</label>
-                        </div>
+                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                <input class="form-check-input" name="vocals" type="checkbox" id="editVocalCheck" value="option1"  >
+                                <label class="form-check-label" for="editVocalCheck">Vocals</label>
+                            </div>
+                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                <input class="form-check-input" name="guitar" type="checkbox" id="editGuitarCheck" value="option2" >
+                                <label class="form-check-label" for="editGuitarCheck">Guitar</label>
+                            </div>
+                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                <input class="form-check-input" name="bass" type="checkbox" id="editBassCheck" value="option3">
+                                <label class="form-check-label" for="editBassCheck">Bass</label>
+                            </div>
+                            <div class="col form-check form-check-inline" style="margin: 0 auto;">
+                                <input class="form-check-input" name="drums" type="checkbox" id="editDrumsCheck" value="option4" >
+                                <label class="form-check-label" for="editDrumsCheck">Drums</label>
+                            </div>
 
-                    </div>
-                    </form>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

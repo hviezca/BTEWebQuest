@@ -36,15 +36,27 @@ public class TrackDataService implements DataAccessInterface<TrackEntity>{
 
     @Override
     public boolean create(TrackEntity trackEntity) {
-        return false;
+
+        try
+        {
+            // Attempt to save new UserEntity to database
+            trackRepository.save(trackEntity);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     @Override
-    public boolean update(TrackEntity trackEntity) {
+    public boolean update(TrackEntity trackEntity)
+    {
         try
         {
             // Attempt to update UserModel in database
-            System.out.println("Trying to update");
             trackRepository.save(trackEntity);
         }
         catch(Exception e)
@@ -58,6 +70,18 @@ public class TrackDataService implements DataAccessInterface<TrackEntity>{
 
     @Override
     public boolean delete(TrackEntity trackEntity) {
-        return false;
+
+        try
+        {
+            // Attempt to delete UserModel in database
+            trackRepository.delete(trackEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 }

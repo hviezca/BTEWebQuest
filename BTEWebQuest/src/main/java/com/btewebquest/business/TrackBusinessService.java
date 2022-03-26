@@ -29,4 +29,19 @@ public class TrackBusinessService {
 
         return service.update(trackEntity);
     }
+
+    public boolean addTrack(TrackModel track)
+    {
+        TrackEntity trackEntity = new TrackEntity(track.getId(), track.getTrackName(), track.getTrackNumber(), track.getAlbumId(), track.isVocals(), track.isGuitar(), track.isDrums(), track.isBass() );
+
+        return service.create(trackEntity);
+    }
+
+    public boolean deleteTrack(TrackModel track)
+    {
+        TrackEntity trackEntity = new TrackEntity(track.getId(), track.getTrackName(), track.getTrackNumber(), track.getAlbumId(), track.isVocals(), track.isGuitar(), track.isDrums(), track.isBass() );
+
+        return service.delete(trackEntity);
+    }
+
 }
