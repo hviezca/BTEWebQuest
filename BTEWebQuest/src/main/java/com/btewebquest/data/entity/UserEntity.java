@@ -4,7 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("USERS")
+/**
+ * Entity representing a UserModel object
+ *
+ * @author sfradet
+ * @version 1.0
+ */
+@Table("users")
 public class UserEntity {
 
     @Id
@@ -33,6 +39,7 @@ public class UserEntity {
         this.password = password;
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }

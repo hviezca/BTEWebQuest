@@ -19,6 +19,12 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller for handling actions related to Users
+ *
+ * @author sfradet
+ * @version 1/0
+ */
 @Controller
 @RequestMapping("/BTE")
 public class UserController
@@ -29,6 +35,12 @@ public class UserController
     @Autowired
     HttpSession session;
 
+    /**
+     * Return User page with list of all Users
+     *
+     * @param model View Model
+     * @return User Management page
+     */
     @GetMapping("/users")
     public String users(Model model)
     {
@@ -44,20 +56,31 @@ public class UserController
             }
         }
 
+        // Get List of all Users from database
         List<UserModel> users = service.getUsers();
 
+        // Setup information for View Model
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
 
         return "admin/users";
     }
 
+    /**
+     * Return User data as ResponseEntity
+     *
+     * @param id ID of desired UserModel
+     * @return User Management page
+     */
     @GetMapping("/users/json/{id}")
     public ResponseEntity<?> getUserJson(@PathVariable("id") int id)
     {
         try
         {
+            // Get User from database
             UserModel user = service.getUserById(id);
+
+            // If User is null, send fail, else send UserModel
             if (user == null)
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             else
@@ -69,22 +92,40 @@ public class UserController
         }
     }
 
-
+    /**
+     * Delete UserModel from database
+     *
+     * @param id ID of desired User to delete
+     * @param model View Model
+     * @return User Management Page
+     */
     @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable int id, Model model)
     {
+        // Get User from database
         UserModel user = service.getUserById(id);
 
+        // Delete User from database
         service.deleteUser(user);
 
+        // Get List of all Users in database
         List<UserModel> users = service.getUsers();
 
+        // Setup information for View Model
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
 
         return "admin/userFragment";
     }
 
+    /**
+     * Add User to database
+     *
+     * @param user UserModel to add to database
+     * @param result BindingResult for validation
+     * @param model View Model
+     * @return User Management Page
+     */
     @PostMapping("/users")
     public String addUser(@ModelAttribute @Valid UserModel user, BindingResult result, Model model)
     {
@@ -94,14 +135,19 @@ public class UserController
         // Add encoded password to UserModel
         user.setPassword(encoded);
 
+        // Add User to database
         service.addUser(user);
 
+        // Get User by ID
         user = service.findUserByUsername(user.getUserName());
 
+        // Add 'Editor' role to User
         service.addUserRoles(4, user.getId());
 
+        // Get List of all Users from database
         List<UserModel> users = service.getUsers();
 
+        // Setup information for View Model
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
@@ -109,19 +155,32 @@ public class UserController
         return "admin/userFragment :: #userTable";
     }
 
+    /**
+     * Update User in database
+     *
+     * @param user UserModel to be updated
+     * @param result BindingResult for validation
+     * @param model View Model
+     * @return User Management page
+     */
     @PutMapping("/users")
     public String updateUser(@ModelAttribute @Valid UserModel user, BindingResult result, Model model)
     {
+        // Get User from database
         UserModel existingUser = service.getUserById(user.getId());
 
+        // Update User information
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setUserName(user.getUserName());
 
+        // Update User in database
         service.updateUser(existingUser);
 
+        // Get List of User from database
         List<UserModel> users = service.getUsers();
 
+        // Setup information for View Model
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
@@ -129,12 +188,23 @@ public class UserController
         return "admin/userFragment :: #userTable";
     }
 
+    /**
+     * Delete User from database
+     *
+     * @param user UserModel to be deleted
+     * @param model View Model
+     * @return User Management Page
+     */
     @RequestMapping("/users/verify")
     public String verifyDeleteUser(@RequestBody UserModel user, Model model)
     {
+        // Get Admin user from database
         UserModel admin = service.getUserById((Integer) session.getAttribute("userID"));
+
+        // Get User to be deleted from database
         UserModel deleteUser = service.getUserById(user.getId());
 
+        // Verify User entered Admin Password
         if(BCrypt.checkpw(user.getPassword(), admin.getPassword()))
         {
             service.deleteUser(deleteUser);
@@ -144,8 +214,10 @@ public class UserController
             System.out.println("No Match");
         }
 
+        // Get List of User from database
         List<UserModel> users = service.getUsers();
 
+        // Setup information for View Model
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
@@ -153,16 +225,26 @@ public class UserController
         return "admin/userFragment :: #userTable";
     }
 
+    /**
+     * Update User Password
+     *
+     * @param user UserModel to have password updated
+     * @param model View Model
+     * @return User Management Page
+     */
     @RequestMapping("/users/update")
     public String updateUserPassword(@RequestBody UserModel user, Model model)
     {
-
+        // Get User from database
         UserModel oldUser = service.getUserById(user.getId());
 
+        // Verify User password
         if(BCrypt.checkpw(user.getUserName(), oldUser.getPassword()))
         {
            // Encode Password
            String encoded = new BCryptPasswordEncoder().encode(user.getPassword());
+
+           // Update User
            oldUser.setPassword(encoded);
            service.updateUser(oldUser);
         }
@@ -171,8 +253,10 @@ public class UserController
             System.out.println("No Match");
         }
 
+        // Get List of UserModel
         List<UserModel> users = service.getUsers();
 
+        // Setup information for View Model
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());

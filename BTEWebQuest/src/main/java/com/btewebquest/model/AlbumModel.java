@@ -3,14 +3,20 @@ package com.btewebquest.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model representing an Album
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 public class AlbumModel {
 
-    private int id;
-    private String albumName;
-    private int albumYear;
-    private boolean isMixed;
-    private boolean isMastered;
-    private List<TrackModel> trackList;
+    private int id; // Album ID
+    private String albumName; // Album Name
+    private int albumYear; // Album Year
+    private boolean isMixed; // Is Album mixed
+    private boolean isMastered; // Is Album mastered
+    private List<TrackModel> trackList; // List of Tracks for Album
 
     public AlbumModel() {}
 
@@ -24,6 +30,7 @@ public class AlbumModel {
         };
     }
 
+    // Getter and Setters
     public int getId() {
         return id;
     }

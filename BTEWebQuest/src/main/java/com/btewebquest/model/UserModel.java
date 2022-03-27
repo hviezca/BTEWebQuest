@@ -5,22 +5,28 @@ import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * Model representing User
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 public class UserModel {
 
     @Id
-    private int id;
+    private int id; // User ID
 
     @NotEmpty
-    private String firstName;
+    private String firstName; // First Name
 
     @NotEmpty
-    private String lastName;
+    private String lastName; // Last Name
 
     @Size(min = 4, max = 20, message = "Username must be between 4 and 20 characters")
-    private String userName;
+    private String userName; // Username
 
     @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
-    private String password;
+    private String password; // Password
 
     public UserModel() {}
 
@@ -31,6 +37,8 @@ public class UserModel {
         this.userName = userName;
         this.password = password;
     }
+
+    // Getters and setters
 
     public int getId() {
         return id;

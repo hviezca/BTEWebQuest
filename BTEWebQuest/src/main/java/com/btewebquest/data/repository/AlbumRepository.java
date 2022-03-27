@@ -8,8 +8,20 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Set;
 
+/**
+ * CRUD Repository for AlbumEntity
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 public interface AlbumRepository extends CrudRepository<AlbumEntity, Long> {
 
+    /**
+     * Custom Query for getting Tracks for Album
+     *
+     * @param id Album ID
+     * @return Set of TrackEntity
+     */
     @Query("SELECT * FROM tracks WHERE ALBUM_ID = :id")
     Set<TrackEntity> findTracks(@Param("id") Long id);
 

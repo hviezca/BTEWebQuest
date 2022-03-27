@@ -4,7 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("TRACKS")
+/**
+ * Entity representing a TrackModel object
+ *
+ * @author sfradet
+ * @version 1.0
+ */
+@Table("tracks")
 public class TrackEntity {
 
     @Id
@@ -46,6 +52,7 @@ public class TrackEntity {
         this.bass = bass;
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }

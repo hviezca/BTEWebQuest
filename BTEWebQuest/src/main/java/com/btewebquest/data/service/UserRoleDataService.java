@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Data Service for User Roles
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 @Service
 public class UserRoleDataService implements DataAccessInterface<UserRoleEntity>{
 
@@ -27,12 +33,18 @@ public class UserRoleDataService implements DataAccessInterface<UserRoleEntity>{
         return null;
     }
 
+    /**
+     * Create new User Role
+     *
+     * @param userRoleEntity UserRoleEntity
+     * @return boolean indicating success
+     */
     @Override
     public boolean create(UserRoleEntity userRoleEntity) {
 
         try
         {
-            // Attempt to save new UserEntity to database
+            // Attempt to save new UserRoleEntity to database
             userRoleRepository.save(userRoleEntity);
         }
         catch (Exception e)

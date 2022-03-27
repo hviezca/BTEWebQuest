@@ -1,15 +1,21 @@
 package com.btewebquest.model;
 
+/**
+ * Model representing an Album Track
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 public class TrackModel {
 
-    private int id;
-    private String trackName;
-    private int trackNumber;
-    private int albumId;
-    private boolean vocals;
-    private boolean guitar;
-    private boolean drums;
-    private boolean bass;
+    private int id; // Track ID
+    private String trackName; // Track Name
+    private int trackNumber; // Track Number
+    private int albumId; // Album ID
+    private boolean vocals; // Is vocals recorded
+    private boolean guitar; // is guitar recorded
+    private boolean drums; // is drums recorded
+    private boolean bass; // is bass recorded
 
     public TrackModel() {}
 
@@ -34,6 +40,8 @@ public class TrackModel {
         this.drums = drums;
         this.bass = bass;
     }
+
+    // Getter and setters
 
     public int getId() {
         return id;

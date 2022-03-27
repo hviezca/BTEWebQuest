@@ -6,7 +6,22 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class maps' database results to TrackEntity
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 public class TrackRowMapper implements RowMapper<TrackEntity> {
+
+    /**
+     * Maps results to TrackEntity
+     *
+     * @param rs ResultSet
+     * @param rowNum Row Number
+     * @return AlbumEntity
+     * @throws SQLException
+     */
     @Override
     public TrackEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new TrackEntity(rs.getInt("TRACK_ID"),

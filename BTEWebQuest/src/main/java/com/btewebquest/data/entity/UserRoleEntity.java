@@ -4,7 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("USERS_ROLES")
+/**
+ * Entity representing a User Roles object
+ *
+ * @author sfradet
+ * @version 1.0
+ */
+@Table("users_roles")
 public class UserRoleEntity {
 
     @Id
@@ -27,6 +33,7 @@ public class UserRoleEntity {
         return users_role_id;
     }
 
+    // Getters and Setters
     public void setUsers_role_id(int users_role_id) {
         this.users_role_id = users_role_id;
     }

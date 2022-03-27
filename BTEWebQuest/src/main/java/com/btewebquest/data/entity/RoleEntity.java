@@ -4,8 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-
-@Table("ROLES")
+/**
+ * Entity representing a Role object
+ *
+ * @author sfradet
+ * @version 1.0
+ */
+@Table("roles")
 public class RoleEntity {
 
     @Id
@@ -15,6 +20,7 @@ public class RoleEntity {
     @Column("ROLE_NAME")
     private String name;
 
+    // Getters and Setters
     public Integer getId() {
         return id;
     }

@@ -4,7 +4,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("ALBUM")
+/**
+ * Entity representing and AlbumModel object
+ *
+ * @author sfradet
+ * @version 1.0
+ */
+@Table("album")
 public class AlbumEntity {
 
     @Id
@@ -34,6 +40,7 @@ public class AlbumEntity {
         this.isMastered = isMastered;
     }
 
+    // Getters / Setters
     public int getId() {
         return id;
     }
