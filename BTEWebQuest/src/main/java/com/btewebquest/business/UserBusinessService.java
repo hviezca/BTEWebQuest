@@ -3,7 +3,6 @@ package com.btewebquest.business;
 import com.btewebquest.data.entity.RoleEntity;
 import com.btewebquest.data.entity.UserEntity;
 import com.btewebquest.data.entity.UserRoleEntity;
-import com.btewebquest.data.repository.UserRepository;
 import com.btewebquest.data.service.UserDataService;
 import com.btewebquest.data.service.UserRoleDataService;
 import com.btewebquest.model.UserModel;

@@ -1,9 +1,5 @@
 package com.btewebquest.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class TrackModel {
 
     private int id;

@@ -1,6 +1,5 @@
 package com.btewebquest.data.service;
 
-import com.btewebquest.data.entity.AlbumEntity;
 import com.btewebquest.data.entity.TrackEntity;
 import com.btewebquest.data.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
