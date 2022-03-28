@@ -6,9 +6,22 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * Class maps' database results to UserEntity
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 public class UserRowMapper implements RowMapper<UserEntity> {
 
+    /**
+     * Maps results to UserEntity
+     *
+     * @param rs ResultSet
+     * @param rowNum Row Number
+     * @return AlbumEntity
+     * @throws SQLException
+     */
     @Override
     public UserEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
 

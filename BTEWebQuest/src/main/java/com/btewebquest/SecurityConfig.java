@@ -11,6 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Security Configuration
+ *
+ * @author sfradet
+ * @version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -26,7 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	{
 		return new BCryptPasswordEncoder();
 	}
-	
+
+	/**
+	 * Configure security settings
+	 *
+	 * @param http HttpSecurity
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
@@ -49,7 +61,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.permitAll()
 			.logoutSuccessUrl("/");	
 	}
-	
+
+	/**
+	 * Configure UserDetails
+	 *
+	 * @param auth AuthenticationManagerBuilder
+	 * @throws Exception
+	 */
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception
 	{

@@ -1,4 +1,3 @@
-
 <!--Navbar Header for admin pages
 author @ Hiram Viezca-->
 <div th:fragment="admin-header">
@@ -33,13 +32,26 @@ author @ Hiram Viezca-->
                     <li class="nav-item text-muted">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <!--<span class="navbar-toggler-icon"></span>-->
                             Admin
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li>
-                                <a class="dropdown-item" href="admin/admin-home">Login</a>
+                        <ul sec:authorize="isAnonymous()" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li >
+                                <a class="dropdown-item" href="/login">Login</a>
                             </li>
                         </ul>
+                        <ul sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li >
+                                <a class="dropdown-item" href="/BTE/users">Users</a>
+                            </li>
+                            <li >
+                                <a class="dropdown-item" href="/BTE/comingsoon">Album Management</a>
+                            </li>
+                            <li >
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                        <!--<a class="nav-link text-muted" aria-current="page" href="#">Admin</a>-->
                     </li>
                 </ul>
             </div>

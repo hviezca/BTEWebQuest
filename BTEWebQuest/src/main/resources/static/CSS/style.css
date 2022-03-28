@@ -9,3 +9,6 @@
     color: black;
     text-align: center;
 }
+.modal-open[style] {
+    padding-right: 0px !important;
+}
