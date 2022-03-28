@@ -1,3 +1,9 @@
+/**
+ * BOOKING ENTITY
+ * An Entity class for the Booking objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.entity;
 
 import org.springframework.data.annotation.Id;

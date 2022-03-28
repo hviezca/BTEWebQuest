@@ -87,9 +87,9 @@ $('document').ready(function() {
         event.preventDefault();
 
         $("#addModal").modal('hide');
-
+        //alert($('#addUserForm').serialize())
         $.post({
-            url: '',
+            url: "users",
             data: $('#addUserForm').serialize(),
             success: function (fragment) {
                 $("#userTable").replaceWith(fragment);

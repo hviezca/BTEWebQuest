@@ -1,27 +1,19 @@
-/*Controller file for Book Us functions
-* Author @ Hiram Viezca
-* */
+/**
+ * BOOKING CONTROLLER
+ * A Controller class for Booking requests
+ * Author @ Hiram Viezca
+ */
 
 package com.btewebquest.controller;
 
-import com.btewebquest.business.*;
-import com.btewebquest.data.entity.*;
-import com.btewebquest.data.service.MessageDataService;
+import com.btewebquest.business.BookingBusinessService;
 import com.btewebquest.model.BookingModel;
-import com.btewebquest.model.EventModel;
-import com.btewebquest.model.MessageModel;
-import com.btewebquest.model.VenueModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.swing.plaf.synth.SynthSpinnerUI;
-import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.util.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BookingController {
@@ -29,6 +21,11 @@ public class BookingController {
     @Autowired
     private BookingBusinessService bookingService;
 
+    /**
+     * Display the Book Us form
+     * @param model A Model object to collect form data
+     * @return booking-form.html
+     */
     @GetMapping("/booking")
     public String bookingForm(Model model)
     {
@@ -37,8 +34,13 @@ public class BookingController {
         return "booking-form";
     }
 
+    /**
+     * Submits the booking form to persist form data in the database
+     * @param booking A BookingModel object
+     * @return booking-form.html
+     */
     @PostMapping("/bookingSubmit")
-    public String  bookingSubmit(@ModelAttribute BookingModel booking, Model model)
+    public String  bookingSubmit(@ModelAttribute BookingModel booking)
     {
         ////////////// TESTING ////////////////
         /*System.out.println(booking.getEvent().getEvent_date());

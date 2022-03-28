@@ -1,3 +1,9 @@
+/**
+ * VENUE MAPPER
+ * An Mapper class for Venue objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.mapper;
 
 import com.btewebquest.data.entity.VenueEntity;

@@ -1,13 +1,20 @@
+/**
+ * BOOKING DATA SERVICE
+ * A Data Access Service class for booking requests
+ *
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.service;
 
 import com.btewebquest.business.*;
 import com.btewebquest.data.entity.*;
 import com.btewebquest.data.repository.BookingRepository;
-import com.btewebquest.data.repository.ContactRepository;
 import com.btewebquest.model.BookingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -26,20 +33,27 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
     @Autowired
     private EventBusinessService eventBusinessService;
 
-    //@Autowired
     private BookingRepository bookingRepository;
     public BookingDataService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
 
-    @Autowired
-    private ContactDataService contactDataService;
 
+    /**
+     * Get all Booking Entity objects from the database
+     * @return A List of BookingEntity objects
+     */
     @Override
     public List<BookingEntity> findAll() {
-        return null;
+
+        return (List<BookingEntity>) bookingRepository.findAll();
     }
 
+    /**
+     * Get a BookingEntity object by its id number
+     * @param id id number of a BookingEntity
+     * @return the BookingEntity object
+     */
     @Override
     public BookingEntity findById(int id) {
         return null;
@@ -67,6 +81,12 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
         return false;
     }
 
+    /**
+     * Create a booking request entry in the database.
+     * @param booking - A BookingModel object.
+     * @return 
+     */
+    @Transactional
     public boolean createBooking(BookingModel booking)
     {
         // Save Contact to DB

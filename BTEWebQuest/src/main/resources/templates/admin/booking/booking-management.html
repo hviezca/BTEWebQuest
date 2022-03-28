@@ -6,61 +6,99 @@
     <title>Booking Management</title>
 </head>
 <body>
-    <div class="container-fluid">
+<script type="text/javascript" th:src="@{/booking.js}"></script>
 
-        <!-- Insert Header -->
-        <div th:insert="~{admin/admin-fragments/admin-header :: admin-header}"></div>
+<div class="container-fluid">
+    <!-- Insert Header -->
+    <div th:insert="~{admin/admin-fragments/admin-header :: admin-header}"></div>
 
-        <!-- Insert page title -->
-        <div class="container mx-auto m-5">
-            <div class="fs-1 text-center">Booking Management</div>
-        </div>
-
-        <!-- Begin content-->
-        <div class="container">
-            <table class="table">
-                <thead class="bg-black text-white">
-                    <tr>
-                        <th scope="col">Venue</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Reply</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Venue 1</td>
-                        <td>2-2-22</td>
-                        <td>123 Main St, ABQ, NM</td>
-                        <td>This is a booking request</td>
-                        <td>Joe Shmoe</td>
-                        <td>test@test.com</td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="row">
-                                <button type="submit" onclick="location.href = '#';"
-                                        class="btn btn-primary mx-auto">Delete
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Insert Footer-->
-        <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
-
+    <!-- Insert page title -->
+    <div class="container mx-auto m-5">
+        <div class="fs-1 text-center">Booking Management</div>
     </div>
+
+    <!-- Begin content-->
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr class="table-dark">
+                <th scope="col">Venue</th>
+                <th scope="col">Date</th>
+                <th scope="col">Address</th>
+                <th scope="col">Message</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Reply</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.event.venue.venue_name}">Venue Name</td>
+                <td th:text="${booking.event.event_date}" nowrap>Event Date</td>
+                <td><span th:text="${booking.event.venue.venue_address}"></span> <span
+                        th:text="${booking.event.venue.venue_city}"></span>, <span
+                        th:text="${booking.event.venue.venue_state}"></span> <span
+                        th:text="${booking.event.venue.venue_zip}"></span></td>
+                <td>
+                    <a style="display: block"
+                       th:href="@{/BTE/message/json/{id} (id=${booking.message.message_id})}"
+                       class="messageModalClass"
+                       data-bs-toggle="modal"
+                       data-bs-target="#messageModal">
+                        <span id="messageText"
+                            th:text="${booking.message.message}">
+                        </span>
+                    </a>
+                </td>
+                <td th:text="${booking.event.venue.contact.contact_name}" nowrap>Contact</td>
+                <td th:text="${booking.event.venue.contact.contact_email}">Email</td>
+                <td th:text="${booking.event.venue.contact.contact_phone}" nowrap>Phone</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" name="checkbox"
+                               th:checked="${booking.message.has_reply}">
+                        <label class="form-check-label" for="flexCheckChecked">
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="row">
+                        <button type="submit" onclick="location.href = '#';"
+                                class="btn btn-primary mx-auto">Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Message</h3>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_body">
+                    <input class="form-control" id="messageId" name="messageName" type="hidden" placeholder="MessageName">
+                    <textarea class="form-control bg-white" id="message" name="message" type="text" placeholder="Message Not Displaying" style="resize: none" readonly></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="replyButton" class="btn btn-primary">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Insert Footer-->
+    <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
+
+</div>
 </body>
 </html>

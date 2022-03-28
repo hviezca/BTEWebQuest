@@ -1,3 +1,9 @@
+/**
+ * VENUE ENTITY
+ * An Entity class for Venue objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.entity;
 
 import org.springframework.data.annotation.Id;

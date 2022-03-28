@@ -1,11 +1,18 @@
+/**
+ * EVENT DATA SERVICE
+ * An Data Service class for Event objects
+ * Author @ Hiram Viezca
+ */
+
+
 package com.btewebquest.data.service;
 
-import com.btewebquest.data.entity.ContactEntity;
 import com.btewebquest.data.entity.EventEntity;
 import com.btewebquest.data.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventDataService implements DataAccessInterface<EventEntity> {
@@ -22,11 +29,23 @@ public class EventDataService implements DataAccessInterface<EventEntity> {
         return null;
     }
 
+    /**
+     * Gets an Event object from the database by its ID number
+     * @param id The ID number of Event Object
+     * @return An Event Entity object
+     */
     @Override
-    public EventEntity findById(int id) {
-        return null;
+    public EventEntity findById(int id)
+    {
+        Optional<EventEntity> event = eventRepository.findById((long) id);
+        return event.get();
     }
 
+    /**
+     * Save an Event Object to the database
+     * @param eventEntity An EventEntity object
+     * @return True if successful. False if not successful
+     */
     @Override
     public boolean create(EventEntity eventEntity) {
         EventEntity savedEventEntity = eventRepository.save(eventEntity);
@@ -49,6 +68,11 @@ public class EventDataService implements DataAccessInterface<EventEntity> {
         return false;
     }
 
+    /**
+     * Save an Event Object to the database
+     * @param eventEntity Ab EventEntity object
+     * @return A EventEntity object with its ID number from the database
+     */
     public EventEntity createEvent(EventEntity eventEntity)
     {
         return eventRepository.save(eventEntity);

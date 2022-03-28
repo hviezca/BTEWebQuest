@@ -1,3 +1,9 @@
+/**
+ * BOOKING MAPPER
+ * An Mapper class for Booking objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.mapper;
 
 import com.btewebquest.data.entity.BookingEntity;

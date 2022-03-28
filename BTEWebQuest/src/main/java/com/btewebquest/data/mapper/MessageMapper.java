@@ -1,3 +1,9 @@
+/**
+ * MESSAGE MAPPER
+ * An Mapper class for Message objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.mapper;
 
 import com.btewebquest.data.entity.MessageEntity;

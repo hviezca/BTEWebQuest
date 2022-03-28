@@ -1,3 +1,9 @@
+/**
+ * CONTACT MAPPER
+ * An Mapper class for Contact objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.mapper;
 
 import com.btewebquest.data.entity.ContactEntity;

@@ -1,6 +1,11 @@
+/**
+ * MESSAGE ENTITY
+ * An Entity class for Message objects
+ * Author @ Hiram Viezca
+ */
+
 package com.btewebquest.data.entity;
 
-import com.btewebquest.model.MessageModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
