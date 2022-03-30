@@ -55,7 +55,7 @@ $(document).ready(function(){
 $('#toastBtn').on('click', function(e){
     e.preventDefault()        //This stops page loading
     var form = document.getElementById('bookingForm');
-
+    console.log(formIsValid(form));
     if (!formIsValid(form)){
         $('#toastHeader').text('Error')
         $('#toastBody').text('Please complete the form.');

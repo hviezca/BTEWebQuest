@@ -6,7 +6,7 @@
     <title>Booking Management</title>
 </head>
 <body>
-<script type="text/javascript" th:src="@{/booking.js}"></script>
+<script type="text/javascript" th:src="@{/booking-management.js}"></script>
 
 <div class="container-fluid">
     <!-- Insert Header -->
@@ -36,7 +36,7 @@
             <tbody>
             <tr th:each="booking : ${bookings}">
                 <td th:text="${booking.event.venue.venue_name}">Venue Name</td>
-                <td th:text="${booking.event.event_date}" nowrap>Event Date</td>
+                <td class="eventDateClass" id="eventDate" th:href="@{/BTE/event/json/{id} (id=${booking.event.event_id})}" th:text="${booking.event.event_date}" nowrap>Event Date</td>
                 <td><span th:text="${booking.event.venue.venue_address}"></span> <span
                         th:text="${booking.event.venue.venue_city}"></span>, <span
                         th:text="${booking.event.venue.venue_state}"></span> <span
@@ -92,6 +92,36 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button id="replyButton" class="btn btn-primary">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Modal-->
+    <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="text-center">Reply</h3>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="reply_modal_body">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control" id="subject" name="subject" type="text" placeholder="Subject">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <textarea class="form-control bg-white" id="replyMessage" name="replyMessage" type="text" placeholder="Reply Message" style="resize: none"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="sendButton" class="btn btn-primary">Send</button>
                 </div>
             </div>
         </div>
