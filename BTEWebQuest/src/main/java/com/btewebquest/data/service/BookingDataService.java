@@ -89,23 +89,28 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
     @Transactional
     public boolean createBooking(BookingModel booking)
     {
+        System.out.println("Entered Booking Data Service.");
         // Save Contact to DB
         ContactEntity contactEntity = contactBusinessService.addContact(booking.getEvent().getVenue().getContact());
 
         // Set Contact_Id in VenueModel to the value of Contact Entity from the DB
         booking.getEvent().getVenue().getContact().setContact_id(contactEntity.getId());
+        System.out.println("Contact Entity Entry successful");
 
         // Save Venue
         VenueEntity venueEntity = venueBusinessService.addVenue(booking.getEvent().getVenue());
 
         // Set Venue_Id in EventModel to the value of Venue Entity from the DB
         booking.getEvent().getVenue().setVenue_id(venueEntity.getId());
+        System.out.println("Venue Entity Entry successful");
 
         // Save Event
         EventEntity eventEntity = eventBusinessService.addEvent(booking.getEvent());
+        System.out.println("Contact Event Entry successful");
 
         // Save Message
         MessageEntity messageEntity = messageBusinessService.addMessage(booking.getMessage());
+        System.out.println("Message Entity Entry successful");
 
         // Set Booking Date to Today
         booking.setBooking_date(new Date());
@@ -119,7 +124,7 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
         BookingEntity bookingEntity = new BookingEntity(booking.getBooking_id(), booking.getBooking_date(), booking.getEvent().getEvent_id(), booking.getMessage().getMessage_id());
 
         BookingEntity savedBookingEntity = bookingRepository.save(bookingEntity);
-
+        System.out.println("Contact Booking Entry successful");
         if (savedBookingEntity.getBooking_id() > 0)
             return true;
 
