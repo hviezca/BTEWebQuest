@@ -43,7 +43,7 @@ public class BookingController {
     public String  bookingSubmit(@ModelAttribute BookingModel booking)
     {
         ////////////// TESTING ////////////////
-        /*System.out.println(booking.getEvent().getEvent_date());
+        System.out.println(booking.getEvent().getEvent_date());
         System.out.println(booking.getEvent().getVenue().getVenue_name());
         System.out.println(booking.getEvent().getVenue().getVenue_address());
         System.out.println(booking.getEvent().getVenue().getVenue_city());
@@ -51,7 +51,7 @@ public class BookingController {
         System.out.println(booking.getEvent().getVenue().getVenue_zip());
         System.out.println(booking.getMessage().getMessage());
         System.out.println(booking.getEvent().getVenue().getContact().getContact_name());
-        System.out.println(booking.getEvent().getVenue().getContact().getContact_email());*/
+        System.out.println(booking.getEvent().getVenue().getContact().getContact_email());
 
         // Save Booking
         if(bookingService.addBooking(booking))

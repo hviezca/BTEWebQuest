@@ -10,7 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -194,4 +198,28 @@ public class ComingSoonController {
         return "coming-soon/coming-soon-menu-frag :: #comingSoonMenu";
     }
 
+    @PostMapping("/comingsoon/albumimage")
+    public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+
+        System.out.println(file.getOriginalFilename() + "!");
+
+
+        Files.copy(file.getInputStream(), Path.of("resources/static/images/coming-soon"+file.getOriginalFilename()));
+
+        // Retrieve List of albums
+        List<AlbumModel> albums = albumService.getAlbums();
+
+        // Get Album 1 from database
+        AlbumModel album = albumService.getAlbumById(1);
+
+        // Get Albums tracks from database
+        album.setTrackList(albumService.getTracks(album.getId()));
+
+        // Setup information for View Model
+        model.addAttribute("title", "Progress Management");
+        model.addAttribute("album", album);
+
+        // Return HTML page
+        return "coming-soon/coming-soon-manage";
+    }
 }

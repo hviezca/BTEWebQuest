@@ -29,15 +29,19 @@ public class AlbumEntity {
     @Column("IS_MASTERED")
     private boolean isMastered;
 
+    @Column("IMAGE_NAME")
+    private String imageName;
+
     public AlbumEntity() {
     }
 
-    public AlbumEntity(int id, String albumName, int albumYear, boolean isMixed, boolean isMastered) {
+    public AlbumEntity(int id, String albumName, int albumYear, boolean isMixed, boolean isMastered, String imageName) {
         this.id = id;
         this.albumName = albumName;
         this.albumYear = albumYear;
         this.isMixed = isMixed;
         this.isMastered = isMastered;
+        this.imageName = imageName;
     }
 
     // Getters / Setters
@@ -79,5 +83,13 @@ public class AlbumEntity {
 
     public void setMastered(boolean mastered) {
         isMastered = mastered;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

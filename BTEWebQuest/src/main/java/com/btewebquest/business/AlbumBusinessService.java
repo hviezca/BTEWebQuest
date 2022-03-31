@@ -39,7 +39,7 @@ public class AlbumBusinessService {
         // For each AlbumEntity in albumEntity List, add AlbumModel to albums List
         for(AlbumEntity entity : albumEntities)
         {
-            albums.add(new AlbumModel(entity.getId(), entity.getAlbumName(), entity.getAlbumYear(), entity.isMixed(), entity.isMastered()));
+            albums.add(new AlbumModel(entity.getId(), entity.getAlbumName(), entity.getAlbumYear(), entity.isMixed(), entity.isMastered(), entity.getImageName()));
         }
 
         // Return list of AlbumModels
@@ -81,7 +81,7 @@ public class AlbumBusinessService {
     {
         AlbumEntity entity = service.findById(id);
 
-        return new AlbumModel(entity.getId(), entity.getAlbumName(), entity.getAlbumYear(), entity.isMixed(), entity.isMastered());
+        return new AlbumModel(entity.getId(), entity.getAlbumName(), entity.getAlbumYear(), entity.isMixed(), entity.isMastered(), entity.getImageName());
     }
 
     /**
@@ -92,7 +92,7 @@ public class AlbumBusinessService {
      */
     public boolean updateAlbum(AlbumModel album)
     {
-        AlbumEntity albumEntity = new AlbumEntity(album.getId(), album.getAlbumName(), album.getAlbumYear(), album.isMixed(), album.isMastered());
+        AlbumEntity albumEntity = new AlbumEntity(album.getId(), album.getAlbumName(), album.getAlbumYear(), album.isMixed(), album.isMastered(), album.getAlbumImage());
 
         return service.update(albumEntity);
     }

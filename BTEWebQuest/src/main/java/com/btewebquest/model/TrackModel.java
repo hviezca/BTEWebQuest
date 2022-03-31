@@ -1,5 +1,7 @@
 package com.btewebquest.model;
 
+import java.text.DecimalFormat;
+
 /**
  * Model representing an Album Track
  *
@@ -39,6 +41,37 @@ public class TrackModel {
         this.guitar = guitar;
         this.drums = drums;
         this.bass = bass;
+    }
+
+    public double getTrackCompletionPercent()
+    {
+        double total = 0;
+
+        if (this.vocals)
+        {
+            total += .25;
+        }
+        if (this.drums)
+        {
+            total += .25;
+        }
+        if (this.bass)
+        {
+            total += .25;
+        }
+        if (this.guitar)
+        {
+            total += .25;
+        }
+
+        return total;
+    }
+
+    public String getTrackCompletionPercentFormatted()
+    {
+        DecimalFormat df = new DecimalFormat("0");
+        double percentFormatted = this.getTrackCompletionPercent() * 100;
+        return df.format(percentFormatted);
     }
 
     // Getter and setters
