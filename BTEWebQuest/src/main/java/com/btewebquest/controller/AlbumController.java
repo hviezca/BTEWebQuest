@@ -201,10 +201,16 @@ public class AlbumController {
         return "coming-soon/coming-soon-menu-frag :: #comingSoonMenu";
     }
 
+    /**
+     * Upload an album image
+     *
+     * @param file File to be uploaded
+     * @param model View model
+     * @return  Coming Soon HTML fragment
+     * @throws IOException
+     */
     @PostMapping("/comingsoon/albumimage")
     public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
-
-        System.out.println(file.getOriginalFilename() + "!");
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path uploadPath = Paths.get("user-uploads/");
@@ -223,6 +229,7 @@ public class AlbumController {
         // Get Album 1 from database
         AlbumModel album = albumService.getAlbumById(1);
 
+        // Update album in database
         album.setAlbumImage(fileName);
         albumService.updateAlbum(album);
 

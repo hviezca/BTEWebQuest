@@ -85,15 +85,27 @@ $('document').ready(function() {
     $("#addButton").on('click', function(event){
 
         event.preventDefault();
+        $('input').next('span').remove();
 
-        $("#addModal").modal('hide');
-        //alert($('#addUserForm').serialize())
         $.post({
-            url: "users",
+            url: "users/validation",
             data: $('#addUserForm').serialize(),
-            success: function (fragment) {
-                $("#userTable").replaceWith(fragment);
-                $('.modal-backdrop').remove();
+            success: function (response) {
+
+                if(response.validated) {
+                    $.post({
+                        url: "users",
+                        data: $('#addUserForm').serialize(),
+                        success: function (fragment) {
+                            $("#userTable").replaceWith(fragment);
+                            $('.modal-backdrop').remove();
+                        }
+                    })
+                } else {
+                    $.each(response.errorMessages,function(key,value) {
+                        $('input[name='+key+']').after('<span class="help-block">'+value+'</span>');
+                    });
+                }
             }
         })
     })
@@ -101,17 +113,33 @@ $('document').ready(function() {
     $("#editButton").on('click', function(event){
 
         event.preventDefault();
+        $('input').next('span').remove();
 
-        $("#editModal").modal('hide');
-
-        $.ajax({
-            type: "PUT",
-            url: "",
+        $.post({
+            url: "users/validation",
             data: $('#editUserForm').serialize(),
-        }).done(function(fragment){
-            $("#userTable").replaceWith(fragment);
-            $('.modal-backdrop').remove();
+            success: function (response) {
+
+                if(response.validated) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "",
+                        data: $('#editUserForm').serialize(),
+                    }).done(function(fragment){
+                        $("#userTable").replaceWith(fragment);
+                        $('.modal-backdrop').remove();
+                    })
+                } else {
+                    $.each(response.errorMessages,function(key,value) {
+                        $('input[name='+key+']').after('<span class="help-block">'+value+'</span>');
+                    });
+                }
+            }
         })
+
+
+
+
     })
 
 })

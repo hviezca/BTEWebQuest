@@ -41,8 +41,6 @@ public class HomeController {
         model.addAttribute("title", "Progress Management");
         model.addAttribute("album", album);
 
-        System.out.println(album.getAlbumCompletionPercent());
-
         return "home/index";
     }
 }

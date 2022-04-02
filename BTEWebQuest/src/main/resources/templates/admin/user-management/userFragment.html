@@ -56,7 +56,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="addUserForm">
-
                         <div class="form-row my-2">
                             <div class="col">
                                 <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name"
@@ -77,6 +76,7 @@
                             <div class="col">
                                 <input class="form-control" id="userName" name="userName" type="text"
                                        placeholder="Username" required>
+                                <input type="hidden" id="unique" name="unique" >
                             </div>
                         </div>
 
@@ -127,14 +127,15 @@
                             </div>
                         </div>
 
-
                         <div class="form-row my-3">
                             <div class="col">
                                 <input class="form-control" id="editUserName" name="userName" type="text"
                                        placeholder="Username" required>
+                                <input type="hidden" id="unique" name="unique" >
                             </div>
                         </div>
 
+                        <input type="hidden" id="editPassword" name="password" value="updatingUser">
                         <input type="hidden" id="editId" name="id">
 
                     </form>
