@@ -22,7 +22,7 @@ public interface AlbumRepository extends CrudRepository<AlbumEntity, Long> {
      * @param id Album ID
      * @return Set of TrackEntity
      */
-    @Query("SELECT * FROM tracks WHERE ALBUM_ID = :id")
+    @Query("SELECT * FROM TRACKS WHERE ALBUM_ID = :id")
     Set<TrackEntity> findTracks(@Param("id") Long id);
 
 }

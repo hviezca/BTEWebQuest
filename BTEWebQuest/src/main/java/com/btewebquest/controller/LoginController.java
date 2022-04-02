@@ -25,7 +25,7 @@ public class LoginController {
         //Display Login view
         model.addAttribute("title", "Login Form");
 
-        return "admin/loginTest";
+        return "login/login";
     }
 
 }

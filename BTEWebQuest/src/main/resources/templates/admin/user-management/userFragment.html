@@ -1,5 +1,5 @@
 <div class="container " th:fragment="userFrag" id="userTable">
-    <script type="text/javascript" th:src="@{/main.js}"></script>
+    <script type="text/javascript" th:src="@{/users.js}"></script>
 
     <h1 class="text-center my-5">User Management</h1>
     <table class="table table-striped">
@@ -8,7 +8,6 @@
             <th>Username</th>
             <th>Edit</th>
             <th>Change Password</th>
-            <!-- <th>Delete User</th> -->
             <th>Delete User</th>
         </tr>
         </thead>
@@ -26,13 +25,7 @@
                     <a id="updateButtonID" th:attr="data-id=${user.id}" class="btn btn-sm btn-primary my-1 updateClass" >Update Password</a>
                 </div>
             </td>
-            <!--
-            <td>
-                <div sec:authorize="hasRole('ADMIN')">
-                    <button th:onclick="deleteItem([[${user.id}]]); return false" class="btn btn-sm btn-danger my-1"  >Delete</button>
-                </div>
-            </td>
-            -->
+
             <td>
                 <div sec:authorize="hasRole('ADMIN')">
                     <button type="button" id="deleteButtonID" th:attr="data-id=${user.id}" class="btn btn-sm btn-dark my-1 deleteClass">
@@ -50,6 +43,7 @@
             Add User</button>
         </span>
     </div>
+
     <!-- Add User Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -62,7 +56,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="addUserForm">
-                        <!-- Insert th:field for name -->
+
                         <div class="form-row my-2">
                             <div class="col">
                                 <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name"
@@ -70,7 +64,7 @@
                             </div>
                         </div>
 
-                        <!-- Insert th:field for companyName -->
+
                         <div class="form-row my-3">
                             <div class="col">
                                 <input class="form-control" id="lastName" name="lastName" type="text" placeholder="Last Name"
@@ -78,7 +72,7 @@
                             </div>
                         </div>
 
-                        <!-- Insert th:field for companyLocation -->
+
                         <div class="form-row my-3">
                             <div class="col">
                                 <input class="form-control" id="userName" name="userName" type="text"
@@ -86,7 +80,7 @@
                             </div>
                         </div>
 
-                        <!-- Insert th:field for companyLocation -->
+
                         <div class="form-row my-3">
                             <div class="col">
                                 <input class="form-control" id="password" name="password" type="password"
@@ -117,7 +111,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="editUserForm">
-                        <!-- Insert th:field for name -->
+
                         <div class="form-row my-2">
                             <div class="col">
                                 <input th:class="form-control" id="editFirstName" name="firstName" type="text" placeholder="First Name"
@@ -125,7 +119,7 @@
                             </div>
                         </div>
 
-                        <!-- Insert th:field for companyName -->
+
                         <div class="form-row my-3">
                             <div class="col">
                                 <input class="form-control" id="editLastName" name="lastName" type="text" placeholder="Last Name"
@@ -133,7 +127,7 @@
                             </div>
                         </div>
 
-                        <!-- Insert th:field for companyLocation -->
+
                         <div class="form-row my-3">
                             <div class="col">
                                 <input class="form-control" id="editUserName" name="userName" type="text"
@@ -168,7 +162,7 @@
                     <input type="hidden" id="deleteFirstName" name="firstName" value="test">
                     <input type="hidden" id="deleteLastName" name="lastName" value="test">
                     <input type="hidden" id="deleteUserName" name="userName" value="test">
-                    <!-- Insert th:field for name -->
+
                     <div class="form-row my-2">
                         <div class="col">
                             <input th:class="form-control" type="password" id="deletePassword" placeholder="Password"

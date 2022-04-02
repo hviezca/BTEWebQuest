@@ -63,7 +63,7 @@ public class UserController
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
 
-        return "admin/users";
+        return "admin/user-management/users";
     }
 
     /**
@@ -115,7 +115,7 @@ public class UserController
         model.addAttribute("title", "User Management");
         model.addAttribute("userList", users);
 
-        return "admin/userFragment";
+        return "admin/user-management/userFragment";
     }
 
     /**
@@ -152,7 +152,7 @@ public class UserController
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
 
-        return "admin/userFragment :: #userTable";
+        return "admin/user-management/userFragment :: #userTable";
     }
 
     /**
@@ -185,7 +185,7 @@ public class UserController
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
 
-        return "admin/userFragment :: #userTable";
+        return "admin/user-management/userFragment :: #userTable";
     }
 
     /**
@@ -222,7 +222,7 @@ public class UserController
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
 
-        return "admin/userFragment :: #userTable";
+        return "admin/user-management/userFragment :: #userTable";
     }
 
     /**
@@ -261,6 +261,6 @@ public class UserController
         model.addAttribute("userList", users);
         model.addAttribute("userModel", new UserModel());
 
-        return "admin/userFragment :: #userTable";
+        return "admin/user-management/userFragment :: #userTable";
     }
 }
