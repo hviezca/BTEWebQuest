@@ -27,8 +27,6 @@ public class ContactBusinessService {
      */
     public ContactEntity addContact(ContactModel contact)
     {
-        contact.setContact_phone("555-555-5555");
-
         ContactEntity contactEntity = new ContactEntity(contact.getContact_id(),
                                                         contact.getContact_name(),
                                                         contact.getContact_email(),

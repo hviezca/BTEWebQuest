@@ -35,7 +35,7 @@ public class BookingBusinessService {
      * @return True if entry is successful. False if entry failed
      */
     public boolean addBooking(BookingModel booking) {
-
+        System.out.println("Entered Booking Business Service.");
         return bookingDataService.createBooking(booking);
     }
 

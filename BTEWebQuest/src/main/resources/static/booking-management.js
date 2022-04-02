@@ -21,17 +21,22 @@ $('document').ready(function() {
     $("#replyButton").on('click', function(event){
 
         event.preventDefault();
+        $('#messageModal').modal('hide');
 
-        $("#replyModal").modal('hide');
+        var date = $('#eventDate').attr('href');
 
-        /*$.post({
-            url: "",
-            data: $('#addUserForm').serialize(),
-            success: function (fragment) {
-                $("#userTable").replaceWith(fragment);
-                $('.modal-backdrop').remove();
-            }
-        })*/
+        var re = "RE: ";
+        var eventDateResponse;
+        $.get(date, function (message, status){
+
+            eventDateResponse = message.event_id;
+        })
+
+        console.log(eventDateResponse);
+
+
+        $('#subject').val(re.concat(eventDateResponse))
+        $("#replyModal").modal('show');
+
     })
 })
-

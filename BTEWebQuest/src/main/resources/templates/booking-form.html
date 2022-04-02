@@ -17,27 +17,34 @@
 
 <!-- Begin Content -->
 <div class="container-fluid vh-100">
-    <form name="bookingForm" id="bookingForm" action="#" th:action="@{/bookingSubmit}" th:object="${booking}" method="post">
+    <form name="bookingForm" id="bookingForm" action="#" th:action="@{/bookingSubmit}" th:object="${booking}"
+          method="post">
         <div class="container">
-            <div class="row my-3 justify-content-between">
+            <div class="row justify-content-between">
                 <div class="col-lg-4">
-                    <input class="form-control form-control-lg" name="venue" id="venue" type="text" placeholder="Venue Name" th:field="*{event.venue.venue_name}" required>
+                    <input class="form-control form-control-lg" name="venue" id="venue" type="text"
+                           placeholder="Venue Name" th:field="*{event.venue.venue_name}" required>
                 </div>
-                <div class="col-4 form-group">
-                    <input class="form-control form-control-lg" name="eventDate" id="eventDate" placeholder="Event Date MM/DD/YYYY" type="text" th:field="*{event.event_date}" autocomplete="off" required>
+                <div class="col-lg-4">
+                    <input class="form-control form-control-lg" name="eventDate" id="eventDate"
+                           placeholder="Event Date MM/DD/YYYY" type="text" th:field="*{event.event_date}"
+                           autocomplete="off" required>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-12">
-                    <input class="form-control form-control-lg" name="address" id="address" type="text" placeholder="address" th:field="*{event.venue.venue_address}" required>
+                    <input class="form-control form-control-lg" name="address" id="address" type="text"
+                           placeholder="Address" th:field="*{event.venue.venue_address}" required>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="city" id="city" type="text" placeholder="city" th:field="*{event.venue.venue_city}" required>
+                    <input class="form-control form-control-lg" name="city" id="city" type="text" placeholder="City"
+                           th:field="*{event.venue.venue_city}" required>
                 </div>
                 <div class="col-4">
-                    <select class="form-control form-control-lg form-select-lg" name="state" id="state" th:field="*{event.venue.venue_state}" required>
+                    <select class="form-control form-control-lg form-select-lg" name="state" id="State"
+                            th:field="*{event.venue.venue_state}" required>
                         <option selected value="0">State</option>
                         <option value="AL">AL</option>
                         <option value="AK">AK</option>
@@ -92,35 +99,44 @@
                     </select>
                 </div>
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="zip" id="zip" type="text" placeholder="zip" th:field="*{event.venue.venue_zip}" required >
+                    <input class="form-control form-control-lg" name="zip" id="zip" type="text" placeholder="Zip"
+                           th:field="*{event.venue.venue_zip}" required>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-12">
-                    <textarea class="form-control form-control-lg" name="message" id="message" type="textarea" placeholder="message" rows="5" th:field="*{message.message}" required ></textarea>
+                    <textarea class="form-control form-control-lg" name="message" id="message" type="textarea"
+                              placeholder="Message" rows="5" th:field="*{message.message}" required></textarea>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="contact" id="contact" type="text" placeholder="contact" th:field="*{event.venue.contact.contact_name}" required>
+                    <input class="form-control form-control-lg" name="contact" id="contact" type="text"
+                           placeholder="Contact Name" th:field="*{event.venue.contact.contact_name}" required>
                 </div>
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="email" id="email" type="text" placeholder="email" th:field="*{event.venue.contact.contact_email}" required>
+                    <input class="form-control form-control-lg" name="contact" id="phone" type="text"
+                           placeholder="Phone" th:field="*{event.venue.contact.contact_phone}" required>
                 </div>
                 <div class="col-4">
+                    <input class="form-control form-control-lg" name="email" id="email" type="text" placeholder="Email"
+                           th:field="*{event.venue.contact.contact_email}" required>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-4 mx-auto">
                     <input type="submit" value="Submit" id="toastBtn" class="btn btn-primary btn-block btn-lg">
-
-                    <!--Toast-->
-                    <div class="position-fixed top-0 start-50 p-3" style="z-index: 11">
-                        <div class="toast bg-danger" id="liveToast" role="alert" aria-live="polite" aria-atomic="true">
-                            <div class="toast-header text-black bg-danger">
-                                <strong class="mx-auto">Thank you!</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                            <div class="toast-body text-black text-center">
-                                <strong>One of us will get back to you soon.</strong>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <!--Toast-->
+            <div class="position-fixed top-0 start-50 p-3" style="z-index: 11">
+                <div class="toast bg-danger" id="liveToast" role="alert" aria-live="polite" aria-atomic="true">
+                    <div class="toast-header text-black bg-danger" >
+                        <strong class="mx-auto" id="toastHeader">Thank you!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body text-black text-center" >
+                        <strong id="toastBody">One of us will get back to you soon.</strong>
                     </div>
                 </div>
             </div>
@@ -132,6 +148,6 @@
 <div th:insert="~{ fragments/footer :: footer}"></div>
 
 <!-- Script for Datepicker-->
-<script type="text/javascript" th:src="@{/users.js}"></script>
+<script type="text/javascript" th:src="@{/booking-form.js}"></script>
 </body>
 </html>

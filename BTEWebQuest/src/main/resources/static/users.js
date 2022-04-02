@@ -126,26 +126,4 @@ function deleteItem(id)
     });
 }
 
-/* Script for Datepicker */
-$(document).ready(function(){
-        var date_input=$('input[name="event.event_date"]'); //our date input has the name "date"
-        var container=$('.bootstrap.min.css form').length>0 ? $('.bootstrap.min.css form').parent() : "body";
-        var date = new Date();
-        date.setDate(date.getDate()+1)
-        var options={
-            startDate: date,
-            format: 'mm/dd/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        };
-        date_input.datepicker(options);
-    })
-
-/* Script for Toast */
-$('#toastBtn').on('click', function(e){
-    e.preventDefault()        //This stops page loading
-    $("#liveToast").toast('show'); //Show toast
-    document.getElementsByName('bookingForm')[0].reset() //reset field values of the form
-})
 
