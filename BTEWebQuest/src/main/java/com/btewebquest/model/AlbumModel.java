@@ -1,5 +1,6 @@
 package com.btewebquest.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +18,47 @@ public class AlbumModel {
     private boolean isMixed; // Is Album mixed
     private boolean isMastered; // Is Album mastered
     private List<TrackModel> trackList; // List of Tracks for Album
+    private String albumImage;
 
     public AlbumModel() {}
 
-    public AlbumModel(int id, String albumName, int albumYear, boolean isMixed, boolean isMastered) {
+    public AlbumModel(int id, String albumName, int albumYear, boolean isMixed, boolean isMastered, String albumImage) {
         this.id = id;
         this.albumName = albumName;
         this.albumYear = albumYear;
         this.isMixed = isMixed;
         this.isMastered = isMastered;
+        this.albumImage = albumImage;
         this.trackList = new ArrayList<TrackModel>() {
         };
+    }
+
+    public double getAlbumCompletionPercent()
+    {
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        double completionTotal = 0;
+
+        for (TrackModel track : trackList)
+        {
+           if (track.getTrackCompletionPercent() == 1)
+           {
+               completionTotal += 1;
+           }
+        }
+
+        if(isMastered)
+        {
+            completionTotal += 1;
+        }
+        if(isMixed)
+        {
+            completionTotal += 1;
+        }
+
+        completionTotal = completionTotal / (trackList.size() + 2);
+
+        return Double.parseDouble(df.format(completionTotal));
     }
 
     // Getter and Setters
@@ -77,5 +108,13 @@ public class AlbumModel {
 
     public void setTrackList(List<TrackModel> trackList) {
         this.trackList = trackList;
+    }
+
+    public String getAlbumImage() {
+        return albumImage;
+    }
+
+    public void setAlbumImage(String albumImage) {
+        this.albumImage = albumImage;
     }
 }

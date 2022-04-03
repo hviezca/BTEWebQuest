@@ -16,10 +16,10 @@ public class UserModel {
     @Id
     private int id; // User ID
 
-    @NotEmpty
+    @NotEmpty(message="Please enter a first name")
     private String firstName; // First Name
 
-    @NotEmpty
+    @NotEmpty(message="Please enter a last name")
     private String lastName; // Last Name
 
     @Size(min = 4, max = 20, message = "Username must be between 4 and 20 characters")

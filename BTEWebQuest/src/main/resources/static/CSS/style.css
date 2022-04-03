@@ -12,3 +12,27 @@
 .modal-open[style] {
     padding-right: 0px !important;
 }
+
+.box {
+    display: inline-block;
+}
+
+.progress-circle {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #21252900
+}
+
+.progress-circle > .inner {
+    position: absolute;
+    color: white;
+}
+
+.progress-circle > svg {
+    height: 100%;
+    display: block;
+}

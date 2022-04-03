@@ -9,8 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 /**
@@ -21,7 +28,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/BTE")
-public class ComingSoonController {
+public class AlbumController {
 
     @Autowired
     private AlbumBusinessService albumService;
@@ -194,4 +201,52 @@ public class ComingSoonController {
         return "coming-soon/coming-soon-menu-frag :: #comingSoonMenu";
     }
 
+    /**
+     * Upload an album image
+     *
+     * @param file File to be uploaded
+     * @param model View model
+     * @return  Coming Soon HTML fragment
+     * @throws IOException
+     */
+    @PostMapping("/comingsoon/albumimage")
+    public String upload(@RequestParam("file") MultipartFile file, Model model) throws IOException {
+
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Path uploadPath = Paths.get("user-uploads/");
+
+        if(!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        Path filePath = uploadPath.resolve(fileName);
+
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        // Retrieve List of albums
+        List<AlbumModel> albums = albumService.getAlbums();
+
+        // Get Album 1 from database
+        AlbumModel album = albumService.getAlbumById(1);
+
+        // Update album in database
+        album.setAlbumImage(fileName);
+        albumService.updateAlbum(album);
+
+        // Retrieve List of albums
+        albums = albumService.getAlbums();
+
+        // Get Album 1 from database
+        album = albumService.getAlbumById(1);
+
+        // Get Albums tracks from database
+        album.setTrackList(albumService.getTracks(album.getId()));
+
+        // Setup information for View Model
+        model.addAttribute("title", "Progress Management");
+        model.addAttribute("album", album);
+
+        // Return HTML page
+        return "coming-soon/coming-soon-manage";
+    }
 }
