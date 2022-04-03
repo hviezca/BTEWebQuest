@@ -191,6 +191,8 @@ public class AlbumController {
         // Get Tracks for Album
         album.setTrackList(albumService.getTracks(album.getId()));
 
+        album.setAlbumImage(albumService.getAlbumById(album.getId()).getAlbumImage());
+
         // Update Album in database
         albumService.updateAlbum(album);
 
