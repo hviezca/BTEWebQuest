@@ -41,6 +41,7 @@ $('document').ready(function() {
     $("#updateButton").on('click', function(event){
 
         event.preventDefault();
+        $('input').next('span').remove();
 
         let id = $('#updateUserId').val();
         let oldPassword = $("#oldPassword").val();
@@ -49,13 +50,36 @@ $('document').ready(function() {
         let jsonData = {id: id, firstName: "test" , lastName: "test", userName: oldPassword, password: newPassword};
 
         $.post({
+            url: "users/passwordvalidation",
+            data: jsonData,
+            success: function (response) {
+                if(response.validated) {
+                    $.post({
+                        url: "users/update",
+                        data: JSON.stringify(jsonData),
+                        contentType: 'application/json'
+                    }).done(function(fragment){
+                        $("#userTable").replaceWith(fragment);
+                        $('.modal-backdrop').remove();
+                    })
+                } else {
+                    $.each(response.errorMessages,function(key,value) {
+                        $('input[name='+key+']').after('<span class="help-block">'+value+'</span>');
+                    });
+                }
+            }
+        })
+
+
+        /*
+        $.post({
             url: "users/update",
             data: JSON.stringify(jsonData),
             contentType: 'application/json'
         }).done(function(fragment){
             $("#userTable").replaceWith(fragment);
             $('.modal-backdrop').remove();
-        })
+        })*/
     })
 
 

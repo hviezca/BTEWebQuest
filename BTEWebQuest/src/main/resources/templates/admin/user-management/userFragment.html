@@ -15,13 +15,13 @@
         <tr th:each="user : ${userList}">
             <td th:text="${user.userName}">Username</td>
             <td>
-                <div th:if="${session.userID == user.id or #authorization.expression('hasRole(''ADMIN'')')}">
+                <div th:if="${session.userID == user.id }">
                     <a th:href="@{/BTE/users/json/{id} (id=${user.id})}" id="modalButton" class="testclass btn btn-sm btn-primary my-1" >Edit User</a>
                 </div>
             </td>
 
             <td>
-                <div th:if="${session.userID == user.id or #authorization.expression('hasRole(''ADMIN'')')}">
+                <div th:if="${session.userID == user.id }">
                     <a id="updateButtonID" th:attr="data-id=${user.id}" class="btn btn-sm btn-primary my-1 updateClass" >Update Password</a>
                 </div>
             </td>
@@ -195,7 +195,7 @@
                     <!-- Insert th:field for name -->
                     <div class="form-row my-2">
                         <div class="col">
-                            <input th:class="form-control" type="password" id="oldPassword" placeholder="Old Password"
+                            <input th:class="form-control" type="password" id="oldPassword" name="oldPassword" placeholder="Old Password"
                                    required>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                     <!-- Insert th:field for name -->
                     <div class="form-row my-2">
                         <div class="col">
-                            <input th:class="form-control" type="password" id="newPassword" placeholder="New Password"
+                            <input th:class="form-control" type="password" id="newPassword" name="password" placeholder="New Password"
                                    required>
                         </div>
                     </div>

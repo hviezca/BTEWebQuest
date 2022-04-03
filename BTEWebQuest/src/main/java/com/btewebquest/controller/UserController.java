@@ -233,17 +233,10 @@ public class UserController {
         // Get User from database
         UserModel oldUser = service.getUserById(user.getId());
 
-        // Verify User password
-        if (BCrypt.checkpw(user.getUserName(), oldUser.getPassword())) {
-            // Encode Password
-            String encoded = new BCryptPasswordEncoder().encode(user.getPassword());
-
-            // Update User
-            oldUser.setPassword(encoded);
-            service.updateUser(oldUser);
-        } else {
-            System.out.println("No Match");
-        }
+        String encoded = new BCryptPasswordEncoder().encode(user.getPassword());
+        // Update User
+        oldUser.setPassword(encoded);
+        service.updateUser(oldUser);
 
         // Get List of UserModel
         List<UserModel> users = service.getUsers();
@@ -319,4 +312,50 @@ public class UserController {
 
         return response;
     }
+
+    /**
+     * Validate password data for update
+     *
+     * @param user UserModel with new data
+     * @param result Validated results
+     * @return ValidatedResponse with validated status and errors if applicable
+     */
+    @PostMapping("/users/passwordvalidation")
+    @ResponseBody
+    public ValidatedResponse validatePassword(@ModelAttribute @Valid UserModel user, BindingResult result) {
+
+        ValidatedResponse response = new ValidatedResponse();
+        boolean passwordValidated = false;
+
+        // Get User from database
+        UserModel oldUser = service.getUserById(user.getId());
+
+        // Verify User password
+        if (BCrypt.checkpw(user.getUserName(), oldUser.getPassword())) {
+            String encoded = new BCryptPasswordEncoder().encode(user.getPassword());
+            passwordValidated = true;
+        }
+
+        // Collect any errors
+        if (result.hasErrors() || !passwordValidated) {
+
+            Map<String, String> errors = result.getFieldErrors().stream()
+                    .collect(
+                            Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)
+                    );
+
+            if(!passwordValidated)
+            {
+                errors.put("oldPassword", "Password does not match");
+            }
+
+            response.setValidated(false);
+            response.setErrorMessages(errors);
+        } else {
+            response.setValidated(true);
+        }
+
+        return response;
+    }
+
 }

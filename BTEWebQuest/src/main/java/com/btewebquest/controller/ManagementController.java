@@ -7,13 +7,18 @@
 package com.btewebquest.controller;
 
 import com.btewebquest.business.BookingBusinessService;
+import com.btewebquest.business.UserBusinessService;
 import com.btewebquest.model.BookingModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,7 +26,13 @@ import java.util.List;
 public class ManagementController {
 
     @Autowired
-    BookingBusinessService service;
+    BookingBusinessService bookingService;
+
+    @Autowired
+    UserBusinessService userService;
+
+    @Autowired
+    HttpSession session;
 
     /**
      * Displays the Admin Home page
@@ -31,7 +42,17 @@ public class ManagementController {
     @GetMapping("/")
     public String adminHome(Model model)
     {
-        model.addAttribute("username", "Hiram");
+        // If user securely logged in, add to session data.
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            int userID = userService.findUserByUsername(currentUserName).getId();
+            if (null == session.getAttribute("user")) {
+                session.setAttribute("user", currentUserName);
+                session.setAttribute("userID", userID);
+            }
+        }
+
         return "admin/admin-home";
     }
 
@@ -44,7 +65,7 @@ public class ManagementController {
     public String bookingManagement(Model model)
     {
         // Get all booking records from database.
-        List<BookingModel> bookings = service.getBooking();
+        List<BookingModel> bookings = bookingService.getBooking();
 
         model.addAttribute("title", "Booking Management");
         model.addAttribute("bookings", bookings);
