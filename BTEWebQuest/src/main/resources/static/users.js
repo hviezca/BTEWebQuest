@@ -69,17 +69,6 @@ $('document').ready(function() {
                 }
             }
         })
-
-
-        /*
-        $.post({
-            url: "users/update",
-            data: JSON.stringify(jsonData),
-            contentType: 'application/json'
-        }).done(function(fragment){
-            $("#userTable").replaceWith(fragment);
-            $('.modal-backdrop').remove();
-        })*/
     })
 
 
@@ -160,12 +149,7 @@ $('document').ready(function() {
                 }
             }
         })
-
-
-
-
     })
-
 })
 
 function deleteItem(id)
