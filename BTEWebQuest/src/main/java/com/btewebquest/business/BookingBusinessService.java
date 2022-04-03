@@ -11,8 +11,12 @@ import com.btewebquest.data.service.BookingDataService;
 import com.btewebquest.model.BookingModel;
 import com.btewebquest.model.EventModel;
 import com.btewebquest.model.MessageModel;
+import com.btewebquest.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +60,8 @@ public class BookingBusinessService {
                 bookingEntities) {
             BookingModel booking = new BookingModel();
 
+            booking.setBooking_id(bookingEntity.getBooking_id());
+            booking.setBooking_date(bookingEntity.getDate());
             int eventID = bookingEntity.getEvent_id();
             EventModel event = eventBusinessService.findById(eventID);
             booking.setEvent(event);
@@ -70,5 +76,40 @@ public class BookingBusinessService {
 
         // Return list of bookings.
         return bookingModelList;
+    }
+
+    public BookingModel findById(int id)
+    {
+        BookingModel bookingModel = new BookingModel();
+        BookingEntity booking = bookingDataService.findById(id);
+
+        bookingModel.setBooking_id(booking.getBooking_id());
+        bookingModel.setBooking_date(booking.getDate());
+        bookingModel.setEvent(eventBusinessService.findById(booking.getEvent_id()));
+        bookingModel.setMessage(messageBusinessService.findById(booking.getMessage_id()));
+
+        return bookingModel;
+    }
+
+    /**
+     * Delete a booking entity from the database
+     *
+     * @param booking - A BookingEntity Object
+     * @return - Boolean
+     */
+    public boolean deleteBooking(BookingModel booking)
+    {
+        // Get User from database
+        BookingEntity bookingEntity = new BookingEntity();
+
+        bookingEntity.setBooking_id(booking.getBooking_id());
+        bookingEntity.setDate(booking.getBooking_date());
+        bookingEntity.setEvent_id(booking.getEvent().getEvent_id());
+        bookingEntity.setMessage_id(booking.getMessage().getMessage_id());
+
+        // Delete User from database
+        if (bookingDataService.delete(bookingEntity))
+            return true;
+        return false;
     }
 }

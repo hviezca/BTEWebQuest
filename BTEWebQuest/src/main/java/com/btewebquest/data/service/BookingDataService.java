@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingDataService implements DataAccessInterface<BookingEntity>{
@@ -33,10 +34,8 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
     @Autowired
     private EventBusinessService eventBusinessService;
 
+    @Autowired
     private BookingRepository bookingRepository;
-    public BookingDataService(BookingRepository bookingRepository) {
-        this.bookingRepository = bookingRepository;
-    }
 
 
     /**
@@ -56,7 +55,10 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
      */
     @Override
     public BookingEntity findById(int id) {
-        return null;
+
+        Optional<BookingEntity> booking = bookingRepository.findById((long)id);
+
+        return booking.get();
     }
 
     @Override
@@ -76,15 +78,28 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
         return false;
     }
 
+    /**
+     * Delete a booking entity from the database.
+     *
+     * @param bookingEntity - A BookingEntity Object.
+     * @return - boolean
+     */
     @Override
-    public boolean delete(BookingEntity bookingEntity) {
-        return false;
+    public boolean delete(BookingEntity bookingEntity)
+    {
+        try{
+            bookingRepository.delete(bookingEntity);
+            return true;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     /**
      * Create a booking request entry in the database.
      * @param booking - A BookingModel object.
-     * @return 
+     * @return - Boolean
      */
     @Transactional
     public boolean createBooking(BookingModel booking)

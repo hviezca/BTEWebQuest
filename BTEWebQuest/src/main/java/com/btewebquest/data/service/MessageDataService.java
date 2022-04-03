@@ -8,6 +8,7 @@ package com.btewebquest.data.service;
 
 import com.btewebquest.data.entity.MessageEntity;
 import com.btewebquest.data.repository.MessageRepository;
+import com.btewebquest.model.MessageModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,7 +64,9 @@ public class MessageDataService implements DataAccessInterface<MessageEntity> {
 
     @Override
     public boolean delete(MessageEntity messageEntity) {
-        return false;
+
+        messageRepository.delete(messageEntity);
+        return true;
     }
 
     /**
@@ -74,5 +77,16 @@ public class MessageDataService implements DataAccessInterface<MessageEntity> {
     public MessageEntity createMessage(MessageEntity messageEntity)
     {
         return messageRepository.save(messageEntity);
+    }
+
+    public boolean replyToMessage(MessageEntity message)
+    {
+        Optional<MessageEntity> messageEntity = messageRepository.findById((long)message.getId());
+        MessageEntity newMessage = messageEntity.get();
+
+        newMessage.setHas_reply(message.isHas_reply());
+
+        messageRepository.save(newMessage);
+        return false;
     }
 }

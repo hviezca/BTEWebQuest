@@ -64,7 +64,9 @@ public class ContactDataService implements DataAccessInterface<ContactEntity> {
 
     @Override
     public boolean delete(ContactEntity contactEntity) {
-        return false;
+
+        contactRepository.delete(contactEntity);
+        return true;
     }
 
     /**

@@ -52,4 +52,17 @@ public class ContactBusinessService {
 
         return contactModel;
     }
+
+    public boolean deleteContact(ContactModel contact)
+    {
+        ContactEntity contactEntity = new ContactEntity();
+        contactEntity.setId(contact.getContact_id());
+        contactEntity.setName(contact.getContact_name());
+        contactEntity.setEmail(contact.getContact_email());
+        contactEntity.setPhone(contact.getContact_phone());
+
+        if (service.delete(contactEntity))
+            return true;
+        return false;
+    }
 }

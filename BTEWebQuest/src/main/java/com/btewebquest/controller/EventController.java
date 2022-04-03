@@ -35,12 +35,10 @@ public class EventController {
             if (event == null)
             {
                 // Message not found
-                System.out.println("Not Found");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             else
             {
-                System.out.println("Found");
                 // Message found. Return OK response and message
                 return new ResponseEntity<>(event, HttpStatus.OK);
             }
@@ -48,7 +46,6 @@ public class EventController {
         catch (Exception e)
         {
             // Server error
-            System.out.println("Server Error");
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -49,4 +49,30 @@ public class MessageBusinessService {
 
         return messageModel;
     }
+
+    public boolean replyToMessage(MessageModel message)
+    {
+        MessageEntity messageEntity = new MessageEntity();
+        messageEntity.setId(message.getMessage_id());
+        messageEntity.setSubject(message.getSubject());
+        messageEntity.setMessage(message.getMessage());
+        messageEntity.setHas_reply(message.isHas_reply());
+
+        if(service.replyToMessage(messageEntity))
+            return true;
+        return false;
+    }
+
+    public boolean deleteMessage(MessageModel message)
+    {
+        MessageEntity messageEntity = new MessageEntity();
+        messageEntity.setId(message.getMessage_id());
+        messageEntity.setSubject(message.getSubject());
+        messageEntity.setMessage(message.getMessage());
+        messageEntity.setHas_reply(message.isHas_reply());
+
+        if (service.delete(messageEntity))
+            return true;
+        return false;
+    }
 }
