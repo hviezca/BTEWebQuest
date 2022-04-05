@@ -38,7 +38,7 @@
             <tbody>
             <tr th:each="booking : ${bookings}">
                 <td id="bookingId" style="display: none" th:text="${booking.booking_id}">Booking</td>
-                <td id="venueName" th:text="${booking.event.venue.venue_name}" th:href="@{/BTE/venue/json/{id} (id=${booking.event.venue.venue_id})}">Venue Name</td>
+                <td class="venueNameClass" id="venueName" th:text="${booking.event.venue.venue_name}" th:href="@{/BTE/venue/json/{id} (id=${booking.event.venue.venue_id})}">Venue Name</td>
                 <td class="eventDateClass" id="eventDate" th:href="@{/BTE/event/json/{id} (id=${booking.event.event_id})}" th:text="${booking.event.event_date}" nowrap>Event Date</td>
                 <td><span th:text="${booking.event.venue.venue_address}"></span> <span
                         th:text="${booking.event.venue.venue_city}"></span>, <span
@@ -88,7 +88,7 @@
                 </div>
                 <div class="modal-body" id="modal_body">
                     <input class="form-control" id="messageId" name="messageName" type="hidden" placeholder="MessageName">
-                    <textarea class="form-control bg-white" id="message" name="message" type="text" placeholder="Message Not Displaying" style="resize: none" readonly></textarea>
+                    <textarea class="form-control bg-white" id="message" name="message" type="text" rows = 5 placeholder="Message Not Displaying" style="resize: none" readonly></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col">
-                            <textarea class="form-control bg-white" id="replyMessage" name="replyMessage" type="text" placeholder="Reply Message" style="resize: none"></textarea>
+                            <textarea class="form-control bg-white" id="replyMessage" name="replyMessage" type="text" rows="5" placeholder="Reply Message" style="resize: none"></textarea>
                         </div>
                     </div>
                 </div>

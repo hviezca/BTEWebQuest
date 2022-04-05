@@ -23,8 +23,8 @@ $('document').ready(function () {
         event.preventDefault();
         $('#messageModal').modal('hide');
 
-        var date = $('#eventDate').attr('href');
-        var venue = $('#venueName').attr('href');
+        var date = $('.eventDateClass').attr('href');
+        var venue = $('.venueNameClass').attr('href');
 
         $.get(venue, function (vResponse, status) {
 
@@ -39,6 +39,8 @@ $('document').ready(function () {
 
             var date = new Date(eResponse.event_date).toLocaleDateString("en-US");
             var venue = vResponse.venue_name;
+
+            console.log(date + " " + venue);
 
             $('#subject').val("Break the Earth Booking - Event on " + date + " at " + venue);
             $("#replyModal").modal('show');

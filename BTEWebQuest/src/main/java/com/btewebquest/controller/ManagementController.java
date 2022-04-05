@@ -9,12 +9,13 @@ package com.btewebquest.controller;
 import com.btewebquest.business.BookingBusinessService;
 import com.btewebquest.business.ContactBusinessService;
 import com.btewebquest.business.MessageBusinessService;
+import com.btewebquest.business.UserBusinessService;
 import com.btewebquest.model.BookingModel;
-import com.btewebquest.model.MessageModel;
-import com.btewebquest.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,9 @@ public class ManagementController {
 
     @Autowired
     BookingBusinessService service;
+
+    @Autowired
+    UserBusinessService userService;
 
     // For Delete functions. Tables in DB are set to Cascade.
     // Need to delete the last item in the chain for cascade to function.
@@ -46,7 +50,10 @@ public class ManagementController {
     @GetMapping("/")
     public String adminHome(Model model)
     {
-        model.addAttribute("username", "Hiram");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        model.addAttribute("username", currentUserName);
         return "admin/admin-home";
     }
 
@@ -56,8 +63,7 @@ public class ManagementController {
      * @return booking-management.html
      */
     @GetMapping("/booking-management")
-    public String bookingManagement(Model model)
-    {
+    public String bookingManagement(Model model) {
         // Get all booking records from database.
         List<BookingModel> bookings = service.getBooking();
 
@@ -101,8 +107,7 @@ public class ManagementController {
      * @return Booking Management Page
      */
     @DeleteMapping("/booking/delete/{id}")
-    public String deleteBooking(@PathVariable int id, Model model)
-    {
+    public String deleteBooking(@PathVariable int id, Model model) {
         // Get Booking from database
         BookingModel booking = service.findById(id);
 

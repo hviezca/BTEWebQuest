@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{ fragments/include :: include}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Us</title>
+</head>
+<body class="bg-dark text-light">
+
+<!--Header-->
+<div th:insert="~{ fragments/header :: header}"></div>
+<div class="container mx-auto m-5">
+    <div class="fs-1 text-center">Contact Break the Earth</div>
+</div>
+
+<!-- Begin Content -->
+<div class="container-fluid vh-100">
+    <form name="contactForm" id="contactForm" action="#" th:action="@{/contactSubmit}" th:object="${contactRequest}"
+          method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <input class="form-control form-control-lg" name="subject" id="subject" type="text"
+                           th:field="*{message.subject}" placeholder="Subject"  required>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-12">
+                    <textarea class="form-control form-control-lg" name="message" id="message" type="text"
+                             th:field="*{message.message}" rows="5" placeholder="Message"  required></textarea>
+                </div>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-4">
+                    <input class="form-control form-control-lg" name="contact" id="contact" type="text"
+                           th:field="*{contact.contact_name}" placeholder="Contact Name"  required>
+                </div>
+                <div class="col-4">
+                    <input class="form-control form-control-lg" name="contact" id="phone" type="text"
+                           th:field="*{contact.contact_phone}" placeholder="Phone"  required>
+                </div>
+                <div class="col-4">
+                    <input class="form-control form-control-lg" name="email" id="email" type="text"
+                           th:field="*{contact.contact_email}" placeholder="Email" required>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-4 mx-auto">
+                    <input type="submit" value="Submit" id="toastBtn" class="btn btn-primary btn-block btn-lg">
+                </div>
+            </div>
+            <!--Toast-->
+            <div class="position-fixed top-0 start-50 p-3" style="z-index: 11">
+                <div class="toast bg-danger" id="liveToast" role="alert" aria-live="polite" aria-atomic="true">
+                    <div class="toast-header text-black bg-danger" >
+                        <strong class="mx-auto" id="toastHeader">Thank you!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body text-black text-center" >
+                        <strong id="toastBody">One of us will get back to you soon.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div th:insert="~{ fragments/footer :: footer}"></div>
+
+<!-- Script for Datepicker-->
+<!--<script type="text/javascript" th:src="@{/booking-form.js}"></script>-->
+</body>
+</html>

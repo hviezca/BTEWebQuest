@@ -11,15 +11,12 @@ import com.btewebquest.data.service.BookingDataService;
 import com.btewebquest.model.BookingModel;
 import com.btewebquest.model.EventModel;
 import com.btewebquest.model.MessageModel;
-import com.btewebquest.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class BookingBusinessService {
@@ -47,8 +44,7 @@ public class BookingBusinessService {
      * Gets all booking requests from the database.
      * @return A List of all BookingModel objects.
      */
-    public List<BookingModel> getBooking()
-    {
+    public List<BookingModel> getBooking() {
         // Create a new list to hold booking requests.
         List<BookingModel> bookingModelList = new ArrayList<>();
 
@@ -62,6 +58,7 @@ public class BookingBusinessService {
 
             booking.setBooking_id(bookingEntity.getBooking_id());
             booking.setBooking_date(bookingEntity.getDate());
+
             int eventID = bookingEntity.getEvent_id();
             EventModel event = eventBusinessService.findById(eventID);
             booking.setEvent(event);
