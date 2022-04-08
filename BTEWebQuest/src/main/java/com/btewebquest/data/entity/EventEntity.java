@@ -12,7 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
-@Table("EVENT")
+@Table("event")
 public class EventEntity {
 
     @Id

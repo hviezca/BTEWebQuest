@@ -1,0 +1,27 @@
+<body th:fragment="events-frag">
+
+<div class="container-fluid">
+    <div class="card text-white bg-dark bg-gradient py-1" >
+        <div class="card-body">
+            <h1 class="card-title text-center mb-4">Upcoming Events</h1>
+            <table class="table table-dark table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>Venue</th>
+                    <th>City</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="clickable-row" th:attr="data-id=${event.getEvent_id}" th:each="event : ${eventList}">
+                    <td th:text="${event.getVenue.getVenue_name}"></td>
+                    <td th:text="${event.getVenue.getVenue_city}"></td>
+                    <td th:text="${event.getEvent_date}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>

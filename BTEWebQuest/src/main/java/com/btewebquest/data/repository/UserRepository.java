@@ -25,7 +25,7 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     UserEntity findByUserName(String userName);
 
     // Custom Query for getting User Roles from database
-    @Query("SELECT * FROM ROLES INNER JOIN USERS_ROLES ON ROLES.ROLE_ID = USERS_ROLES.ROLE_ID WHERE USERS_ROLES.USER_ID = :id")
+    @Query("SELECT * FROM roles INNER JOIN users_roles ON roles.ROLE_ID = users_roles.ROLE_ID WHERE users_roles.USER_ID = :id")
     Set<RoleEntity> findRoles(@Param("id") Long id);
 
 }

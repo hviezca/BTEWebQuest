@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
  * @author sfradet
  * @version 1.0
  */
-@Table("TRACKS")
+@Table("tracks")
 public class TrackEntity {
 
     @Id

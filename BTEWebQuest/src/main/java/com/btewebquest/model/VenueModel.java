@@ -44,6 +44,17 @@ public class VenueModel {
         this.contact = contact;
     }
 
+    public VenueModel(int venue_id, String venue_name, String venue_address, String venue_city, String venue_state, String venue_zip, int contact_id) {
+        this.venue_id = venue_id;
+        this.venue_name = venue_name;
+        this.venue_address = venue_address;
+        this.venue_city = venue_city;
+        this.venue_state = venue_state;
+        this.venue_zip = venue_zip;
+        this.contact = new ContactModel();
+        this.contact.setContact_id(contact_id);
+    }
+
     public int getVenue_id() {
         return venue_id;
     }

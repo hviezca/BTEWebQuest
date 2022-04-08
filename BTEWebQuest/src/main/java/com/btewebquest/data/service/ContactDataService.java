@@ -57,11 +57,45 @@ public class ContactDataService implements DataAccessInterface<ContactEntity> {
         return false;
     }
 
-    @Override
-    public boolean update(ContactEntity contactEntity) {
-        return false;
+    /**
+     * Create new Contact and return ID
+     *
+     * @param contactEntity ContactEntity to be created
+     * @return New ContactEntity
+     */
+    public int createReturnId(ContactEntity contactEntity) {
+        return contactRepository.save(contactEntity).getId();
     }
 
+    /**
+     * Update Contact in database
+     *
+     * @param contactEntity ContactEntity to be updated
+     * @return boolean indicating operation success
+     */
+    @Override
+    public boolean update(ContactEntity contactEntity) {
+
+        try
+        {
+            // Attempt to update Contact in database
+           contactRepository.save(contactEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Delete Contact in database
+     *
+     * @param contactEntity ContactEntity to be deleted
+     * @return boolean indicating success
+     */
     @Override
     public boolean delete(ContactEntity contactEntity) {
 

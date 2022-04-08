@@ -1,7 +1,6 @@
 package com.btewebquest.model;
 
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 public class EventModel {
@@ -9,7 +8,6 @@ public class EventModel {
     @Id
     private int event_id;
 
-    @NotEmpty
     private Date event_date;
 
     private double event_price;
@@ -26,6 +24,15 @@ public class EventModel {
         this.event_price = event_price;
         this.all_ages = all_ages;
         this.venue = venue;
+    }
+
+    public EventModel(int event_id, Date event_date, double event_price, boolean all_ages, int venue_id) {
+        this.event_id = event_id;
+        this.event_date = event_date;
+        this.event_price = event_price;
+        this.all_ages = all_ages;
+        this.venue = new VenueModel();
+        this.venue.setVenue_id(venue_id);
     }
 
     public int getEvent_id() {
