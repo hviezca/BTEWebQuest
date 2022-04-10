@@ -19,11 +19,14 @@
 	<!--Now Available section-->
 	<div th:insert="~{ main-content/now-available :: now-availableFragment}"></div>
 
+	<!--Coming Soon section-->
+	<div th:insert="~{ main-content/coming-soon :: coming-soon}"></div>
+
 	<!--Video section-->
 	<div th:insert="~{ main-content/video :: videoFragment}"></div>
 
-	<!--Coming Soon section-->
-	<div th:insert="~{ main-content/coming-soon :: coming-soon}"></div>
+	<!-- Merchandise -->
+	<div #id="merch" th:insert="~{ main-content/merchandise :: merch}"></div>
 
 	<!--Events section-->
 	<div th:insert="~{ main-content/events-frag :: events-frag}"></div>
