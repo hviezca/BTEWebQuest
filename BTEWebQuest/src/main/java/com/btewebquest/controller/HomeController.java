@@ -9,6 +9,8 @@ package com.btewebquest.controller;
 import com.btewebquest.business.AlbumBusinessService;
 import com.btewebquest.model.AlbumModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,5 +44,20 @@ public class HomeController {
         model.addAttribute("album", album);
 
         return "home/index";
+    }
+
+    /**
+     * Displays the Admin Home page
+     * @param model A Model object for transferring data to the View
+     * @return admin-home.html
+     */
+    @GetMapping("/BTE")
+    public String adminHome(Model model)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = authentication.getName();
+
+        model.addAttribute("username", currentUserName);
+        return "admin/admin-home";
     }
 }

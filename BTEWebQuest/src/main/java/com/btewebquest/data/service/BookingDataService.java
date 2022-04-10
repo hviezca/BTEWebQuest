@@ -104,28 +104,23 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
     @Transactional
     public boolean createBooking(BookingModel booking)
     {
-        System.out.println("Entered Booking Data Service.");
         // Save Contact to DB
         ContactEntity contactEntity = contactBusinessService.addContact(booking.getEvent().getVenue().getContact());
 
         // Set Contact_Id in VenueModel to the value of Contact Entity from the DB
         booking.getEvent().getVenue().getContact().setContact_id(contactEntity.getId());
-        System.out.println("Contact Entity Entry successful");
 
         // Save Venue
         VenueEntity venueEntity = venueBusinessService.addVenue(booking.getEvent().getVenue());
 
         // Set Venue_Id in EventModel to the value of Venue Entity from the DB
         booking.getEvent().getVenue().setVenue_id(venueEntity.getId());
-        System.out.println("Venue Entity Entry successful");
 
         // Save Event
         EventEntity eventEntity = eventBusinessService.addEvent(booking.getEvent());
-        System.out.println("Contact Event Entry successful");
 
         // Save Message
         MessageEntity messageEntity = messageBusinessService.addMessage(booking.getMessage());
-        System.out.println("Message Entity Entry successful");
 
         // Set Booking Date to Today
         booking.setBooking_date(new Date());

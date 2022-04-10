@@ -1,5 +1,4 @@
-$('document').ready(function () {
-
+$('document').ready(function (){
     $.ajaxSetup({
         cache: false,
     });
@@ -12,39 +11,33 @@ $('document').ready(function () {
 
         $.get(href, function (message, status) {
             $('#messageId').val(message.message_id);
-            $('#message').val(message.message);
+            $('#modalMessage').val(message.message);
         })
 
         $('#messageModal').modal('show');
     })
 
-    $("#replyButton").on('click', function (event) {
+    $('#replyButton').on('click', function (event) {
 
         event.preventDefault();
         $('#messageModal').modal('hide');
 
-        var date = $('.eventDateClass').attr('href');
-        var venue = $('.venueNameClass').attr('href');
+        var date = $('#date').attr('href');
 
-        $.get(venue, function (vResponse, status) {
+        $.get(date, function (response, status) {
 
-            $.get(date, function (eResponse, status) {
+            date = response.date;
+            date = new Date(date);
+            var d = date.getDate(date);
+            var m = date.getMonth()+1;
+            m += 1; // Javascript months are 0 - 11
+            var y = date.getFullYear();
 
-                getVenueName(eResponse, vResponse);
+            $('#modalSubject').val("Break the Earth RE: Your Contact Request on " + d+"/"+m+"/"+y)
 
-            });
-        });
-
-        function getVenueName(eResponse, vResponse) {
-
-            var date = new Date(eResponse.event_date).toLocaleDateString("en-US");
-            var venue = vResponse.venue_name;
-
-            console.log(date + " " + venue);
-
-            $('#subject').val("Break the Earth Booking - Event on " + date + " at " + venue);
             $("#replyModal").modal('show');
-        }
+
+        });
     })
 
     $("#sendButton").on('click', function (event) {
@@ -55,38 +48,30 @@ $('document').ready(function () {
 
         $.get(email, function (eResponse, status) {
 
-            email = eResponse.contact_email;
+            email = eResponse.contact.contact_email;
 
             let reply = {
                 message_id: $('#messageId').val(),
-                subject: $('#subject').val(),
+                subject: $('#modalSubject').val(),
                 message: $('#replyMessage').val()
             }
-            let booking_contact = {
+            let contact_person = {
 
                 contact_email: email
             }
 
-            let booking_venue = {
-                contact: booking_contact
-            }
-
-            let booking_event = {
-                venue: booking_venue
-            }
-
-            let booking ={
+            let contact_request ={
                 message: reply,
-                event: booking_event
+                contact: contact_person
             }
 
             $.post({
-                url: "message/reply",
-                data: JSON.stringify(booking),
+                url: "contactRequest/reply",
+                data: JSON.stringify(contact_request),
                 contentType: 'application/json'
             }).done(function (fragment) {
-                $("#bookingTable").replaceWith(fragment);
                 $('#replyModal').modal('hide');
+                $("#contactRequestTable").replaceWith(fragment);
                 $('#replyMessage').val("");
                 //document.getElementById('replyMessage').reset();
             })
@@ -98,11 +83,11 @@ $('document').ready(function () {
 
         event.preventDefault();
 
-        var bookingId = $(this).attr('href');
+        var contactRequestId = $(this).attr('href');
 
-        $.get(bookingId, function(contactRequest, status){
+        $.get(contactRequestId, function(request, status){
 
-            deleteBooking(contactRequest.contact_request_id);
+            deleteBooking(request.contact_request_id);
         })
     })
 })
@@ -113,7 +98,7 @@ function deleteBooking(id)
         type: 'DELETE',
         contentType:'application/json',
         success: function(fragment) {
-            $("#bookingTable").replaceWith(fragment);
+            $("#contactRequestTable").replaceWith(fragment);
         }
     });
 }

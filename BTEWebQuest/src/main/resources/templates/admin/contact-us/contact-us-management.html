@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="~{ fragments/include :: include}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Us Management</title>
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <!-- Insert Header -->
+    <div th:insert="~{admin/admin-fragments/admin-header :: admin-header}"></div>
+
+    <!-- Insert page title -->
+    <div class="container mx-auto m-5">
+        <div class="fs-1 text-center"><span th:text="${title}"></span></div>
+    </div>
+
+    <!-- Begin content-->
+    <div class="container" th:fragment="contactUsTableFragment" id="contactRequestTable">
+        <script type="text/javascript" th:src="@{/contact-us-management.js}"></script>
+        <table class="table table-striped">
+            <thead>
+            <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Message</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Reply</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="request : ${contactRequests}">
+                <td id="requestId" th:text="${request.contact_request_id}" >ContactRequestId</td>
+                <td class="dateClass" id="date" th:text="${request.date}" th:href="@{/BTE/contactRequest/json/{id} (id=${request.contact_request_id})}">Date</td>
+                <td class="subjectClass" id="subject" th:text="${request.message.subject}">Subject</td>
+                <td>
+                    <a style="display: block"
+                        class="messageModalClass"
+                        data-bs-toggle="modal"
+                        data-bs-target="#messageModal"
+                        th:href="@{/BTE/message/json/{id} (id=${request.message.message_id})}">
+                        <span id="messageText"
+                              th:text="${request.message.message}">
+                        </span>
+                    </a>
+                </td>
+                <td th:text="${request.contact.contact_name}">ContactName</td>
+                <td id="email" th:text="${request.contact.contact_email}" th:href="@{/BTE/contactRequest/json/{id} (id=${request.contact_request_id})}">ContactEmail</td>
+
+                <td th:text="${request.contact.contact_phone}" nowrap>Phone</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" onclick="return false;" value="" id="flexCheckChecked" name="checkbox"
+                               th:checked="${request.message.has_reply}" >
+                        <label class="form-check-label" for="flexCheckChecked"></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="row">
+                        <button id="deleteButton" class="deleteClass btn btn-primary mx-auto" th:href="@{/BTE/contactRequest/json/{id} (id=${request.contact_request_id})}" >Delete</button>
+                    </div>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Message Modal -->
+        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-center">Message</h3>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal_body">
+                        <input class="form-control" id="messageId" name="messageName" type="hidden" placeholder="MessageName">
+                        <textarea class="form-control bg-white" id="modalMessage" name="modalMessage" type="text" rows = 5 placeholder="Message Not Displaying" style="resize: none" readonly></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="replyButton" class="replyClass btn btn-primary">Reply</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reply Modal-->
+        <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-center">Reply</h3>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="reply_modal_body">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control" id="modalSubject" name="subject" type="text" placeholder="Subject">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <textarea class="form-control bg-white" id="replyMessage" name="replyMessage" type="text" rows="5" placeholder="Reply Message" style="resize: none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="sendButton" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Insert Footer-->
+    <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
+</div>
+</body>
+</html>

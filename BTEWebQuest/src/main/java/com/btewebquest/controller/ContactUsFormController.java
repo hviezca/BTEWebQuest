@@ -1,7 +1,8 @@
 package com.btewebquest.controller;
 
-import com.btewebquest.model.BookingModel;
+import com.btewebquest.business.ContactRequestBusinessService;
 import com.btewebquest.model.ContactRequestModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -9,11 +10,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ContactUsFormController {
 
+    @Autowired
+    ContactRequestBusinessService service;
+
+    /**
+     * Display the ContactUs form.
+     *
+     * @param model - A Model object to hold object data from the HTML page.
+     * @return - The ContactUs form.
+     */
     @GetMapping("/contactUs")
     public String getContactUsForm(Model model)
     {
@@ -23,29 +32,32 @@ public class ContactUsFormController {
         return "contact-us-form";
     }
 
+    /**
+     * Send a ContactRequestModel to the ContactRequestBusinessService for saving to the database
+     *
+     * @param contactRequest - A ContactRequestModel
+     * @return - A ResponseEntity<> with the Http Status. Either OK, NOT_FOUND, or INTERNAL_SERVER_ERROR
+     */
     @PostMapping("/contactSubmit")
-    public ResponseEntity<?> bookingSubmit(@ModelAttribute ContactRequestModel contactRequest)
+    public ResponseEntity<?> contactSubmit(@ModelAttribute ContactRequestModel contactRequest)
     {
-        System.out.println("Entered ContactRequestController.");
         ////////////// TESTING ////////////////
-        System.out.println(contactRequest.getMessage().getSubject());
+        /*System.out.println(contactRequest.getMessage().getSubject());
         System.out.println(contactRequest.getMessage().getMessage());
         System.out.println(contactRequest.getContact().getContact_name());
         System.out.println(contactRequest.getContact().getContact_phone());
-        System.out.println(contactRequest.getContact().getContact_email());
+        System.out.println(contactRequest.getContact().getContact_email());*/
 
-
-        return new ResponseEntity<>("/contactUs", HttpStatus.OK);
-        /*try {
+        try {
             // Save Booking
-            if(bookingService.addBooking(booking))
-                return new ResponseEntity<>("/booking", HttpStatus.OK);
+            if(service.addContactRequest(contactRequest))
+                return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
                 //return "admin/success";
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             //return null;
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }*/
+        }
     }
 }

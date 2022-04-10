@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{ fragments/include :: include}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Break The Earth</title>
+</head>
+
+<body class="bg-dark">
+
+<!--Header-->
+<div th:insert="~{ fragments/header :: header}"></div>
+
+<!--Band header image-->
+<div th:insert="~{ about-us-fragments/about-us-header-fragment :: aboutUsHeaderImage }"></div>
+
+<!-- Paul Section -->
+<div th:insert="~{ about-us-fragments/paul-fragment :: paul }"></div>
+
+<!-- Patrick Section -->
+<div th:insert="~{ about-us-fragments/duffy-fragment :: duffy }"></div>
+
+<!-- Connor Section -->
+<div th:insert="~{ about-us-fragments/connor-fragment :: connor }"></div>
+
+<!-- Hiram Section -->
+<div th:insert="~{ about-us-fragments/beast-fragment :: beast }"></div>
+
+<!--Footer-->
+<div th:insert="~{ fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

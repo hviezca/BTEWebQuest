@@ -43,21 +43,6 @@ public class ManagementController {
     MessageBusinessService messageBusinessService;
 
     /**
-     * Displays the Admin Home page
-     * @param model A Model object for transferring data to the View
-     * @return admin-home.html
-     */
-    @GetMapping("/")
-    public String adminHome(Model model)
-    {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = authentication.getName();
-
-        model.addAttribute("username", currentUserName);
-        return "admin/admin-home";
-    }
-
-    /**
      * Gets all Booking Records from database and display the Booking Management page
      * @param model A Model object for transferring data to the View
      * @return booking-management.html
