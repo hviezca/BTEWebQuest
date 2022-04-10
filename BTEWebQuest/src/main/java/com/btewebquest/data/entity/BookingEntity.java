@@ -12,7 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
-@Table("BOOKING_REQUEST")
+@Table("booking_request")
 public class BookingEntity {
     @Id
     @Column("BOOKING_ID")

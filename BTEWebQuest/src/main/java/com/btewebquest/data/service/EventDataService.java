@@ -9,8 +9,10 @@ package com.btewebquest.data.service;
 
 import com.btewebquest.data.entity.EventEntity;
 import com.btewebquest.data.repository.EventRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +26,41 @@ public class EventDataService implements DataAccessInterface<EventEntity> {
         this.eventRepository = eventRepository;
     }
 
+    /**
+     * Find all events and sort by DATE
+     *
+      * @return List of EventEntity sorted by DATE
+     */
+    public List<EventEntity> findAllOrderByDate()
+    {
+        return (List<EventEntity>) eventRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+    }
+
+    /**
+     * Return a list of all Events
+     *
+     * @return List of EventEntity
+     */
     @Override
     public List<EventEntity> findAll() {
-        return null;
+
+        // Empty List of EventEntity
+        List<EventEntity> events = new ArrayList<EventEntity>();
+
+        try
+        {
+            // Iterable result set from database
+            Iterable<EventEntity> userIterable = eventRepository.findAll();
+
+            // Step through Iterable set and add to EventEntity List
+            userIterable.forEach(events::add);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Return List of EventEntity
+        return events;
     }
 
     /**
@@ -58,14 +92,48 @@ public class EventDataService implements DataAccessInterface<EventEntity> {
         return false;
     }
 
+    /**
+     * Update Event in database
+     *
+     * @param eventEntity EventEntity to update
+     * @return boolean indication operation success
+     */
     @Override
     public boolean update(EventEntity eventEntity) {
-        return false;
+        try
+        {
+            // Attempt to update Event in database
+            eventRepository.save(eventEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
+    /**
+     * Delete Event in database
+     *
+     * @param eventEntity EventEntity to be deleted
+     * @return boolean indicating operation success
+     */
     @Override
     public boolean delete(EventEntity eventEntity) {
-        return false;
+        try
+        {
+            // Attempt to delete EventModel in database
+            eventRepository.delete(eventEntity);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
     /**
