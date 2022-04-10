@@ -13,10 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 
 @Controller
@@ -24,6 +29,9 @@ public class BookingController {
 
     @Autowired
     private BookingBusinessService bookingService;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     /**
      * Display the Book Us form
@@ -46,7 +54,6 @@ public class BookingController {
     @PostMapping("/bookingSubmit")
     public ResponseEntity<?> bookingSubmit(@ModelAttribute BookingModel booking)
     {
-        System.out.println("Entered BookingController.");
         ////////////// TESTING ////////////////
         /*System.out.println(booking.getEvent().getEvent_date());
         System.out.println(booking.getEvent().getVenue().getVenue_name());
@@ -61,13 +68,37 @@ public class BookingController {
         try {
             // Save Booking
             if(bookingService.addBooking(booking))
+            {
+                notifyOfBookingRequest(booking);
                 return new ResponseEntity<>("/booking", HttpStatus.OK);
-            //return "admin/success";
+                //return "admin/success";
+            }
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             //return null;
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private void notifyOfBookingRequest(BookingModel booking) throws MessagingException {
+
+        String subject = "New Booking Request From: " + booking.getEvent().getVenue().getContact().getContact_name();
+        String msgBody = "You have a new booking request. Please click " +
+                "<html><a href='https://breaktheearth.herokuapp.com/BTE/booking-management'>here</a></html> " +
+                "to access your booking requests";
+
+        // Set up email to send
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        /////////// FOR TESTING ONLY
+        helper.setTo("hiramramirez3@gmail.com");
+
+        //helper.setTo(booking.getEvent().getVenue().getContact().getContact_email());
+
+        helper.setSubject(subject);
+        helper.setText(msgBody, msgBody);
+
+        javaMailSender.send(message);
     }
 }

@@ -134,7 +134,6 @@ public class BookingDataService implements DataAccessInterface<BookingEntity>{
         BookingEntity bookingEntity = new BookingEntity(booking.getBooking_id(), booking.getBooking_date(), booking.getEvent().getEvent_id(), booking.getMessage().getMessage_id());
 
         BookingEntity savedBookingEntity = bookingRepository.save(bookingEntity);
-        System.out.println("Contact Booking Entry successful");
         if (savedBookingEntity.getBooking_id() > 0)
             return true;
 
