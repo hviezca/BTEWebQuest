@@ -4,6 +4,7 @@ $('document').ready(function() {
         cache: false,
     });
 
+    // Class to identify button for opening User Edit Model
     $('.testclass').on('click',function(event){
 
         event.preventDefault();
@@ -20,6 +21,7 @@ $('document').ready(function() {
         $('#editModal').modal('show');
     })
 
+    // Class to identify button for User delete modal
     $('.deleteClass').on('click', function(event){
 
         event.preventDefault();
@@ -29,6 +31,7 @@ $('document').ready(function() {
         $('#deleteModal').modal('show');
     })
 
+    // Class to identify button for User update modal
     $('.updateClass').on('click', function(event){
 
         event.preventDefault();
@@ -38,17 +41,21 @@ $('document').ready(function() {
         $('#changeModal').modal('show');
     })
 
+    // Code for updating a User password via Ajax
     $("#updateButton").on('click', function(event){
 
         event.preventDefault();
-        $('input').next('span').remove();
+        $('input').next('span').remove(); // Remove any validation messages
 
+        // Get User data from modal
         let id = $('#updateUserId').val();
         let oldPassword = $("#oldPassword").val();
         let newPassword = $("#newPassword").val();
 
+        // Convert data to JSON
         let jsonData = {id: id, firstName: "test" , lastName: "test", userName: oldPassword, password: newPassword};
 
+        // Send data via Ajax and receive HTML fragment back for page refresh
         $.post({
             url: "users/passwordvalidation",
             data: jsonData,
@@ -71,8 +78,7 @@ $('document').ready(function() {
         })
     })
 
-
-
+    // Execute delete User with Ajax
     $("#passwordButton").on('click', function(event){
 
         event.preventDefault();
@@ -95,6 +101,7 @@ $('document').ready(function() {
         })
     })
 
+    // Execute add User with Ajax
     $("#addButton").on('click', function(event){
 
         event.preventDefault();
@@ -123,6 +130,7 @@ $('document').ready(function() {
         })
     })
 
+    // Execute Edit User with Ajax
     $("#editButton").on('click', function(event){
 
         event.preventDefault();
@@ -152,6 +160,7 @@ $('document').ready(function() {
     })
 })
 
+// Delete user by ID
 function deleteItem(id)
 {
     $.ajax({
