@@ -1,0 +1,42 @@
+<body th:fragment="project-background">
+
+<div class="container-fluid">
+    <div class="card text-white bg-dark bg-gradient py-1 shadow p-3 mb-3 rounded" >
+        <div class="card-body">
+            <div class="row justify-content-around">
+                <div class="col-md-7 col-lg-6 col-xl-5 d-flex align-items-center">
+                    <div>
+                    <h3 class="card-title text-center mb-4">Project Background</h3>
+                    <p>This project was designed by Hiram Viezca and Shawn Fradet as part of their Computer Programming
+                        Senior Capstone at Grand Canyon University. The idea behind the capstone project is to create
+                        an application that serves as a demonstration of skills learned during the course of their
+                        degree program. Hiram and Shawn worked with a heavy metal band local to the Albuquerque New
+                        Mexico area that were looking to increase their online presence. Over the course of eight weeks
+                        they developed a project proposal, requirements document, and architectural design document to
+                        capture the band's vision and make it a working application.
+                    </p>
+                    <p>
+                        The application was coded in Java with the Spring Boot framework and MySQL as the backing
+                        database.
+                        The site presents a simplified layout for fans to quickly obtain the most common information
+                        about the band from the main page. This information includes band discography, work in progress,
+                        links to available music, videos and merchandise, and upcoming events. Information is presented
+                        dynamically to the front page allowing band members to update the information through secure
+                        administrative tools with instant results.
+                    </p>
+                    <p>
+                        Along with providing information for the fans, the application provides booking capabilities,
+                        album and event management, and administrative functions. The project can be viewed at the above
+                        link for the application or the GitHub repository.
+                    </p>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 col-xl-5 d-flex align-items-center">
+                        <img th:src="@{/images/breaktheearth.png/}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>

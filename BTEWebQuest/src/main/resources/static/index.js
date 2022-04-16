@@ -1,3 +1,4 @@
+// On load set Album completion percentage for indicator
 window.onload = function onLoad() {
     let completionPercent = $('#albumPercent').val();
     let completionPercentConverted = completionPercent * 100;

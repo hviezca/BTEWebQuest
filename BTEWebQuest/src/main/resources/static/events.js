@@ -1,8 +1,11 @@
 jQuery(document).ready(function($) {
+
+    // Handle click on Event table row
     $(".clickable-row").click(function() {
         var href= "/BTE/event/json/" + $(this).data('id');
 
         $.get(href, function(event, status){
+
             $('#editVenueName').val(event.venue.venue_name);
             $('#editVenueAddress').val(event.venue.venue_address);
             $('#editVenueCity').val(event.venue.venue_city);
@@ -12,6 +15,7 @@ jQuery(document).ready(function($) {
             let date = new Date(event.event_date);
             date.setDate(date.getDate()+1)
             $('input[name="editEventDate"]').datepicker("update", date);
+
             if(event.all_ages)
             {
                 $('#editEventAge').val(1);
@@ -20,12 +24,15 @@ jQuery(document).ready(function($) {
             }
 
         })
+
         $('#editModal').modal('show');
     });
 
+    // Update Event via Ajax
     $("#updateButton").on('click', function(event){
 
         event.preventDefault();
+
         let eventID = $('#updateUserId').val();
         var href= "/BTE/event/json/" + eventID;
 
@@ -37,6 +44,7 @@ jQuery(document).ready(function($) {
         let eventDate = new Date($('#editEventDate').val());
         eventDate.setDate(eventDate.getDate()+1);
         let allAges = false;
+
         if($('#editEventAge').val() == 1)
         {
             allAges = true;
@@ -63,6 +71,7 @@ jQuery(document).ready(function($) {
         })
     })
 
+    // Delete Event button
     $("#deleteButton").on('click', function(event){
 
         event.preventDefault();
@@ -81,6 +90,7 @@ jQuery(document).ready(function($) {
 
     })
 
+    // Add Event button
     $("#addButton").on('click', function(event){
 
         event.preventDefault();
@@ -146,6 +156,7 @@ jQuery(document).ready(function($) {
 
     })
 
+    // Populate Date picker
     var edit_date_input=$('input[name="editEventDate"]'); //our date input has the name "date"
     let add_date_input=$('input[name="addEventDate"]');
     var container=$('.bootstrap.min.css form').length>0 ? $('.bootstrap.min.css form').parent() : "body";
@@ -163,6 +174,7 @@ jQuery(document).ready(function($) {
 
 });
 
+// Toggle new Event div
 function selectedOption(chosen) {
     var x = document.getElementById("venueToggle");
     if(chosen === "new")

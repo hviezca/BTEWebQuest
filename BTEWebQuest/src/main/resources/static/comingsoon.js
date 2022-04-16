@@ -4,6 +4,7 @@ $('document').ready(function() {
         cache: false,
     });
 
+    // Class to populate and open Track modal
     $('.trackclass').on('click',function(event){
 
         event.preventDefault();
@@ -25,6 +26,7 @@ $('document').ready(function() {
         $('#editTrackModal').modal('show');
     })
 
+    // Class to open Edit Album modal
     $('.albumclass').on('click',function(event){
 
         event.preventDefault();
@@ -32,6 +34,7 @@ $('document').ready(function() {
         $('#editAlbumModal').modal('show');
     })
 
+    // Update Track via Ajax
     $("#updateTrackButton").on('click', function(event){
 
         event.preventDefault();
@@ -73,6 +76,7 @@ $('document').ready(function() {
         })
     })
 
+    // Update Album via Ajax
     $("#doUpdateAlbumButton").on('click', function(event){
 
         event.preventDefault();
@@ -106,6 +110,7 @@ $('document').ready(function() {
     })
 })
 
+// Delete track by ID
 function deleteTrack(id)
 {
     $.ajax({
@@ -120,6 +125,7 @@ function deleteTrack(id)
     });
 }
 
+// Function to add Track via ID
 function addTrack(id)
 {
     $.ajax({
