@@ -102,14 +102,14 @@ $('document').ready(function () {
 
         $.get(bookingId, function(contactRequest, status){
 
-            deleteBooking(contactRequest.contact_request_id);
+            deleteBooking(contactRequest.booking_id);
         })
     })
 })
 function deleteBooking(id)
 {
     $.ajax({
-        url: 'contactRequest/delete/'+id,
+        url: 'booking/delete/'+id,
         type: 'DELETE',
         contentType:'application/json',
         success: function(fragment) {
