@@ -27,7 +27,7 @@ Along with providing information for the fans, the application provides booking 
 album and event management, and administrative functions. The project can be viewed at the above
 link for the application or the GitHub repository.
 </p>
-                    
-                    
+
+***     
 
 ![](https://github.com/hviezca/BTEWebQuest/blob/main/BTEWebQuest/src/main/resources/static/images/breaktheearth.png)
