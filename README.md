@@ -2,7 +2,7 @@
 
 ***
 
-##[Visit the site!](https://breaktheearth.herokuapp.com/)
+[Visit the site!](https://breaktheearth.herokuapp.com/)
 
 ### Developed by Hiram Viezca & Shawn Fradet
 
