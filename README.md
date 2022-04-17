@@ -14,6 +14,7 @@ Mexico area that were looking to increase their online presence. Over the course
 they developed a project proposal, requirements document, and architectural design document to
 capture the band's vision and make it a working application.
 </br>
+</br>
 The application was coded in Java with the Spring Boot framework and MySQL as the backing database.
 The site presents a simplified layout for fans to quickly obtain the most common information
 about the band from the main page. This information includes band discography, work in progress,
