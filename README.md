@@ -1,7 +1,5 @@
 # BTEWebQuest<br>A web application for the band Break the Earth
 
-***
-
 [Visit the site!](https://breaktheearth.herokuapp.com/)
 
 ### Developed by Hiram Viezca & Shawn Fradet
