@@ -29,4 +29,4 @@
                         link for the application or the GitHub repository.
                     </p>
 
-![](C:\Users\sfrad\IdeaProjects\BTEWebQuest\BTEWebQuest\src\main\resources\static\images\breaktheearth.png)
+![](https://github.com/hviezca/BTEWebQuest/blob/main/BTEWebQuest/src/main/resources/static/images/breaktheearth.png)
