@@ -1,6 +1,5 @@
 # BTEWebQuest<br>A web application for the band Break the Earth
 
-</br>
 [Visit the site!](https://breaktheearth.herokuapp.com/)
 
 ### Developed by Hiram Viezca & Shawn Fradet
@@ -26,6 +25,10 @@ Along with providing information for the fans, the application provides booking 
 album and event management, and administrative functions. The project can be viewed at the above
 link for the application or the GitHub repository.
 </p>
+
+* Repository files
+  * \Project Documents - Documents covering the creation of the applciation    
+  * \BTEWEBQUEST - Spring Boot Source files for the application
 
 ***     
 
