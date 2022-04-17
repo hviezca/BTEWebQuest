@@ -22,6 +22,7 @@ links to available music, videos and merchandise, and upcoming events. Informati
 dynamically to the front page allowing band members to update the information through secure
 administrative tools with instant results.
 </br>
+</br>
 Along with providing information for the fans, the application provides booking capabilities,
 album and event management, and administrative functions. The project can be viewed at the above
 link for the application or the GitHub repository.
