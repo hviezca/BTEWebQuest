@@ -28,7 +28,7 @@ link for the application or the GitHub repository.
 
 * Repository files
   * \Project Documents - Documents covering the creation of the applciation    
-  * \BTEWEBQUEST - Spring Boot Source files for the application
+  * \BTEWebQuest - Spring Boot Source files for the application
 
 ***     
 
