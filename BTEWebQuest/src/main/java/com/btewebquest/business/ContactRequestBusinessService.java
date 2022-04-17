@@ -8,7 +8,6 @@ import com.btewebquest.model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
 import java.util.ArrayList;
 import java.util.List;
 

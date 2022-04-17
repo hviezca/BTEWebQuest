@@ -3,7 +3,6 @@ package com.btewebquest.controller;
 import com.btewebquest.business.ContactBusinessService;
 import com.btewebquest.business.ContactRequestBusinessService;
 import com.btewebquest.business.MessageBusinessService;
-import com.btewebquest.model.BookingModel;
 import com.btewebquest.model.ContactModel;
 import com.btewebquest.model.ContactRequestModel;
 import com.btewebquest.model.MessageModel;

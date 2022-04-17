@@ -1,7 +1,6 @@
 package com.btewebquest.controller;
 
 import com.btewebquest.business.ContactRequestBusinessService;
-import com.btewebquest.model.BookingModel;
 import com.btewebquest.model.ContactRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

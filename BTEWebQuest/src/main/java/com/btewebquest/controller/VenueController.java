@@ -1,7 +1,6 @@
 package com.btewebquest.controller;
 
 import com.btewebquest.business.VenueBusinessService;
-import com.btewebquest.model.MessageModel;
 import com.btewebquest.model.VenueModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
