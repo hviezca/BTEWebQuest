@@ -1,41 +1,46 @@
 <body th:fragment="merch">
     <div class="card bg-dark pb-5" id="merch">
         <div class="container-fluid">
-            <div class="card bg-dark bg-image text-white px-4 py-4" style="background: url('/images/merch/devil_is_real_img_3.png'); background-position: center;
-                                                                   background-repeat: no-repeat;
-                                                                   background-size: cover;
-                                                                   position: relative;'">
-                <div class="card-header">
-                    <!--Section Header-->
-                    <h1 class="p-2">Merch</h1>
-                </div>
-                <div class="card-body">
-                    <!--Container to hold album cover art and track list-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=2">
-                                    <img style="width:250px; height:250px; "
-                                         th:src="@{/images/merch/bte_tee.png/}"/>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=117">
-                                    <img style="width:250px; height:250px; "
-                                         th:src="@{/images/merch/bte_tank.png/}"/>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=95">
-                                    <img style="width:250px; height:250px; "
-                                         th:src="@{/images/merch/bte_flowy_tank.png/}"/>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=226">
-                                    <img style="width:250px; height:250px; "
-                                         th:src="@{/images/merch/bte_v_tee.png/}"/>
-                                </a>
+            <div class="card bg-image" style="background: url('/images/merch/devil_is_real_img_3.png');
+                                              background-position: center;
+                                              background-size: cover;
+                                              background-repeat: no-repeat;
+">
+                <div class="mask text-white" style="background-color: rgba(0, 0, 0, 0.7);
+                                                    background-position: center;
+                                                    position: relative;">
+                    <div class="card-header">
+                        <!--Section Header-->
+                        <h1 class="p-2">Merch</h1>
+                    </div>
+                    <div class="card-body">
+                        <!--Container to hold album cover art and track list-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=2">
+                                        <img style="width:250px; height:250px; "
+                                             th:src="@{/images/merch/bte_tee.png/}"/>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=117">
+                                        <img style="width:250px; height:250px; "
+                                             th:src="@{/images/merch/bte_tank.png/}"/>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=95">
+                                        <img style="width:250px; height:250px; "
+                                             th:src="@{/images/merch/bte_flowy_tank.png/}"/>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a class="navbar-brand" target="_blank" href="https://break-the-earth.creator-spring.com/listing/break-the-earth-t-shirt?product=226">
+                                        <img style="width:250px; height:250px; "
+                                             th:src="@{/images/merch/bte_v_tee.png/}"/>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
