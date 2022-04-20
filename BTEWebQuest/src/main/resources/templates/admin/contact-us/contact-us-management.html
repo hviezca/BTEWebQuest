@@ -20,7 +20,7 @@
     <!-- Begin content-->
     <div class="container" th:fragment="contactUsTableFragment" id="contactRequestTable">
         <script type="text/javascript" th:src="@{/contact-us-management.js}"></script>
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
             <tr class="table-dark">
                 <th scope="col">ID</th>
@@ -45,9 +45,14 @@
                         data-bs-toggle="modal"
                         data-bs-target="#messageModal"
                         th:href="@{/BTE/message/json/{id} (id=${request.message.message_id})}">
-                        <span id="messageText"
+                        <p id="messageText"
+                              style="overflow: hidden;
+                              text-overflow: ellipsis;
+                              white-space: nowrap;
+                              width: 100%;
+                              max-width: 200px;"
                               th:text="${request.message.message}">
-                        </span>
+                        </p>
                     </a>
                 </td>
                 <td th:text="${request.contact.contact_name}">ContactName</td>
@@ -124,10 +129,6 @@
         </div>
 
     </div>
-
-
-    <!-- Insert Footer-->
-    <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
 </div>
 </body>
 </html>

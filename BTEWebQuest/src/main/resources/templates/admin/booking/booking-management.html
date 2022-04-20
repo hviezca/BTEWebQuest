@@ -20,7 +20,7 @@
     <!-- Begin content-->
     <div class="container" th:fragment="bookingTableFragment" id="bookingTable">
         <script type="text/javascript" th:src="@{/booking-management.js}"></script>
-        <table class="table table-striped">
+        <table class="table table-striped table-hover">
             <thead>
             <tr class="table-dark">
                 <!--<th scope="col">ID</th>-->
@@ -50,9 +50,14 @@
                        class="messageModalClass"
                        data-bs-toggle="modal"
                        data-bs-target="#messageModal">
-                        <span id="messageText"
-                            th:text="${booking.message.message}">
-                        </span>
+                        <p id="messageText"
+                           style="overflow: hidden;
+                           text-overflow: ellipsis;
+                           white-space: nowrap;
+                           width: 100%;
+                           max-width: 200px;"
+                           th:text="${booking.message.message}">
+                        </p>
                     </a>
                 </td>
                 <td th:text="${booking.event.venue.contact.contact_name}" nowrap>Contact</td>
@@ -127,9 +132,6 @@
             </div>
         </div>
     </div>
-    <!-- Insert Footer-->
-    <div th:insert="~{admin/admin-fragments/admin-footer :: admin-footer}"></div>
-
 </div>
 </body>
 </html>
