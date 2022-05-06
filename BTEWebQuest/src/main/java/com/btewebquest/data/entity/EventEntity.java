@@ -28,16 +28,20 @@ public class EventEntity {
     @Column("ALL_AGES")
     private boolean all_ages;
 
+    @Column("BOOKED")
+    private boolean booked;
+
     @Column("VENUE_ID")
     private int venue_id;
 
     public EventEntity(){}
 
-    public EventEntity(int id, Date date, double price, boolean all_ages, int venue_id) {
+    public EventEntity(int id, Date date, double price, boolean all_ages, boolean booked, int venue_id) {
         this.id = id;
         this.date = date;
         this.price = price;
         this.all_ages = all_ages;
+        this.booked = booked;
         this.venue_id = venue_id;
     }
 
@@ -79,5 +83,13 @@ public class EventEntity {
 
     public void setVenue_id(int venue_id) {
         this.venue_id = venue_id;
+    }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
     }
 }

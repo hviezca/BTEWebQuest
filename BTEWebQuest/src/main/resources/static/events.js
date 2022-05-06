@@ -23,6 +23,8 @@ jQuery(document).ready(function($) {
                 $('#editEventAge').val(0);
             }
 
+            document.getElementById('editEventBooked').checked = event.booked;
+
         })
 
         $('#editModal').modal('show');
@@ -44,6 +46,11 @@ jQuery(document).ready(function($) {
         let eventDate = new Date($('#editEventDate').val());
         eventDate.setDate(eventDate.getDate()+1);
         let allAges = false;
+        let eventBooked = false;
+        if (document.getElementById('editEventBooked').checked)
+        {
+            eventBooked = true;
+        }
 
         if($('#editEventAge').val() == 1)
         {
@@ -58,6 +65,7 @@ jQuery(document).ready(function($) {
             event.venue.venue_state = venueState;
             event.event_price = eventPrice;
             event.all_ages = allAges;
+            event.booked = eventBooked;
             event.event_date = eventDate;
 
             $.post({
@@ -106,6 +114,11 @@ jQuery(document).ready(function($) {
         let contactPhone = $('#addContactNumber').val();
         let newVenue = $('#dropDownList').val();
         let eventPrice = $('#addEventPrice').val();
+        let eventBooked = false;
+        if (document.getElementById('addEventBooked').checked)
+        {
+            eventBooked = true;
+        }
         let venueID = $('#dropDownList').val();
         let allAges = false;
         if($('#addEventAge').val() == 1)
@@ -120,6 +133,7 @@ jQuery(document).ready(function($) {
             event.event_price = eventPrice;
             event.all_ages = allAges;
             event.event_date = eventDate;
+            event.booked = eventBooked;
 
 
             if(newVenue === "new") {

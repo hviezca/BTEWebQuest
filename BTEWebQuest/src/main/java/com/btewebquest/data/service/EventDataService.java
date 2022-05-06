@@ -37,6 +37,16 @@ public class EventDataService implements DataAccessInterface<EventEntity> {
     }
 
     /**
+     * Find all events and sort by DATE
+     *
+     * @return List of EventEntity sorted by DATE
+     */
+    public List<EventEntity> findAllBooked()
+    {
+        return (List<EventEntity>) eventRepository.findAllByBookedTrue(Sort.by(Sort.Direction.ASC, "date"));
+    }
+
+    /**
      * Return a list of all Events
      *
      * @return List of EventEntity

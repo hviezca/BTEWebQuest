@@ -10,6 +10,7 @@
             <th>Price</th>
             <th>Date</th>
             <th>Age</th>
+            <th>Booked</th>
         </tr>
         </thead>
         <tbody>
@@ -19,6 +20,9 @@
             <td th:text="${#numbers.formatCurrency(event.getEvent_price)}"></td>
             <td th:text="${event.getEvent_date}"></td>
             <td th:text="${event.isAll_ages} ? 'All Ages' : '21+'"></td>
+            <td> <input class="form-check-input" type="checkbox" th:checked="${event.isBooked}" value=""
+                       id="isMixed" onclick="this.checked=!this.checked;">
+            </td>
         </tr>
 
         </tbody>
@@ -142,6 +146,15 @@
                                 <option value="1" th:text="'All Ages'"></option>
                                 <option value="0" th:text="'21+'"></option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col">
+                            <input class="form control form-check-input" type="checkbox" value="" id="editEventBooked">
+                            <label class="form-check-label" for="editEventBooked">
+                                Event is booked
+                            </label>
                         </div>
                     </div>
 
@@ -308,6 +321,15 @@
                             <input class="form-control form-control" name="addEventDate" id="addEventDate"
                                    placeholder="Event Date MM/DD/YYYY" type="text" data-date-format="dd/mm/yyyy"
                                    autocomplete="off" required>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col">
+                            <input class="form control form-check-input" type="checkbox" value="" id="addEventBooked">
+                            <label class="form-check-label" for="addEventBooked">
+                                Event is booked
+                            </label>
                         </div>
                     </div>
 

@@ -16,21 +16,25 @@ public class EventModel {
 
     private VenueModel venue = new VenueModel();
 
+    private boolean booked;
+
     public EventModel() {}
 
-    public EventModel(int event_id, Date event_date, double event_price, boolean all_ages, VenueModel venue) {
+    public EventModel(int event_id, Date event_date, double event_price, boolean all_ages, boolean booked, VenueModel venue) {
         this.event_id = event_id;
         this.event_date = event_date;
         this.event_price = event_price;
         this.all_ages = all_ages;
+        this.booked = booked;
         this.venue = venue;
     }
 
-    public EventModel(int event_id, Date event_date, double event_price, boolean all_ages, int venue_id) {
+    public EventModel(int event_id, Date event_date, double event_price, boolean all_ages, boolean booked, int venue_id) {
         this.event_id = event_id;
         this.event_date = event_date;
         this.event_price = event_price;
         this.all_ages = all_ages;
+        this.booked = booked;
         this.venue = new VenueModel();
         this.venue.setVenue_id(venue_id);
     }
@@ -73,6 +77,14 @@ public class EventModel {
 
     public void setVenue(VenueModel venue) {
         this.venue = venue;
+    }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
     }
 
     @Override
