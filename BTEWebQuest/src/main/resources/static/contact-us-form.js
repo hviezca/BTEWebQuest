@@ -1,49 +1,77 @@
-/* Script for Toast */
-$('#toastBtn').on('click', function(e){
-    e.preventDefault()        //This stops page loading
-    var form = document.getElementById('contactForm');
+$(document).ready(function () {
 
-    if (!formIsValid(form)){
-        $('#toastHeader').text('Error')
-        $('#toastBody').text('Please complete the form.');
-        $("#liveToast").toast('show');
-    }
-    else{
-        $.post({
-            url: "/contactSubmit",
-            data: $('#contactForm').serialize(),
-            success: function () {
-                $("#liveToast").toast('show'); //Show toast
-                document.getElementsByName('contactForm')[0].reset();
-            }
-        }).fail(function(){
+    // Subject can't be empty
+    $('#contact_subject').on('input', function() {
+        var input=$(this);
+        var is_subject=input.val();
+        if(is_subject && is_subject.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+
+    // Message can't be empty
+    $('#contact_message').keyup(function(event) {
+        var input=$(this);
+        var message = $(this).val();
+        //console.log(message);
+        if(message && message.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+
+    // Name can't be empty
+    $('#contact_name').on('input', function() {
+        var input=$(this);
+        var is_name=input.val();
+        if(is_name && is_name.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+
+    // Phone must be a valid phone number
+    $('#contact_phone').on('input', function() {
+        var input=$(this);
+        var re = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        var is_phone=re.test(input.val());
+        if(is_phone){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+
+    // Email must be a valid email
+    $('#contact_email').on('input', function() {
+        var input=$(this);
+        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var is_email=re.test(input.val());
+        if(is_email){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+
+
+
+    $("#contact_submit button").click(function(event){
+        event.preventDefault();
+
+        var form = $("#contact_form");
+
+        form.validate();
+
+        if (!form.valid()){
             $('#toastHeader').text('Error')
-            $('#toastBody').text('An error has occurred... Please try again.');
-            $("#liveToast").toast('show'); //Show toast
-        })
-    }
-})
-
-// Checks if any of the form inputs are empty
-function formIsValid(form){
-
-    var inputs = form.getElementsByTagName("input");
-    var textArea = document.getElementById('message')
-
-    let size = inputs.length;
-
-    for (var i = 0; i < size; i++){
-
-        if(inputs[i].hasAttribute("required")) {
-            if (inputs[i].value === "" || inputs[i].value == null) {
-                // found an empty field that is required
-                return false;
-            }
+            $('#toastBody').text('Please complete the form.');
+            $("#liveToast").toast('show');
         }
-    }
-    if (textArea.value === "" || textArea.value == null) {
-        // found an empty field that is required
-        return false;
-    }
-    return true;
-}
+        else{
+            $.post({
+                url: "/contactSubmit",
+                data: form.serialize(),
+                success: function () {
+                    $('#toastHeader').text('Thank you!')
+                    $('#toastBody').text('One of us will get back to you soon.');
+                    $("#liveToast").toast('show'); //Show toast
+                    document.getElementsByName('contactForm')[0].reset();
+                }
+            }).fail(function(){
+                $('#toastHeader').text('Error')
+                $('#toastBody').text('An error has occurred... Please try again.');
+                $("#liveToast").toast('show'); //Show toast
+            })
+        }
+    });
+});

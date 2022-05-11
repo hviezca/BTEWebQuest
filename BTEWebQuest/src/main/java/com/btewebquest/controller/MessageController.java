@@ -86,9 +86,9 @@ public class MessageController {
             // Set up email to send
             SimpleMailMessage msg = new SimpleMailMessage();
             /////////// FOR TESTING ONLY
-            msg.setTo("hiramramirez3@gmail.com");
+            //msg.setTo("btecontactservice@gmail.com");
 
-            //msg.setTo(contact.getContact_email());
+            msg.setTo(contact.getContact_email());
 
             msg.setSubject(message.getSubject());
             msg.setText(message.getMessage());
