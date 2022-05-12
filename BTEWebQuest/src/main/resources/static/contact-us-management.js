@@ -33,12 +33,28 @@ $('document').ready(function (){
             m += 1; // Javascript months are 0 - 11
             var y = date.getFullYear();
 
-            $('#modalSubject').val("Break the Earth RE: Your Contact Request on " + d+"/"+m+"/"+y)
+            $('#replySubject').val("Break the Earth RE: Your Contact Request on " + d+"/"+m+"/"+y)
 
             $("#replyModal").modal('show');
 
         });
     })
+
+    // Reply Subject can't be empty
+    $('#replySubject').on('input', function() {
+        var input=$(this);
+        var is_subject=input.text(input.val());  // .text() will sanitize the value of the element.
+        if(is_subject && is_subject.text().length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+
+    // Message can't be empty
+    $('#replyMessage').keyup(function(event) {
+        var input=$(this);
+        var message = $(this).text($(this).val());  // .tex() will sanitize input
+        if(message && message.text().length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
     $("#sendButton").on('click', function (event) {
 
@@ -52,7 +68,7 @@ $('document').ready(function (){
 
             let reply = {
                 message_id: $('#messageId').val(),
-                subject: $('#modalSubject').val(),
+                subject: $('#replySubject').val(),
                 message: $('#replyMessage').val()
             }
             let contact_person = {
@@ -65,17 +81,21 @@ $('document').ready(function (){
                 contact: contact_person
             }
 
-            $.post({
-                url: "contactRequest/reply",
-                data: JSON.stringify(contact_request),
-                contentType: 'application/json'
-            }).done(function (fragment) {
-                $('#replyModal').modal('hide');
-                $("#contactRequestTable").replaceWith(fragment);
-                $('#replyMessage').val("");
-                //document.getElementById('replyMessage').reset();
-            })
+            var form = $('#reply_form');
+            form.validate();
+            if(form.valid()) {
 
+                $.post({
+                    url: "contactRequest/reply",
+                    data: JSON.stringify(contact_request),
+                    contentType: 'application/json'
+                }).done(function (fragment) {
+                    $('#replyModal').modal('hide');
+                    $("#contactRequestTable").replaceWith(fragment);
+                    $('#replyMessage').val("");
+                    //document.getElementById('replyMessage').reset();
+                })
+            }
         });
     })
 
