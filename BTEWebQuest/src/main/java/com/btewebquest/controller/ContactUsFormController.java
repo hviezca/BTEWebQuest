@@ -82,7 +82,7 @@ public class ContactUsFormController {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         /////////// FOR TESTING ONLY
-        helper.setTo("hiramramirez3@gmail.com");
+        helper.setTo("btecontactservice@gmail.com");
 
         //helper.setTo(booking.getEvent().getVenue().getContact().getContact_email());
 

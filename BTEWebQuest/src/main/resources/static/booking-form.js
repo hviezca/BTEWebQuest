@@ -1,37 +1,110 @@
-$('document').ready(function() {
+$(document).ready(function() {
 
-    $.ajaxSetup({
-        cache: false,
+    // Subject can't be empty or less than 3 characters
+    $('#venue').on('input', function() {
+        var input=$(this);
+        var is_venue=input.val();
+        if(is_venue && is_venue.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
     });
 
-    $('.messageModalClass').on('click',function(event){
+    // Event Date can't be empty
+    $('#eventDate').on('input', function() {
+        var input=$(this);
+        var is_date=input.val();
+        if(is_date){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-        event.preventDefault();
+    // Address can't be empty or less than 3 characters
+    $('#address').on('input', function() {
+        var input=$(this);
+        var is_address=input.val();
+        if(is_address && is_address.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-        var href = $(this).attr('href');
+    // City can't be empty or less than 3 characters
+    $('#city').on('input', function() {
+        var input=$(this);
+        var is_city=input.val();
+        if(is_city && is_city.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-        $.get(href, function(message, status){
-            $('#messageId').val(message.message_id);
-            $('#message').val(message.message);
-        })
+    // Zip can't be empty and must be 5 chars
+    $('#zip').on('input', function() {
+        var input=$(this);
+        var is_zip=input.val();
+        if(is_zip && is_zip.length === 5){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
+    
+    // Message can't be empty
+    $('#message').keyup(function(event) {
+        var input=$(this);
+        var message = $(this).val();
+        if(message && message.length >= 5 && message.length <= 9){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-        $('#messageModal').modal('show');
-    })
+    // Name can't be empty or less than 3 characters
+    $('#name').on('input', function() {
+        var input=$(this);
+        var is_name=input.val();
+        if(is_name && is_name.length >= 3){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-    $("#replyButton").on('click', function(event){
+    // Phone must be a valid phone number
+    $('#phone').on('input', function() {
+        var input=$(this);
+        var re = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        var is_phone=re.test(input.val());
+        if(is_phone){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-        event.preventDefault();
+    // Email must be a valid email
+    $('#email').on('input', function() {
+        var input=$(this);
+        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var is_email=re.test(input.val());
+        if(is_email){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+    });
 
-        $("#replyModal").modal('hide');
+    $('#toastBtn').on('click', function(e){
+        e.preventDefault()        //This stops page loading
 
-        /*$.post({
-            url: "",
-            data: $('#addUserForm').serialize(),
-            success: function (fragment) {
-                $("#userTable").replaceWith(fragment);
-                $('.modal-backdrop').remove();
-            }
-        })*/
+        var form = $('#booking_form');
+        form.validate();
+
+        if (!form.valid()){
+            $('#toastHeader').text('Error')
+            $('#toastBody').text('Please complete the form.');
+            $("#liveToast").toast('show');
+        }
+        else{
+            $.post({
+                url: "/bookingSubmit",
+                data: form.serialize(),
+                success: function () {
+                    $('#toastHeader').text('Thank you!')
+                    $('#toastBody').text('One of us will get back to you soon.');
+                    $("#liveToast").toast('show'); //Show toast
+                    document.getElementsByName('bookingForm')[0].reset();
+                    Array.from(form.elements).forEach((input) => {
+                       input.removeClass("valid");
+                       input.removeClass("invalid");
+                    });
+                }
+            }).fail(function(){
+                $('#toastHeader').text('Error')
+                $('#toastBody').text('An error has occurred... Please try again.');
+                $("#liveToast").toast('show'); //Show toast
+            })
+        }
     })
 })
 
@@ -50,59 +123,3 @@ $(document).ready(function(){
     };
     date_input.datepicker(options);
 })
-
-/* Script for Toast */
-$('#toastBtn').on('click', function(e){
-    e.preventDefault()        //This stops page loading
-    var form = document.getElementById('bookingForm');
-    console.log(formIsValid(form));
-    if (!formIsValid(form)){
-        $('#toastHeader').text('Error')
-        $('#toastBody').text('Please complete the form.');
-        $("#liveToast").toast('show');
-    }
-    else{
-        $.post({
-            url: "/bookingSubmit",
-            data: $('#bookingForm').serialize(),
-            success: function () {
-                $("#liveToast").toast('show'); //Show toast
-                document.getElementsByName('bookingForm')[0].reset();
-            }
-        }).fail(function(){
-            $('#toastHeader').text('Error')
-            $('#toastBody').text('An error has occurred... Please try again.');
-            $("#liveToast").toast('show'); //Show toast
-        })
-    }
-})
-
-// Checks if any of the form inputs are empty
-function formIsValid(form){
-
-    var inputs = form.getElementsByTagName("input");
-    var textArea = document.getElementById('message')
-    var select = document.getElementById('State');
-
-    let size = inputs.length;
-
-    for (var i = 0; i < size; i++){
-
-        if(inputs[i].hasAttribute("required")) {
-            if (inputs[i].value === "" || inputs[i].value == null) {
-                // found an empty field that is required
-                return false;
-            }
-        }
-    }
-    if (textArea.value === "" || textArea.value == null) {
-        // found an empty field that is required
-        return false;
-    }
-    if (select.value === "" || select.value == null) {
-        // found an empty field that is required
-        return false;
-    }
-
-    return true;
-}

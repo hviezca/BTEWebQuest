@@ -17,39 +17,39 @@
 
 <!-- Begin Content -->
 <div class="container-fluid vh-100">
-    <form name="contactForm" id="contactForm" action="#" th:action="@{/contactSubmit}" th:object="${contactRequest}"
-          method="post">
+    <form name="contactForm" id="contact_form" th:action="@{'/contactSubmit'}" th:object="${contactRequest}" method="post">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <input class="form-control form-control-lg" name="subject" id="subject" type="text"
-                           th:field="*{message.subject}" placeholder="Subject"  required>
+                    <input class="form-control form-control-lg" name="subject" id="contact_subject" type="text"
+                           minlength="3" th:field="*{message.subject}" placeholder="Subject" required>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-12">
-                    <textarea class="form-control form-control-lg" name="message" id="message" type="text"
-                             th:field="*{message.message}" rows="5" placeholder="Message"  required></textarea>
+                    <textarea class="form-control form-control-lg" name="message" id="contact_message"
+                             minlength="3" th:field="*{message.message}" rows="5" placeholder="Message"  required></textarea>
                 </div>
             </div>
 
             <div class="row my-3">
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="contact" id="contact" type="text"
-                           th:field="*{contact.contact_name}" placeholder="Contact Name"  required>
+                    <input class="form-control form-control-lg" name="name" id="contact_name" type="text"
+                           minlength="3" th:field="*{contact.contact_name}" placeholder="Contact Name"  required>
                 </div>
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="contact" id="phone" type="text"
-                           th:field="*{contact.contact_phone}" placeholder="Phone"  required>
+                    <input class="form-control form-control-lg" name="phone" id="contact_phone" type="tel"
+                           pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" th:field="*{contact.contact_phone}" placeholder="Phone"  required>
                 </div>
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="email" id="email" type="text"
+                    <input class="form-control form-control-lg" name="email" id="contact_email" type="email"
                            th:field="*{contact.contact_email}" placeholder="Email" required>
                 </div>
             </div>
             <div class="row my-3">
-                <div class="col-4 mx-auto">
-                    <input type="submit" value="Submit" id="toastBtn" class="btn btn-primary btn-block btn-lg">
+                <div class="col-4 mx-auto" id="contact_submit">
+                    <!--<input type="submit" value="Submit" id="submit" class="btn btn-primary btn-block btn-lg">-->
+                    <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
                 </div>
             </div>
             <!--Toast-->
@@ -71,7 +71,7 @@
 
 <div th:insert="~{ fragments/footer :: footer}"></div>
 
-<!-- Script for Datepicker-->
+<!-- Script for form validation-->
 <script type="text/javascript" th:src="@{/contact-us-form.js}"></script>
 </body>
 </html>

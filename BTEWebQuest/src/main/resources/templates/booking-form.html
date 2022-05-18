@@ -17,13 +17,13 @@
 
 <!-- Begin Content -->
 <div class="container-fluid vh-100">
-    <form name="bookingForm" id="bookingForm" action="#" th:action="@{/bookingSubmit}" th:object="${booking}"
+    <form name="bookingForm" id="booking_form" action="#" th:action="@{/bookingSubmit}" th:object="${booking}"
           method="post">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-4">
                     <input class="form-control form-control-lg" name="venue" id="venue" type="text"
-                           placeholder="Venue Name" th:field="*{event.venue.venue_name}" required>
+                           minlength="3" placeholder="Venue Name" th:field="*{event.venue.venue_name}" required>
                 </div>
                 <div class="col-lg-4">
                     <input class="form-control form-control-lg" name="eventDate" id="eventDate"
@@ -34,13 +34,13 @@
             <div class="row my-3">
                 <div class="col-12">
                     <input class="form-control form-control-lg" name="address" id="address" type="text"
-                           placeholder="Address" th:field="*{event.venue.venue_address}" required>
+                          minlength="3" placeholder="Address" th:field="*{event.venue.venue_address}" required>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-4">
                     <input class="form-control form-control-lg" name="city" id="city" type="text" placeholder="City"
-                           th:field="*{event.venue.venue_city}" required>
+                           minlength="3" th:field="*{event.venue.venue_city}" required>
                 </div>
                 <div class="col-4">
                     <select class="form-control form-control-lg form-select-lg" name="state" id="State"
@@ -100,26 +100,26 @@
                 </div>
                 <div class="col-4">
                     <input class="form-control form-control-lg" name="zip" id="zip" type="text" placeholder="Zip"
-                           th:field="*{event.venue.venue_zip}" required>
+                           minlength="5" th:field="*{event.venue.venue_zip}" required>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-12">
                     <textarea class="form-control form-control-lg" name="message" id="message" type="textarea"
-                              placeholder="Message" rows="5" th:field="*{message.message}" required></textarea>
+                              minlength="3" placeholder="Message" rows="5" th:field="*{message.message}" required></textarea>
                 </div>
             </div>
             <div class="row my-3">
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="contact" id="contact" type="text"
-                           placeholder="Contact Name" th:field="*{event.venue.contact.contact_name}" required>
+                    <input class="form-control form-control-lg" name="name" id="name" type="text"
+                           minlength="3" placeholder="Contact Name" th:field="*{event.venue.contact.contact_name}" required>
                 </div>
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="contact" id="phone" type="text"
-                           placeholder="Phone" th:field="*{event.venue.contact.contact_phone}" required>
+                    <input class="form-control form-control-lg" name="contact" id="phone" type="tel"
+                           pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" placeholder="Phone" th:field="*{event.venue.contact.contact_phone}" required>
                 </div>
                 <div class="col-4">
-                    <input class="form-control form-control-lg" name="email" id="email" type="text" placeholder="Email"
+                    <input class="form-control form-control-lg" name="email" id="email" type="email" placeholder="Email"
                            th:field="*{event.venue.contact.contact_email}" required>
                 </div>
             </div>
