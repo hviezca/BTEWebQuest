@@ -5,7 +5,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 /**
- * Entity representing and AlbumModel object
+ * Entity representing an AlbumModel object
  *
  * @author sfradet
  * @version 1.0

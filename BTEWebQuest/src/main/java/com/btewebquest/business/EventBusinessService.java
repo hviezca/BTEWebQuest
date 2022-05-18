@@ -42,7 +42,25 @@ public class EventBusinessService {
         // For each EventEntity in eventEntities List, add EventModel to events List
         for(EventEntity entity : eventEntities)
         {
-            events.add(new EventModel(entity.getId(), entity.getDate(), entity.getPrice(), entity.isAll_ages(), entity.getVenue_id()));
+            events.add(new EventModel(entity.getId(), entity.getDate(), entity.getPrice(), entity.isAll_ages(), entity.isBooked(), entity.getVenue_id()));
+        }
+
+        // Return list of EventModels
+        return events;
+    }
+
+    public List<EventModel> getBookedEvents()
+    {
+        //List<EventEntity> eventEntities = service.findAll();
+        List<EventEntity> eventEntities = service.findAllBooked();
+
+        // Empty List of EventModel to hold results
+        List<EventModel> events = new ArrayList<EventModel>();
+
+        // For each EventEntity in eventEntities List, add EventModel to events List
+        for(EventEntity entity : eventEntities)
+        {
+            events.add(new EventModel(entity.getId(), entity.getDate(), entity.getPrice(), entity.isAll_ages(), entity.isBooked(), entity.getVenue_id()));
         }
 
         // Return list of EventModels
@@ -61,6 +79,7 @@ public class EventBusinessService {
                 event.getEvent_date(),
                 event.getEvent_price(),
                 event.isAll_ages(),
+                event.isBooked(),
                 event.getVenue().getVenue_id());
 
         return service.delete(eventEntity);
@@ -77,6 +96,7 @@ public class EventBusinessService {
                                                   event.getEvent_date(),
                                                   event.getEvent_price(),
                                                   event.isAll_ages(),
+                                                  event.isBooked(),
                                                   event.getVenue().getVenue_id());
 
         return service.createEvent(eventEntity);
@@ -95,6 +115,7 @@ public class EventBusinessService {
                 event.getEvent_date(),
                 event.getEvent_price(),
                 event.isAll_ages(),
+                event.isBooked(),
                 event.getVenue().getVenue_id());
 
         return service.update(eventEntity);
@@ -113,6 +134,7 @@ public class EventBusinessService {
         eventModel.setEvent_date(eventEntity.getDate());
         eventModel.setEvent_price(eventEntity.getPrice());
         eventModel.setAll_ages(eventEntity.isAll_ages());
+        eventModel.setBooked(eventEntity.isBooked());
 
         eventModel.setVenue(venueBusinessService.findVenueById(eventEntity.getVenue_id()));
 

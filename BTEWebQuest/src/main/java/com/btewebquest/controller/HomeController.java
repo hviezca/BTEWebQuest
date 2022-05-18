@@ -49,7 +49,7 @@ public class HomeController {
         album.setTrackList(albumService.getTracks(album.getId()));
 
         // Get List of all Events from database
-        List<EventModel> events = eventService.getEvents();
+        List<EventModel> events = eventService.getBookedEvents();
 
         for(EventModel event : events)
         {

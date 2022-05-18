@@ -21,4 +21,6 @@ public interface EventRepository extends CrudRepository<EventEntity, Long> {
      * @return List<EventEntity> of sorted Events
      */
     List<EventEntity> findAll(Sort DATE);
+
+    List<EventEntity> findAllByBookedTrue(Sort DATE);
 }
