@@ -36,8 +36,11 @@ $('document').ready(function() {
 
     // Update Track via Ajax
     $("#updateTrackButton").on('click', function(event){
-
         event.preventDefault();
+
+        const form = $('#editTrackForm');
+        form.validate();
+
         let id = $('#updateTrackId').val();
         let trackName = $("#songTitle").val();
         let trackNumber = $("#updateTrackNumber").val();
@@ -65,21 +68,40 @@ $('document').ready(function() {
 
         let jsonData = {id: id, trackName: trackName, trackNumber: trackNumber, albumId: albumId, vocals: vocals, guitar: guitar, bass: bass, drums: drums};
 
-        $.post({
-            url: "comingsoon/trackupdate",
-            data: JSON.stringify(jsonData),
-            contentType: 'application/json'
-        }).done(function(fragment){
-            $("#comingSoonMenu").replaceWith(fragment);
-            $("body").css("overflow", "auto");
-            $('.modal-backdrop').remove();
-        })
+        if (form.valid())
+        {
+            $.post({
+                url: "comingsoon/trackupdate",
+                data: JSON.stringify(jsonData),
+                contentType: 'application/json'
+            }).done(function(fragment){
+                $("#comingSoonMenu").replaceWith(fragment);
+                $("body").css("overflow", "auto");
+                $('.modal-backdrop').remove();
+            })
+        }
+
     })
+
+    // Subject can't be empty or less than 3 characters
+    $('#albumTitle').on('input', function() {
+        const album= document.getElementById('albumTitle');
+        const input = $(this);
+        if(album.validity.valid) {
+            input.removeClass("invalid").addClass("valid");
+        }
+        else {
+            input.removeClass("valid").addClass("invalid");
+        }
+    });
 
     // Update Album via Ajax
     $("#doUpdateAlbumButton").on('click', function(event){
 
         event.preventDefault();
+
+        const form = $('#testForm');
+        form.validate();
 
         let id = $('#updateAlbumAlbumId').val();
         let albumTitle = $("#albumTitle").val();
@@ -97,16 +119,18 @@ $('document').ready(function() {
 
         let jsonData = {id: id, albumName: albumTitle, albumYear: albumYear, mixed: mixed, mastered: mastered};
 
-        $.post({
-            url: "comingsoon/albumupdate",
-            data: JSON.stringify(jsonData),
-            contentType: 'application/json'
-        }).done(function(fragment){
-            $("#comingSoonMenu").replaceWith(fragment);
-            $("body").css("overflow", "auto");
-            $('.modal-backdrop').remove();
-        })
-
+        if(form.valid())
+        {
+            $.post({
+                url: "comingsoon/albumupdate",
+                data: JSON.stringify(jsonData),
+                contentType: 'application/json'
+            }).done(function(fragment){
+                $("#comingSoonMenu").replaceWith(fragment);
+                $("body").css("overflow", "auto");
+                $('.modal-backdrop').remove();
+            })
+        }
     })
 })
 

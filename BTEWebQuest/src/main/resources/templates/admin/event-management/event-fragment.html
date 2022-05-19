@@ -11,6 +11,7 @@
             <th>Date</th>
             <th>Age</th>
             <th>Booked</th>
+
         </tr>
         </thead>
         <tbody>
@@ -21,7 +22,7 @@
             <td th:text="${event.getEvent_date}"></td>
             <td th:text="${event.isAll_ages} ? 'All Ages' : '21+'"></td>
             <td> <input class="form-check-input" type="checkbox" th:checked="${event.isBooked}" value=""
-                       id="isMixed" onclick="this.checked=!this.checked;">
+                        id="isMixed" onclick="this.checked=!this.checked;">
             </td>
         </tr>
 
@@ -47,117 +48,117 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="updateUserId" name="id">
 
-                    <div class="row my-2">
-                        <div class="col">
-                            <input th:class="form-control" id="editVenueName" name="editVenueName" type="text"
-                                   placeholder="Venue Name"
-                                   required>
+                    <form id="editEventForm">
+                        <input type="hidden" id="updateUserId" name="id">
+                        <div class="row my-2">
+                            <div class="col">
+                                <input th:class="form-control" id="editVenueName" name="editVenueName" type="text"
+                                       placeholder="Venue Name"
+                                       required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row my-3">
-                        <div class="col">
-                            <input class="form-control" id="editVenueAddress" name="editVenueAddress" type="text"
-                                   placeholder="Address" required>
+                        <div class="row my-3">
+                            <div class="col">
+                                <input class="form-control" id="editVenueAddress" name="editVenueAddress" type="text"
+                                       placeholder="Address" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row my-3">
-                        <div class="col">
-                            <input class="form-control" id="editVenueCity" name="editVenueCity" type="text"
-                                   placeholder="City" required>
+                        <div class="row my-3">
+                            <div class="col">
+                                <input class="form-control" id="editVenueCity" name="editVenueCity" type="text"
+                                       placeholder="City" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row my-3">
-                        <div class="col-6">
-                            <select class="form-control form-select" name="editVenueState" id="editVenueState"
-                                    required>
-                                <option selected value="0">State</option>
-                                <option value="AL">AL</option>
-                                <option value="AK">AK</option>
-                                <option value="AZ">AZ</option>
-                                <option value="AR">AR</option>
-                                <option value="CA">CA</option>
-                                <option value="CO">CO</option>
-                                <option value="CT">CT</option>
-                                <option value="DE">DE</option>
-                                <option value="FL">FL</option>
-                                <option value="GA">GA</option>
-                                <option value="HI">HI</option>
-                                <option value="ID">ID</option>
-                                <option value="IL">IL</option>
-                                <option value="IN">IN</option>
-                                <option value="IA">IA</option>
-                                <option value="KS">KS</option>
-                                <option value="KY">KY</option>
-                                <option value="LA">LA</option>
-                                <option value="ME">ME</option>
-                                <option value="MD">MD</option>
-                                <option value="MA">MA</option>
-                                <option value="MI">MI</option>
-                                <option value="MN">MN</option>
-                                <option value="MS">MS</option>
-                                <option value="MO">MO</option>
-                                <option value="MT">MT</option>
-                                <option value="NE">NE</option>
-                                <option value="NV">NV</option>
-                                <option value="NH">NH</option>
-                                <option value="NJ">NJ</option>
-                                <option value="NM">NM</option>
-                                <option value="NY">NY</option>
-                                <option value="NC">NC</option>
-                                <option value="ND">ND</option>
-                                <option value="OH">OH</option>
-                                <option value="OK">OK</option>
-                                <option value="OR">OR</option>
-                                <option value="PA">PA</option>
-                                <option value="RI">RI</option>
-                                <option value="SC">SC</option>
-                                <option value="SD">SD</option>
-                                <option value="TN">TN</option>
-                                <option value="TX">TX</option>
-                                <option value="UT">UT</option>
-                                <option value="VT">VT</option>
-                                <option value="VA">VA</option>
-                                <option value="WA">WA</option>
-                                <option value="WV">WV</option>
-                                <option value="WI">WI</option>
-                                <option value="WY">WY</option>
-                            </select>
+                        <div class="row my-3">
+                            <div class="col-6">
+                                <select class="form-control form-select" name="editVenueState" id="editVenueState"
+                                        required>
+                                    <option selected value="0">State</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AK">AK</option>
+                                    <option value="AZ">AZ</option>
+                                    <option value="AR">AR</option>
+                                    <option value="CA">CA</option>
+                                    <option value="CO">CO</option>
+                                    <option value="CT">CT</option>
+                                    <option value="DE">DE</option>
+                                    <option value="FL">FL</option>
+                                    <option value="GA">GA</option>
+                                    <option value="HI">HI</option>
+                                    <option value="ID">ID</option>
+                                    <option value="IL">IL</option>
+                                    <option value="IN">IN</option>
+                                    <option value="IA">IA</option>
+                                    <option value="KS">KS</option>
+                                    <option value="KY">KY</option>
+                                    <option value="LA">LA</option>
+                                    <option value="ME">ME</option>
+                                    <option value="MD">MD</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MI">MI</option>
+                                    <option value="MN">MN</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MO">MO</option>
+                                    <option value="MT">MT</option>
+                                    <option value="NE">NE</option>
+                                    <option value="NV">NV</option>
+                                    <option value="NH">NH</option>
+                                    <option value="NJ">NJ</option>
+                                    <option value="NM">NM</option>
+                                    <option value="NY">NY</option>
+                                    <option value="NC">NC</option>
+                                    <option value="ND">ND</option>
+                                    <option value="OH">OH</option>
+                                    <option value="OK">OK</option>
+                                    <option value="OR">OR</option>
+                                    <option value="PA">PA</option>
+                                    <option value="RI">RI</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SD">SD</option>
+                                    <option value="TN">TN</option>
+                                    <option value="TX">TX</option>
+                                    <option value="UT">UT</option>
+                                    <option value="VT">VT</option>
+                                    <option value="VA">VA</option>
+                                    <option value="WA">WA</option>
+                                    <option value="WV">WV</option>
+                                    <option value="WI">WI</option>
+                                    <option value="WY">WY</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control" id="editEventPrice" name="editEventPrice" type="text"
+                                       placeholder="Price" required>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input class="form-control" id="editEventPrice" name="editEventPrice" type="text"
-                                   placeholder="Price" required>
-                        </div>
-                    </div>
 
-                    <div class="row my-3">
-                        <div class="col-6">
-                            <input class="form-control form-control" name="editEventDate" id="editEventDate"
-                                   placeholder="Event Date MM/DD/YYYY" type="text" data-date-format="dd/mm/yyyy"
-                                   autocomplete="off" required>
+                        <div class="row my-3">
+                            <div class="col-6">
+                                <input class="form-control form-control" name="editEventDate" id="editEventDate"
+                                       placeholder="Event Date MM/DD/YYYY" type="text" data-date-format="dd/mm/yyyy"
+                                       autocomplete="off" required>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-control form-select" name="editEventAge" id="editEventAge">
+                                    <option value="-0">Select Age Option</option>
+                                    <option value="1" th:text="'All Ages'"></option>
+                                    <option value="0" th:text="'21+'"></option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <select class="form-control form-select" name="editEventAge" id="editEventAge">
-                                <option value="-0">Select Age Option</option>
-                                <option value="1" th:text="'All Ages'"></option>
-                                <option value="0" th:text="'21+'"></option>
-                            </select>
+                        <div class="row my-3">
+                            <div class="col">
+                                <input class="form control form-check-input" type="checkbox" value="" id="editEventBooked">
+                                <label class="form-check-label" for="editEventBooked">
+                                    Event is booked
+                                </label>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="row my-3">
-                        <div class="col">
-                            <input class="form control form-check-input" type="checkbox" value="" id="editEventBooked">
-                            <label class="form-check-label" for="editEventBooked">
-                                Event is booked
-                            </label>
-                        </div>
-                    </div>
-
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -182,7 +183,8 @@
 
                     <div class="row" id="selectToggle">
                         <div class="col">
-                            <select onchange="selectedOption(this.value)" class="form-control form-select" id="dropDownList">
+                            <select onchange="selectedOption(this.value)" class="form-control form-select"
+                                    id="dropDownList">
                                 <option value="0" selected disabled>Select Venue</option>
                                 <option value="new">Create Venue</option>
                                 <option th:each="venue : ${venueList}" th:value="${venue.getVenue_id}"
@@ -190,6 +192,8 @@
                             </select>
                         </div>
                     </div>
+
+                    <form id="addEventForm">
 
                     <div class="container">
                         <div id="venueToggle" style="display: none;">
@@ -288,7 +292,8 @@
 
                             <div class="row my-3">
                                 <div class="col">
-                                    <input class="form-control" id="addContactNumber" name="addContactNumber" type="text"
+                                    <input class="form-control" id="addContactNumber" name="addContactNumber"
+                                           type="text"
                                            placeholder="Contact Phone" required>
                                 </div>
                             </div>
@@ -304,11 +309,12 @@
 
                     <div class="row my-3">
                         <div class="col-6">
-                            <input class="form-control" id="addEventPrice" name="addEventPrice" type="text" placeholder="Price"
+                            <input class="form-control" id="addEventPrice" name="addEventPrice" type="text"
+                                   placeholder="Price"
                                    required>
                         </div>
                         <div class="col-6">
-                            <select class="form-control form-select" name="addEventAge" id="addEventAge">
+                            <select class="form-control form-select" name="addEventAge" id="addEventAge" required>
                                 <option value="-0">Select Age Option</option>
                                 <option value="1" th:text="'All Ages'"></option>
                                 <option value="0" th:text="'21+'"></option>
@@ -324,18 +330,18 @@
                         </div>
                     </div>
 
-                    <div class="row my-3">
-                        <div class="col">
-                            <input class="form control form-check-input" type="checkbox" value="" id="addEventBooked">
-                            <label class="form-check-label" for="addEventBooked">
-                                Event is booked
-                            </label>
+                        <div class="row my-3">
+                            <div class="col">
+                                <input class="form control form-check-input" type="checkbox" value="" id="addEventBooked">
+                                <label class="form-check-label" for="addEventBooked">
+                                    Event is booked
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
                     <input type="hidden" id="editPassword" name="password" value="updatingUser">
                     <input type="hidden" id="editId" name="id">
-
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

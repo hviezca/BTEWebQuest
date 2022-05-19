@@ -153,14 +153,18 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
+                    <form id="testForm" th:object="${testing}">
 
-                    <label for="albumTitle">Album Title</label>
-                    <input type="text" name="updateAlbumName" id="albumTitle" th:value="${album.albumName}"
-                           style="width: 100%;">
-
-                    <label class="mt-2" for="albumYear">Album Year</label>
-                    <input type="text" name="updateAlbumTitle" id="albumYear" th:value="${album.albumYear}"
-                           style="width: 100%;">
+                        <div class="form-row my-2">
+                            <label for="albumTitle">Album Title</label>
+                            <input type="text" name="updateAlbumName" id="albumTitle" th:value="${album.albumName}"
+                                   style="width: 100%;" minlength="3" required>
+                        </div>
+                        <div class="form-row my-2">
+                            <label class="mt-2" for="albumYear">Album Year</label>
+                            <input type="text" name="updateAlbumTitle" id="albumYear" th:value="${album.albumYear}"
+                                   style="width: 100%;" required>
+                        </div>
 
                     <div class="row mx-auto mt-3">
                         <input type="hidden" id="updateAlbumAlbumId" name="id" th:value="${album.id}">
@@ -176,6 +180,8 @@
                             <label class="form-check-label" for="editIsMasteredCheck">Mastered</label>
                         </div>
                     </div>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -190,9 +196,10 @@
             <div class="modal-content">
                 <div class="modal-body">
 
-
-                    <label for="songTitle">Song Title</label>
-                    <input type="text" name="updateTrackName" id="songTitle" style="width: 100%;">
+                    <form id="editTrackForm">
+                        <label for="songTitle">Song Title</label>
+                        <input type="text" name="updateTrackName" id="songTitle" style="width: 100%;" required>
+                    </form>
 
                     <div class="row mx-auto mt-3">
                         <input type="hidden" id="updateTrackId" name="id">

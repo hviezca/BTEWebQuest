@@ -22,8 +22,8 @@ jQuery(document).ready(function($) {
             }else {
                 $('#editEventAge').val(0);
             }
-
             document.getElementById('editEventBooked').checked = event.booked;
+
 
         })
 
@@ -34,6 +34,9 @@ jQuery(document).ready(function($) {
     $("#updateButton").on('click', function(event){
 
         event.preventDefault();
+
+        const form = $('#editEventForm');
+        form.validate();
 
         let eventID = $('#updateUserId').val();
         var href= "/BTE/event/json/" + eventID;
@@ -57,26 +60,30 @@ jQuery(document).ready(function($) {
             allAges = true;
         }
 
-        $.get(href, function(event, status){
 
-            event.venue.venue_name = venueName;
-            event.venue.venue_address = venueAddress;
-            event.venue.venue_city = venueCity;
-            event.venue.venue_state = venueState;
-            event.event_price = eventPrice;
-            event.all_ages = allAges;
-            event.booked = eventBooked;
-            event.event_date = eventDate;
+        if(form.valid())
+        {
+            $.get(href, function(event, status){
 
-            $.post({
-                url: "event",
-                data: JSON.stringify(event),
-                contentType: 'application/json'
-            }).done(function(fragment){
-                $("#eventFrag").replaceWith(fragment);
-                $('.modal-backdrop').remove();
+                event.venue.venue_name = venueName;
+                event.venue.venue_address = venueAddress;
+                event.venue.venue_city = venueCity;
+                event.venue.venue_state = venueState;
+                event.event_price = eventPrice;
+                event.all_ages = allAges;
+                event.booked = eventBooked;
+                event.event_date = eventDate;
+
+                $.post({
+                    url: "event",
+                    data: JSON.stringify(event),
+                    contentType: 'application/json'
+                }).done(function(fragment){
+                    $("#eventFrag").replaceWith(fragment);
+                    $('.modal-backdrop').remove();
+                })
             })
-        })
+        }
     })
 
     // Delete Event button
@@ -102,6 +109,10 @@ jQuery(document).ready(function($) {
     $("#addButton").on('click', function(event){
 
         event.preventDefault();
+
+        const form = $('#addEventForm');
+        form.validate();
+
         var href= "/BTE/event/neweventjson/";
 
         let venueName = $('#addVenueName').val();
@@ -128,12 +139,53 @@ jQuery(document).ready(function($) {
         let eventDate = new Date($('#addEventDate').val());
         eventDate.setDate(eventDate.getDate()+1);
 
+        if (form.valid())
+        {
+            $.get(href, function(event, status){
+
+                event.event_price = eventPrice;
+                event.all_ages = allAges;
+                event.event_date = eventDate;
+                event.booked = eventBooked;
+
+                if(newVenue === "new") {
+                    event.venue.venue_name = venueName;
+                    event.venue.venue_address = venueAddress;
+                    event.venue.venue_city = venueCity;
+                    event.venue.venue_state = venueState;
+                    event.venue.venue_zip = venueZip;
+                    event.venue.contact.contact_email = contactEmail;
+                    event.venue.contact.contact_phone = contactPhone;
+                    event.venue.contact.contact_name = contactName;
+                    $.post({
+                        url: "event/addevent",
+                        data: JSON.stringify(event),
+                        contentType: 'application/json'
+                    }).done(function(fragment){
+                        $("#eventFrag").replaceWith(fragment);
+                        $('.modal-backdrop').remove();
+                    });
+
+                } else {
+                    event.venue.venue_id = venueID;
+                    $.post({
+                        url: "event/addevent",
+                        data: JSON.stringify(event),
+                        contentType: 'application/json'
+                    }).done(function(fragment){
+                        $("#eventFrag").replaceWith(fragment);
+                        $('.modal-backdrop').remove();
+                    })
+                }
+
+            })
+        }
+        /*
         $.get(href, function(event, status){
 
             event.event_price = eventPrice;
             event.all_ages = allAges;
             event.event_date = eventDate;
-            event.booked = eventBooked;
 
 
             if(newVenue === "new") {
@@ -166,7 +218,7 @@ jQuery(document).ready(function($) {
                 })
             }
 
-        })
+        })*/
 
     })
 
