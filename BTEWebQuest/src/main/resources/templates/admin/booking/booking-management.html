@@ -113,22 +113,24 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="reply_modal_body">
-                    <div class="row">
-                        <div class="col">
-                            <input class="form-control" id="subject" name="subject" type="text" placeholder="Subject">
+                <form id="reply_form">
+                    <div class="modal-body" id="reply_modal_body">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control" id="subject" name="subject" type="text" minlength="3" placeholder="Subject" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <textarea class="form-control bg-white" id="replyMessage" name="replyMessage" rows="5" minlength="3" placeholder="Reply Message" style="resize: none" required></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <textarea class="form-control bg-white" id="replyMessage" name="replyMessage" type="text" rows="5" placeholder="Reply Message" style="resize: none"></textarea>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="sendButton" class="btn btn-primary">Send</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="sendButton" class="btn btn-primary">Send</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
